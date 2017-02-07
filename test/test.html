@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>validid test page</title>
+  </head>
+  <body>
+    <script type='text/javascript' src='./validid.js'></script>
+    <script type='text/javascript'>
+      //<![CDATA[
+      testValidid = function (id) {
+        console.log('test id: ' + id);
+        console.log('result: ' + validid.hkid(id));
+      }
+      console.log('=======');
+      console.log('Test Starting:');
+      testValidid('G123456A');
+      testValidid('A5555550');
+      testValidid('AB9876542');
+      console.log('Test Finished.');
+      console.log('=======');
+      //]]>
+    </script>
+  </body>
+</html>
