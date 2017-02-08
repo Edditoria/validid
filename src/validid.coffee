@@ -23,13 +23,13 @@ class Validid
     isLengthValid = (id) ->
       id.length is 8 or id.length is 9
 
+    isCharValid = (id) ->
+      # isFormatValid() includes this checking
+      # but will be useful for providing error msg
+      /[a-zA-Z0-9]/.test(id)
+
     isFormatValid = (id) ->
-      identifier = id.slice(0, -1)
-      checkDigit = id.slice(-1)
-      regex = /^[A-Z]{2}[0-9]{6}$|^[A-Z]{1}[0-9]{6}$/
-      isIdentifierValid = regex.test(identifier)
-      isCheckDigitValid = /[0-9A]/.test(checkDigit)
-      isIdentifierValid and isCheckDigitValid
+      /^[A-Z]{1,2}[0-9]{6}[0-9A]$/.test(id)
 
     isChecksumValid = (id) ->
       # check digit algorithm is variation of the ISBN-10 check digit algorithm
@@ -46,7 +46,8 @@ class Validid
       remainder = (weightedSum + checkDigit) % 11
       remainder is 0
 
-    isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
+    id = id.toUpperCase()
+    isLengthValid(id) and isCharValid(id) and isFormatValid(id) and isChecksumValid(id)
 
 validid = new Validid()
 

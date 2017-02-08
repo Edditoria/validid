@@ -15,7 +15,7 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
     function Validid() {}
 
     Validid.prototype.hkid = function(id) {
-      var getLetterValue, isChecksumValid, isFormatValid, isLengthValid, isLetter;
+      var getLetterValue, isCharValid, isChecksumValid, isFormatValid, isLengthValid, isLetter;
       getLetterValue = function(letter) {
         return letter.charCodeAt(0) - 64;
       };
@@ -25,14 +25,11 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
       isLengthValid = function(id) {
         return id.length === 8 || id.length === 9;
       };
+      isCharValid = function(id) {
+        return /[a-zA-Z0-9]/.test(id);
+      };
       isFormatValid = function(id) {
-        var checkDigit, identifier, isCheckDigitValid, isIdentifierValid, regex;
-        identifier = id.slice(0, -1);
-        checkDigit = id.slice(-1);
-        regex = /^[A-Z]{2}[0-9]{6}$|^[A-Z]{1}[0-9]{6}$/;
-        isIdentifierValid = regex.test(identifier);
-        isCheckDigitValid = /[0-9A]/.test(checkDigit);
-        return isIdentifierValid && isCheckDigitValid;
+        return /^[A-Z]{1,2}[0-9]{6}[0-9A]$/.test(id);
       };
       isChecksumValid = function(id) {
         var char, charValue, checkDigit, i, identifier, len, remainder, weight, weightedSum;
@@ -49,7 +46,8 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
         remainder = (weightedSum + checkDigit) % 11;
         return remainder === 0;
       };
-      return isLengthValid(id) && isFormatValid(id) && isChecksumValid(id);
+      id = id.toUpperCase();
+      return isLengthValid(id) && isCharValid(id) && isFormatValid(id) && isChecksumValid(id);
     };
 
     return Validid;
