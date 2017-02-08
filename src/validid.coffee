@@ -20,7 +20,18 @@ class Validid
     isLetter = (char) ->
       /[a-zA-Z]/.test(char)
 
-    isValid = (id) ->
+    isLengthValid = (id) ->
+      id.length is 8 or id.length is 9
+
+    isFormatValid = (id) ->
+      identifier = id.slice(0, -1)
+      checkDigit = id.slice(-1)
+      regex = /^[A-Z]{2}[0-9]{6}$|^[A-Z]{1}[0-9]{6}$/
+      isIdentifierValid = regex.test(identifier)
+      isCheckDigitValid = /[0-9A]/.test(checkDigit)
+      isIdentifierValid and isCheckDigitValid
+
+    isChecksumValid = (id) ->
       # check digit algorithm is variation of the ISBN-10 check digit algorithm
       # for each character (except the last digit): character * weight
       # weight from largest to smallest (1)
@@ -35,7 +46,7 @@ class Validid
       remainder = (weightedSum + checkDigit) % 11
       remainder is 0
 
-    isValid(id)
+    isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
 
 validid = new Validid()
 
