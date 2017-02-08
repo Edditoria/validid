@@ -15,7 +15,16 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
     function Validid() {}
 
     Validid.prototype.hkid = function(id) {
-      var getLetterValue, isCharValid, isChecksumValid, isFormatValid, isLengthValid, isLetter;
+      var getLetterValue, isCharValid, isChecksumValid, isFormatValid, isLengthValid, isLetter, normalize;
+      normalize = function(id) {
+        var re;
+        id = id.toUpperCase();
+        re = /^[A-Z]{1,2}[0-9]{6}\([0-9A]\)$/;
+        if (re.test(id)) {
+          id = id.replace(/\(|\)/g, '');
+        }
+        return id;
+      };
       getLetterValue = function(letter) {
         return letter.charCodeAt(0) - 64;
       };
@@ -46,7 +55,7 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
         remainder = (weightedSum + checkDigit) % 11;
         return remainder === 0;
       };
-      id = id.toUpperCase();
+      id = normalize(id);
       return isLengthValid(id) && isCharValid(id) && isFormatValid(id) && isChecksumValid(id);
     };
 

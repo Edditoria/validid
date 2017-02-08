@@ -11,6 +11,14 @@ class Validid
   hkid: (id) ->
     # format of HKID: X123456(A) or XY123456(A)
 
+    normalize = (id) ->
+      # make id toUpperCase
+      # remove '(' and ')'
+      id = id.toUpperCase()
+      re = /^[A-Z]{1,2}[0-9]{6}\([0-9A]\)$/
+      if re.test(id) then id = id.replace(/\(|\)/g, '')
+      id
+
     getLetterValue = (letter) ->
       # charCode = { A: 65, B: 66... Z: 90 }
       # HKID:    = { A:  1, B:  2... Z: 26 }
@@ -46,7 +54,7 @@ class Validid
       remainder = (weightedSum + checkDigit) % 11
       remainder is 0
 
-    id = id.toUpperCase()
+    id = normalize(id)
     isLengthValid(id) and isCharValid(id) and isFormatValid(id) and isChecksumValid(id)
 
 validid = new Validid()
