@@ -8,16 +8,17 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
 
 class Validid
 
-  hkid: (id) ->
-    # format of HKID: X123456(A) or XY123456(A)
-
-    normalize = (id) ->
+  tools:
+    normalize: (id) ->
       # make id toUpperCase
-      # remove '(' and ')'
+      # remove '(' and ')' at the end of the string
       id = id.toUpperCase()
-      re = /^[A-Z]{1,2}[0-9]{6}\([0-9A]\)$/
+      re = /\([A-Z0-9]\)$/
       if re.test(id) then id = id.replace(/\(|\)/g, '')
       id
+
+  hkid: (id) ->
+    # format of HKID: X123456(A) or XY123456(A)
 
     getLetterValue = (letter) ->
       # charCode = { A: 65, B: 66... Z: 90 }
@@ -31,10 +32,11 @@ class Validid
     isLengthValid = (id) ->
       id.length is 8 or id.length is 9
 
-    isCharValid = (id) ->
+    isAllCharValid = (id) ->
       # isFormatValid() includes this checking
       # but will be useful for providing error msg
-      /[a-zA-Z0-9]/.test(id)
+      # note: assume all characters are uppercase
+      !/[^A-Z0-9]/.test(id)
 
     isFormatValid = (id) ->
       /^[A-Z]{1,2}[0-9]{6}[0-9A]$/.test(id)
@@ -54,8 +56,8 @@ class Validid
       remainder = (weightedSum + checkDigit) % 11
       remainder is 0
 
-    id = normalize(id)
-    isLengthValid(id) and isCharValid(id) and isFormatValid(id) and isChecksumValid(id)
+    id = @tools.normalize(id)
+    isLengthValid(id) and isAllCharValid(id) and isFormatValid(id) and isChecksumValid(id)
 
 validid = new Validid()
 
