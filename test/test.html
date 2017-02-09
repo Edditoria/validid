@@ -7,15 +7,18 @@
     <script type='text/javascript' src='./validid.js'></script>
     <script type='text/javascript'>
       //<![CDATA[
-      testValidid = function (id) {
-        console.log('test id: ' + id);
-        console.log('result: ' + validid.hkid(id));
+      testValidid = function (id, cardType) {
+        console.log('test id: ' + id + ' of: ' + cardType);
+        console.log('result: ' + validid[cardType](id));
       }
       console.log('=======');
       console.log('Test Starting:');
-      testValidid('G123456A');
-      testValidid('A5555550');
-      testValidid('AB9876542');
+      testValidid('G123456A', 'hkid');
+      testValidid('A5555550', 'hkid');
+      testValidid('AB9876542', 'hkid');
+      testValidid('A123456789', 'twid');
+      testValidid('M115187864', 'twid');
+      testValidid('Z256783650', 'twid');
       console.log('Test Finished.');
       console.log('=======');
       //]]>
