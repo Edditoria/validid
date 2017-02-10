@@ -60,9 +60,15 @@ class Validid
     isLengthValid(id) and isAllCharValid(id) and isFormatValid(id) and isChecksumValid(id)
 
   twid: (id) ->
+    # format of Taiwan ID: A123456789
+
+    isLengthValid = (id) ->
+      id.length is 10
+
+    isFormatValid = (id) ->
+      /^[A-Z][0-9]{9}$/.test(id)
 
     isChecksumValid = (id) ->
-      # format of Taiwan ID: A123456789
       idLen = id.length
       # each letter represents value from [10..35]
       letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO'
@@ -77,7 +83,9 @@ class Validid
       # note: the check digit of 'id' is weighted 0
       remainder = (letterValue + weightedSum + +id.slice(-1)) % 10
       remainder is 0
-    isChecksumValid(id)
+
+    id = @tools.normalize(id)
+    isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
 
 validid = new Validid()
 
