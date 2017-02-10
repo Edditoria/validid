@@ -17,6 +17,24 @@ class Validid
       if re.test(id) then id = id.replace(/\(|\)/g, '')
       id
 
+  cnid: (id) ->
+    # the 2nd generation of China ID Card
+    # format of card ID: LLLLLLYYYYMMDD000X
+    isChecksumValid = (id) ->
+      # adapts ISO 7064:1983.MOD 11-2
+      identifier = id.slice(0, -1)
+      checkDigit = if id.slice(-1) is 'X' then 10 else +id.slice(-1)
+      getWeight = (n) -> Math.pow(2, n - 1) % 11
+      weightedSum = 0
+      index = id.length
+      for char in identifier
+        weightedSum += +char * getWeight(index)
+        index--
+      remainder = (12 - weightedSum % 11) % 11 - checkDigit
+      remainder is 0
+    isChecksumValid(id)
+
+
   hkid: (id) ->
     # format of HKID: X123456(A) or XY123456(A)
 
@@ -58,6 +76,7 @@ class Validid
 
     id = @tools.normalize(id)
     isLengthValid(id) and isAllCharValid(id) and isFormatValid(id) and isChecksumValid(id)
+
 
   twid: (id) ->
     # format of Taiwan ID: A123456789

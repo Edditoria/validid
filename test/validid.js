@@ -26,6 +26,28 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
       }
     };
 
+    Validid.prototype.cnid = function(id) {
+      var isChecksumValid;
+      isChecksumValid = function(id) {
+        var char, checkDigit, getWeight, i, identifier, index, len, remainder, weightedSum;
+        identifier = id.slice(0, -1);
+        checkDigit = id.slice(-1) === 'X' ? 10 : +id.slice(-1);
+        getWeight = function(n) {
+          return Math.pow(2, n - 1) % 11;
+        };
+        weightedSum = 0;
+        index = id.length;
+        for (i = 0, len = identifier.length; i < len; i++) {
+          char = identifier[i];
+          weightedSum += +char * getWeight(index);
+          index--;
+        }
+        remainder = (12 - weightedSum % 11) % 11 - checkDigit;
+        return remainder === 0;
+      };
+      return isChecksumValid(id);
+    };
+
     Validid.prototype.hkid = function(id) {
       var getLetterValue, isAllCharValid, isChecksumValid, isFormatValid, isLengthValid, isLetter;
       getLetterValue = function(letter) {
