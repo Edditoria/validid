@@ -27,7 +27,13 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
     };
 
     Validid.prototype.cnid = function(id) {
-      var isChecksumValid;
+      var isChecksumValid, isFormatValid, isLengthValid;
+      isLengthValid = function(id) {
+        return id.length === 18;
+      };
+      isFormatValid = function(id) {
+        return /^[0-9]{17}[0-9X]$/.test(id);
+      };
       isChecksumValid = function(id) {
         var char, checkDigit, getWeight, i, identifier, index, len, remainder, weightedSum;
         identifier = id.slice(0, -1);
@@ -45,7 +51,8 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
         remainder = (12 - weightedSum % 11) % 11 - checkDigit;
         return remainder === 0;
       };
-      return isChecksumValid(id);
+      id = this.tools.normalize(id);
+      return isLengthValid(id) && isFormatValid(id) && isChecksumValid(id);
     };
 
     Validid.prototype.hkid = function(id) {

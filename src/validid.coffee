@@ -20,6 +20,13 @@ class Validid
   cnid: (id) ->
     # the 2nd generation of China ID Card
     # format of card ID: LLLLLLYYYYMMDD000X
+
+    isLengthValid = (id) ->
+      id.length is 18
+
+    isFormatValid = (id) ->
+      /^[0-9]{17}[0-9X]$/.test(id)
+
     isChecksumValid = (id) ->
       # adapts ISO 7064:1983.MOD 11-2
       identifier = id.slice(0, -1)
@@ -32,7 +39,9 @@ class Validid
         index--
       remainder = (12 - weightedSum % 11) % 11 - checkDigit
       remainder is 0
-    isChecksumValid(id)
+
+    id = @tools.normalize(id)
+    isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
 
 
   hkid: (id) ->
