@@ -8,7 +8,7 @@
 >
 > This repo is in development stage and not ready for production
 
-# Usage
+# Quick Examples
 
 Just simply provide cardType and ID, and `validid` will return `true` or `false`:
 
@@ -27,11 +27,69 @@ validid.hkid('AB9876542') // true
 
 Currently support:
 
-| cardType  | Country / Place | Name(s) of Card |
-| ----- | --------------  | ------- |
-| cnid | China     | Resident Identity Card of the People's Republic of China (PRC), 中华人民共和国居民身份证
+| cardType | Country / Place | Name(s) of Card |
+| -------- | --------------- | --------------- |
+| cnid | China     | China ID card, Resident Identity Card of the People's Republic of China (PRC), 中华人民共和国居民身份证 |
 | hkid | Hong Kong | Hong Kong ID card, 香港身份證 |
 | twid | Taiwan    | Taiwan ID card, National Identification Card of the Republic of China, 中華民國國民身分證, 臺灣身分證 |
+
+# Install and Usage
+
+`validid` can be installed via npm or Bower, or run in browser directly.
+
+## npm
+
+```shell
+npm install validid
+```
+
+For node.js
+
+```js
+var validid = require('validid');
+console.log(validid.cnid('120103198806018241')); // return true
+```
+
+## Bower
+
+You can download and easily update `validid` via [Bower package manager](https://bower.io/).
+
+```shell
+bower install validid
+```
+
+And it is ready to serve in front-end environment:
+
+```html
+<html>
+  <head>
+    <script src='bower_components/validid/dist/validid.js'></script>
+  </head>
+</html>
+
+```
+
+```js
+console.log(validid.cnid('120103198806018241')); // return true
+```
+
+## Direct Download
+
+Nothing can stop you. Download the file `validid.js` and refer it in your html file:
+
+```html
+<html>
+  <head>
+    <script src='validid.js'></script>
+  </head>
+</html>
+```
+
+And you are ready to go:
+
+```js
+console.log(validid.cnid('120103198806018241')); // return true
+```
 
 # Planning:
 
