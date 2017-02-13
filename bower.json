@@ -1,0 +1,40 @@
+{
+  "name": "validid",
+  "description": "Validate ID Card numbers of China, Taiwan and Hong Kong",
+  "main": "./lib/validid.js",
+  "authors": [
+    "Edditoria <edditoria@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "validate",
+    "id",
+    "number",
+    "validation",
+    "china",
+    "id",
+    "taiwan",
+    "id",
+    "hong",
+    "kong",
+    "id",
+    "hkid"
+  ],
+  "homepage": "https://github.com/Edditoria/validid",
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "docs",
+    "lib",
+    "node_modules",
+    "src",
+    "test",
+    "tests",
+    ".gitignore",
+    ".npmignore",
+    "build.sh",
+    "CONTRIBUTING.md",
+    "package.json",
+    "README.md"
+  ]
+}
