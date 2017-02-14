@@ -96,11 +96,11 @@ console.log(validid.cnid('120103198806018241')); // return true
 This repo is quite new. To make it some-how complete, need more works on these:
 
 - [x] basic validation: (just return true or false)
-  - [ ] China ID card
+  - [x] China ID card (basic)
   - [x] Taiwan ID card
   - [x] Hong Kong ID card
-- [ ] publish to npm and bower
-- [ ] more on 2nd generation of China ID card: validate address code and date of birth code
+- [x] publish to npm and bower
+- [ ] more on 2nd generation of China ID card: validate address code
 
 And plan to give more:
 

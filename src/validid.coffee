@@ -27,6 +27,48 @@ class Validid
     isFormatValid = (id) ->
       /^[0-9]{17}[0-9X]$/.test(id)
 
+    isDateValid = (id) ->
+
+      # check day, month and overall date ('YYYYMMDD')
+      # any step is false, will interrupt and return false
+
+      startIndex = 6
+      # idDate = {year: YYYY, month: MM, day: DD} (the values are numbers)
+      # removed because it is too long
+      idYear = +id.substring(startIndex, startIndex += 4) # number
+      idMonth = id.substring(startIndex, startIndex += 2) # string
+      idDay = +id.substring(startIndex, startIndex += 2) # number
+      idDate = new Date(idYear, +idMonth - 1, idDay) # a Date object
+
+      # 1. Check idDay first
+      maxDay = # do not use Array.indexOf() because of suck IE
+        if '01,03,05,07,08,10,12'.indexOf(idMonth) >= 0 then 31
+        else if '04,06,09,11'.indexOf(idMonth) >= 0 then 30
+        else
+          isLeapYear = (idYear % 4 is 0 and idYear % 100 isnt 0) or (idYear % 400 is 0)
+          if isLeapYear then 29
+          else 28
+      isDayValid = idDay > 0 and idDay <= maxDay
+      if !isDayValid then return false
+
+      # 2. Check idMonth
+      isMonthValid = +idMonth > 0 and +idMonth <= 12
+      if !isMonthValid then return false
+
+      # 3. Check if the date is not from future
+      isFutureDate = Date.now() < idDate
+      #todo: test in IE
+      if isFutureDate then return false
+
+      # 4. Check if the date is not too small
+      # assume the oldest Chinese was born in 1885 and he had an ID card
+      # source: http://www.scmp.com/news/china/article/1297022/uygur-alimihan-seyiti-age-127-may-set-record-oldest-person-alive
+      oldestDate = new Date(1885, 7 - 1, 9) # birth date of Luo Meizhen
+      #todo: test in IE
+      if idDate < oldestDate then return false
+
+      return true # finally, return true
+
     isChecksumValid = (id) ->
       # adapts ISO 7064:1983.MOD 11-2
       identifier = id.slice(0, -1)
@@ -41,7 +83,7 @@ class Validid
       remainder is 0
 
     id = @tools.normalize(id)
-    isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
+    isLengthValid(id) and isFormatValid(id) and isDateValid(id) and isChecksumValid(id)
 
 
   hkid: (id) ->
