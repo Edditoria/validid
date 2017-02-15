@@ -17,10 +17,11 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
     Validid.prototype.tools = {
       normalize: function(id) {
         var re;
-        id = id.toUpperCase();
+        re = /[-\/\s]/g;
+        id = id.toUpperCase().replace(re, '');
         re = /\([A-Z0-9]\)$/;
         if (re.test(id)) {
-          id = id.replace(/\(|\)/g, '');
+          id = id.replace(/[\(\)]/g, '');
         }
         return id;
       },
@@ -216,7 +217,6 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
         remainder = (11 - weightedSum % 11) % 10 - +id.slice(-1);
         return remainder === 0;
       };
-      id = id.replace('-', '');
       id = this.tools.normalize(id);
       return isLengthValid(id) && isFormatValid(id) && isDateValid(id) && isChecksumValid(id);
     };

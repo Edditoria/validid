@@ -19,10 +19,13 @@ class Validid
   tools:
     normalize: (id) ->
       # make id toUpperCase
+      # remove '-' and '/' at any position
+      # remove whitespace
       # remove '(' and ')' at the end of the string
-      id = id.toUpperCase()
+      re = /[-\/\s]/g
+      id = id.toUpperCase().replace(re, '')
       re = /\([A-Z0-9]\)$/
-      if re.test(id) then id = id.replace(/\(|\)/g, '')
+      if re.test(id) then id = id.replace(/[\(\)]/g, '')
       id
 
     isDateValid: (idDate, minDate = '18991129') ->
@@ -248,11 +251,17 @@ class Validid
       remainder = (11 - weightedSum % 11) % 10 - +id.slice(-1)
       remainder is 0
 
-    id = id.replace('-', '')
     id = @tools.normalize(id)
     isLengthValid(id) and isFormatValid(id) and isDateValid(id) and isChecksumValid(id)
 
 
+#
+#  ###### #    # #####   ####  #####  #####
+#  #       #  #  #    # #    # #    #   #
+#  #####    ##   #    # #    # #    #   #
+#  #        ##   #####  #    # #####    #
+#  #       #  #  #      #    # #   #    #
+#  ###### #    # #       ####  #    #   #
 
 validid = new Validid()
 
