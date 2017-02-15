@@ -28,10 +28,12 @@ class Validid
       if re.test(id) then id = id.replace(/[\(\)]/g, '')
       id
 
-    isDateValid: (idDate, minDate = '18991129') ->
-      # idDate and minDate should be in format 'YYYYMMDD'
+    isDateValid: (idDate, minDate = '18991129', maxDate = 'today') ->
+      # idDate, minDate and maxDate should be in format 'YYYYMMDD'
       # process:
-      # - check day, month, future date and compare to minDate
+      # - check day and month
+      # - is not a future date
+      # - is between minDate and maxDate
       # - any step is false, will interrupt and return false
       # !important note about the default minDate:
       # - assumed that only a living person can register for something
@@ -81,9 +83,13 @@ class Validid
       if idDate is false then return false
       minDate = parseDate(minDate)
       if minDate is false then return false
+      maxDate =
+        if maxDate is 'today' then new Date()
+        else parseDate(maxDate)
+      if maxDate is false then return false
 
-      # 5. finally, check if the idDate is not reasonable by comparing minDate
-      idDate > minDate
+      # 5. finally, check if the idDate falls between minDate and maxDate
+      (idDate >= minDate) and (idDate <= maxDate)
 
 
   #   #####  #     # ### ######
