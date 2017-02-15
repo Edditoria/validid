@@ -255,7 +255,8 @@ class Validid
         when '3','4','7','8' then '20'
         else '18'
       date = yearPrefix + id.substring(0,6)
-      @tools.isDateValid(date)
+      maxDate = @tools.getMaxDate(17) # 17 years old to register for an ID
+      @tools.isDateValid(date, 'default', maxDate)
 
     isChecksumValid = (id) ->
       weight = [2,3,4,5,6,7,8,9,2,3,4,5,0] # add 0 for check digit
