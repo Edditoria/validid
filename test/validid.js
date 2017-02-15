@@ -23,6 +23,52 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
           id = id.replace(/\(|\)/g, '');
         }
         return id;
+      },
+      isDateValid: function(idDate, minDate) {
+        var isFormatValid, parseDate;
+        if (minDate == null) {
+          minDate = '18991129';
+        }
+        isFormatValid = function(date) {
+          return typeof date === 'string' && /^[0-9]{8}$/.test(date);
+        };
+        if (!isFormatValid(idDate)) {
+          return false;
+        }
+        if (!isFormatValid(minDate)) {
+          return false;
+        }
+        parseDate = function(input) {
+          var date, day, isDayValid, isFutureDate, isLeapYear, isMonthValid, maxDay, month, startIndex, year;
+          startIndex = 0;
+          year = +input.substring(startIndex, startIndex += 4);
+          month = input.substring(startIndex, startIndex += 2);
+          day = +input.substring(startIndex, startIndex += 2);
+          date = new Date(year, +month - 1, day);
+          maxDay = '01,03,05,07,08,10,12'.indexOf(month) >= 0 ? 31 : '04,06,09,11'.indexOf(month) >= 0 ? 30 : (isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0), isLeapYear ? 29 : 28);
+          isDayValid = day > 0 && day <= maxDay;
+          if (!isDayValid) {
+            return false;
+          }
+          isMonthValid = +month > 0 && +month <= 12;
+          if (!isMonthValid) {
+            return false;
+          }
+          isFutureDate = Date.now() < date;
+          if (isFutureDate) {
+            return false;
+          }
+          return date;
+        };
+        idDate = parseDate(idDate);
+        if (idDate === false) {
+          return false;
+        }
+        minDate = parseDate(minDate);
+        if (minDate === false) {
+          return false;
+        }
+        return idDate > minDate;
       }
     };
 
@@ -34,32 +80,11 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
       isFormatValid = function(id) {
         return /^[0-9]{17}[0-9X]$/.test(id);
       };
-      isDateValid = function(id) {
-        var idDate, idDay, idMonth, idYear, isDayValid, isFutureDate, isLeapYear, isMonthValid, maxDay, oldestDate, startIndex;
-        startIndex = 6;
-        idYear = +id.substring(startIndex, startIndex += 4);
-        idMonth = id.substring(startIndex, startIndex += 2);
-        idDay = +id.substring(startIndex, startIndex += 2);
-        idDate = new Date(idYear, +idMonth - 1, idDay);
-        maxDay = '01,03,05,07,08,10,12'.indexOf(idMonth) >= 0 ? 31 : '04,06,09,11'.indexOf(idMonth) >= 0 ? 30 : (isLeapYear = (idYear % 4 === 0 && idYear % 100 !== 0) || (idYear % 400 === 0), isLeapYear ? 29 : 28);
-        isDayValid = idDay > 0 && idDay <= maxDay;
-        if (!isDayValid) {
-          return false;
-        }
-        isMonthValid = +idMonth > 0 && +idMonth <= 12;
-        if (!isMonthValid) {
-          return false;
-        }
-        isFutureDate = Date.now() < idDate;
-        if (isFutureDate) {
-          return false;
-        }
-        oldestDate = new Date(1885, 7 - 1, 9);
-        if (idDate < oldestDate) {
-          return false;
-        }
-        return true;
-      };
+      isDateValid = (function(_this) {
+        return function() {
+          return _this.tools.isDateValid(id.substring(6, 14), '18860625');
+        };
+      })(this);
       isChecksumValid = function(id) {
         var char, checkDigit, getWeight, i, identifier, index, len, remainder, weightedSum;
         identifier = id.slice(0, -1);
@@ -78,7 +103,7 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
         return remainder === 0;
       };
       id = this.tools.normalize(id);
-      return isLengthValid(id) && isFormatValid(id) && isDateValid(id) && isChecksumValid(id);
+      return isLengthValid(id) && isFormatValid(id) && isDateValid() && isChecksumValid(id);
     };
 
     Validid.prototype.hkid = function(id) {

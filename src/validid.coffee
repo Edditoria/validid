@@ -17,6 +17,65 @@ class Validid
       if re.test(id) then id = id.replace(/\(|\)/g, '')
       id
 
+    isDateValid: (idDate, minDate = '18991129') ->
+      # idDate and minDate should be in format 'YYYYMMDD'
+      # process:
+      # - check day, month, future date and compare to minDate
+      # - any step is false, will interrupt and return false
+      # !important note about the default minDate:
+      # - assumed that only a living person can register for something
+      # - providing ID number for a dead person is NOT the case
+      # - so, minDate is the birth date of world's "living" person verified
+      # - NOT a dead person who does not act on internet
+      # - source: https://en.wikipedia.org/wiki/Oldest_people
+
+      # 1. check and parse idDate and minDate
+      isFormatValid = (date) ->
+        typeof date is 'string' and /^[0-9]{8}$/.test(date)
+      if !isFormatValid(idDate) then return false
+      if !isFormatValid(minDate) then return false
+
+      parseDate = (input) ->
+        # input is string 'YYYYMMDD'
+        # return false asap, else return a Date obj
+        startIndex = 0
+        year = +input.substring(startIndex, startIndex += 4) # number
+        month = input.substring(startIndex, startIndex += 2) # string
+        day = +input.substring(startIndex, startIndex += 2) # number
+        date = new Date(year, +month - 1, day) # a Date object
+
+        # 2. is day valid?
+        maxDay = # do not use Array.indexOf() because of suck IE
+          if '01,03,05,07,08,10,12'.indexOf(month) >= 0 then 31
+          else if '04,06,09,11'.indexOf(month) >= 0 then 30
+          else
+            isLeapYear = (year % 4 is 0 and year % 100 isnt 0) or (year % 400 is 0)
+            if isLeapYear then 29
+            else 28
+        isDayValid = day > 0 and day <= maxDay
+        if !isDayValid then return false
+
+        # 3. is month valid?
+        isMonthValid = +month > 0 and +month <= 12
+        if !isMonthValid then return false
+
+        # 4. is date a future date?
+        isFutureDate = Date.now() < date
+        #todo: test in IE
+        if isFutureDate then return false
+
+        # else case
+        return date # Date object
+
+      idDate = parseDate(idDate)
+      if idDate is false then return false
+      minDate = parseDate(minDate)
+      if minDate is false then return false
+
+      # 5. finally, check if the idDate is not reasonable by comparing minDate
+      idDate > minDate
+
+
   cnid: (id) ->
     # the 2nd generation of China ID Card
     # format of card ID: LLLLLLYYYYMMDD000X
@@ -27,47 +86,9 @@ class Validid
     isFormatValid = (id) ->
       /^[0-9]{17}[0-9X]$/.test(id)
 
-    isDateValid = (id) ->
-
-      # check day, month and overall date ('YYYYMMDD')
-      # any step is false, will interrupt and return false
-
-      startIndex = 6
-      # idDate = {year: YYYY, month: MM, day: DD} (the values are numbers)
-      # removed because it is too long
-      idYear = +id.substring(startIndex, startIndex += 4) # number
-      idMonth = id.substring(startIndex, startIndex += 2) # string
-      idDay = +id.substring(startIndex, startIndex += 2) # number
-      idDate = new Date(idYear, +idMonth - 1, idDay) # a Date object
-
-      # 1. Check idDay first
-      maxDay = # do not use Array.indexOf() because of suck IE
-        if '01,03,05,07,08,10,12'.indexOf(idMonth) >= 0 then 31
-        else if '04,06,09,11'.indexOf(idMonth) >= 0 then 30
-        else
-          isLeapYear = (idYear % 4 is 0 and idYear % 100 isnt 0) or (idYear % 400 is 0)
-          if isLeapYear then 29
-          else 28
-      isDayValid = idDay > 0 and idDay <= maxDay
-      if !isDayValid then return false
-
-      # 2. Check idMonth
-      isMonthValid = +idMonth > 0 and +idMonth <= 12
-      if !isMonthValid then return false
-
-      # 3. Check if the date is not from future
-      isFutureDate = Date.now() < idDate
-      #todo: test in IE
-      if isFutureDate then return false
-
-      # 4. Check if the date is not too small
-      # assume the oldest Chinese was born in 1885 and he had an ID card
-      # source: http://www.scmp.com/news/china/article/1297022/uygur-alimihan-seyiti-age-127-may-set-record-oldest-person-alive
-      oldestDate = new Date(1885, 7 - 1, 9) # birth date of Luo Meizhen
-      #todo: test in IE
-      if idDate < oldestDate then return false
-
-      return true # finally, return true
+    # assume the oldest Chinese, Luo Meizhen, was born in 25 Jun, 1886 and he had an ID card
+    # source: http://www.scmp.com/news/china/article/1297022/uygur-alimihan-seyiti-age-127-may-set-record-oldest-person-alive
+    isDateValid = => @tools.isDateValid(id.substring(6,14), '18860625')
 
     isChecksumValid = (id) ->
       # adapts ISO 7064:1983.MOD 11-2
@@ -83,7 +104,7 @@ class Validid
       remainder is 0
 
     id = @tools.normalize(id)
-    isLengthValid(id) and isFormatValid(id) and isDateValid(id) and isChecksumValid(id)
+    isLengthValid(id) and isFormatValid(id) and isDateValid() and isChecksumValid(id)
 
 
   hkid: (id) ->
