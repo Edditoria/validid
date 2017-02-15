@@ -211,6 +211,31 @@ class Validid
     isLengthValid(id) and isAllCharValid(id) and isFormatValid(id) and isChecksumValid(id)
 
 
+  #
+  #  #    # #####  # #####
+  #  #   #  #    # # #    #
+  #  ####   #    # # #    #
+  #  #  #   #####  # #    #
+  #  #   #  #   #  # #    #
+  #  #    # #    # # #####
+
+  krid: (id) ->
+    # format of South Koera ID card: YYMMDD-SBBBBNC
+    isChecksumValid = (id) ->
+      weight = [2,3,4,5,6,7,8,9,2,3,4,5,0] # add 0 for check digit
+      weightedSum = 0
+      index = 0
+      for char in id
+        weightedSum += +char * weight[index]
+        index++
+      remainder = (11 - weightedSum % 11) % 10 - +id.slice(-1)
+      remainder is 0
+
+    id = id.replace('-', '')
+    id = @tools.normalize(id)
+    isChecksumValid(id)
+
+
 
 validid = new Validid()
 
