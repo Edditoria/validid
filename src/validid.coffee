@@ -8,6 +8,14 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
 
 class Validid
 
+  #
+  #  #####  ####   ####  #       ####
+  #    #   #    # #    # #      #
+  #    #   #    # #    # #       ####
+  #    #   #    # #    # #           #
+  #    #   #    # #    # #      #    #
+  #    #    ####   ####  ######  ####
+
   tools:
     normalize: (id) ->
       # make id toUpperCase
@@ -76,6 +84,14 @@ class Validid
       idDate > minDate
 
 
+  #   #####  #     # ### ######
+  #  #     # ##    #  #  #     #
+  #  #       # #   #  #  #     #
+  #  #       #  #  #  #  #     #
+  #  #       #   # #  #  #     #
+  #  #     # #    ##  #  #     #
+  #   #####  #     # ### ######
+
   cnid: (id) ->
     # the 2nd generation of China ID Card
     # format of card ID: LLLLLLYYYYMMDD000X
@@ -106,6 +122,51 @@ class Validid
     id = @tools.normalize(id)
     isLengthValid(id) and isFormatValid(id) and isDateValid() and isChecksumValid(id)
 
+
+  #
+  #  ##### #    # # #####
+  #    #   #    # # #    #
+  #    #   #    # # #    #
+  #    #   # ## # # #    #
+  #    #   ##  ## # #    #
+  #    #   #    # # #####
+
+  twid: (id) ->
+    # format of Taiwan ID: A123456789
+
+    isLengthValid = (id) ->
+      id.length is 10
+
+    isFormatValid = (id) ->
+      /^[A-Z][0-9]{9}$/.test(id)
+
+    isChecksumValid = (id) ->
+      idLen = id.length
+      # each letter represents value from [10..35]
+      letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO'
+      letterIndex = letters.indexOf(id[0]) + 10
+      letterValue = Math.floor(letterIndex / 10) + (letterIndex % 10) * (idLen - 1)
+      idTail = id.slice(1) # drop the letter
+      weight = idLen - 2 # minus letter digit and check digit
+      weightedSum = 0
+      for char in idTail
+        weightedSum += +char * weight
+        weight--
+      # note: the check digit of 'id' is weighted 0
+      remainder = (letterValue + weightedSum + +id.slice(-1)) % 10
+      remainder is 0
+
+    id = @tools.normalize(id)
+    isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
+
+
+  #
+  #  #    # #    # # #####
+  #  #    # #   #  # #    #
+  #  ###### ####   # #    #
+  #  #    # #  #   # #    #
+  #  #    # #   #  # #    #
+  #  #    # #    # # #####
 
   hkid: (id) ->
     # format of HKID: X123456(A) or XY123456(A)
@@ -150,33 +211,6 @@ class Validid
     isLengthValid(id) and isAllCharValid(id) and isFormatValid(id) and isChecksumValid(id)
 
 
-  twid: (id) ->
-    # format of Taiwan ID: A123456789
-
-    isLengthValid = (id) ->
-      id.length is 10
-
-    isFormatValid = (id) ->
-      /^[A-Z][0-9]{9}$/.test(id)
-
-    isChecksumValid = (id) ->
-      idLen = id.length
-      # each letter represents value from [10..35]
-      letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO'
-      letterIndex = letters.indexOf(id[0]) + 10
-      letterValue = Math.floor(letterIndex / 10) + (letterIndex % 10) * (idLen - 1)
-      idTail = id.slice(1) # drop the letter
-      weight = idLen - 2 # minus letter digit and check digit
-      weightedSum = 0
-      for char in idTail
-        weightedSum += +char * weight
-        weight--
-      # note: the check digit of 'id' is weighted 0
-      remainder = (letterValue + weightedSum + +id.slice(-1)) % 10
-      remainder is 0
-
-    id = @tools.normalize(id)
-    isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
 
 validid = new Validid()
 
