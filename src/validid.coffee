@@ -71,8 +71,7 @@ class Validid
         if !isMonthValid then return false
 
         # 4. is date a future date?
-        isFutureDate = Date.now() < date
-        #todo: test in IE
+        isFutureDate = new Date() < date
         if isFutureDate then return false
 
         # else case

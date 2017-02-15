@@ -55,7 +55,7 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
           if (!isMonthValid) {
             return false;
           }
-          isFutureDate = Date.now() < date;
+          isFutureDate = new Date() < date;
           if (isFutureDate) {
             return false;
           }
