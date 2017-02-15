@@ -28,8 +28,9 @@ class Validid
       if re.test(id) then id = id.replace(/[\(\)]/g, '')
       id
 
-    isDateValid: (idDate, minDate = '18991129', maxDate = 'today') ->
-      # idDate, minDate and maxDate should be in format 'YYYYMMDD'
+    isDateValid: (idDate, minDate = 'default', maxDate = 'today') ->
+      # idDate, minDate should be in format 'YYYYMMDD'
+      # maxDate can be 'YYYYMMDD' or a Date()
       # process:
       # - check day and month
       # - is not a future date
@@ -41,6 +42,8 @@ class Validid
       # - so, minDate is the birth date of world's "living" person verified
       # - NOT a dead person who does not act on internet
       # - source: https://en.wikipedia.org/wiki/Oldest_people
+
+      if minDate is 'default' or minDate is '' then minDate = '18991129'
 
       # 1. check and parse idDate and minDate
       isFormatValid = (date) ->
@@ -85,12 +88,20 @@ class Validid
       if minDate is false then return false
       maxDate =
         if maxDate is 'today' then new Date()
-        else parseDate(maxDate)
+        else if typeof maxDate is 'string' then parseDate(maxDate)
+        else maxDate
       if maxDate is false then return false
 
       # 5. finally, check if the idDate falls between minDate and maxDate
       (idDate >= minDate) and (idDate <= maxDate)
 
+    getMaxDate: (yearsOld) ->
+      # yearsOld should be a whole number
+      # return Date() object
+      # useful for puting maxDate in isDateValid()
+      now = new Date()
+      year = now.getFullYear() - yearsOld
+      new Date(year, now.getMonth(), now.getDate())
 
   #   #####  #     # ### ######
   #  #     # ##    #  #  #     #

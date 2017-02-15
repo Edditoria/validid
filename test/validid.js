@@ -28,10 +28,13 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
       isDateValid: function(idDate, minDate, maxDate) {
         var isFormatValid, parseDate;
         if (minDate == null) {
-          minDate = '18991129';
+          minDate = 'default';
         }
         if (maxDate == null) {
           maxDate = 'today';
+        }
+        if (minDate === 'default' || minDate === '') {
+          minDate = '18991129';
         }
         isFormatValid = function(date) {
           return typeof date === 'string' && /^[0-9]{8}$/.test(date);
@@ -72,11 +75,17 @@ https://github.com/Edditoria/validid/blob/master/LICENSE.md
         if (minDate === false) {
           return false;
         }
-        maxDate = maxDate === 'today' ? new Date() : parseDate(maxDate);
+        maxDate = maxDate === 'today' ? new Date() : typeof maxDate === 'string' ? parseDate(maxDate) : maxDate;
         if (maxDate === false) {
           return false;
         }
         return (idDate >= minDate) && (idDate <= maxDate);
+      },
+      getMaxDate: function(yearsOld) {
+        var now, year;
+        now = new Date();
+        year = now.getFullYear() - yearsOld;
+        return new Date(year, now.getMonth(), now.getDate());
       }
     };
 
