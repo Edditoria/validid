@@ -1,6 +1,6 @@
 {
   "name": "validid",
-  "description": "Validate ID Card numbers of China, Taiwan and Hong Kong",
+  "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
   "main": "./lib/validid.js",
   "authors": [
     "Edditoria <edditoria@gmail.com>"
@@ -8,17 +8,14 @@
   "license": "MIT",
   "keywords": [
     "validate",
-    "id",
-    "number",
+    "id number",
     "validation",
-    "china",
-    "id",
-    "taiwan",
-    "id",
-    "hong",
-    "kong",
-    "id",
-    "hkid"
+    "china id",
+    "taiwan id",
+    "hong kong",
+    "hkid",
+    "korea",
+    "id"
   ],
   "homepage": "https://github.com/Edditoria/validid",
   "ignore": [

@@ -239,7 +239,7 @@ class Validid
   #  #    # #    # # #####
 
   krid: (id) ->
-    # format of South Koera ID card: YYMMDD-SBBBBNC
+    # format of South Korea ID card: YYMMDD-SBBBBNC
 
     isLengthValid = (id) ->
       id.length is 13

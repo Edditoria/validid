@@ -1,7 +1,7 @@
 {
   "name": "validid",
-  "version": "0.2.0",
-  "description": "Validate ID Card numbers of China, Taiwan and Hong Kong",
+  "version": "0.3.0",
+  "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
   "main": "./lib/validid.js",
   "directories": {
     "lib": "./lib",
@@ -21,8 +21,10 @@
     "validation",
     "china id",
     "taiwan id",
-    "hong kong id",
-    "hkid"
+    "hong kong",
+    "hkid",
+    "korea",
+    "id"
   ],
   "author": "Edditoria <edditoria@gmail.com>",
   "homepage": "https://github.com/Edditoria/validid",

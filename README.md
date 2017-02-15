@@ -1,12 +1,8 @@
 # About `validid`
 
-`validid` is a Javascript library to validate ID Card numbers of China, Taiwan and Hong Kong. Available in npm and bower.
+`validid` is a Javascript library to validate ID Card numbers of China, Taiwan, Hong Kong and South Korea. Available in npm and bower.
 
-\(`validid` 是一個 Javascript 程式庫，用作校驗身份證號碼是否基本正確，現時支援中國丶台灣和香港 :\)
-
-> *note:*
->
-> This repo is in development stage and not ready for production
+\(`validid` 是一個 Javascript 程式庫，用作校驗身份證號碼是否基本正確，現時支援中國丶台灣丶香港和韓國 :\)
 
 # Quick Examples
 
@@ -23,15 +19,19 @@ validid.twid('A123456789') // true
 validid.hkid('A5555550') // true
 // supports two leading letters of HKID
 validid.hkid('AB9876542') // true
+
+// validate a number of Korea ID card
+validid.krid('781030-5668081') // true
 ```
 
 Currently support:
 
 | cardType | Country / Place | Name(s) of Card |
 | -------- | --------------- | --------------- |
-| cnid | China     | China ID card, Resident Identity Card of the People's Republic of China (PRC), 中华人民共和国居民身份证 |
-| hkid | Hong Kong | Hong Kong ID card, 香港身份證 |
-| twid | Taiwan    | Taiwan ID card, National Identification Card of the Republic of China, 中華民國國民身分證, 臺灣身分證 |
+| cnid     | China           | China ID card, Resident Identity Card of the People's Republic of China (PRC), 中华人民共和国居民身份证 |
+| hkid     | Hong Kong       | Hong Kong ID card, 香港身份證 |
+| twid     | Taiwan          | Taiwan ID card, National Identification Card of the Republic of China, 中華民國國民身分證, 臺灣身分證 |
+| krid     | South Korea     | South Korea ID card, Resident Registration Number (RRN), 주민등록번호, 住民登錄番號 |
 
 # Install and Usage
 
@@ -91,16 +91,13 @@ And you are ready to go:
 console.log(validid.cnid('120103198806018241')); // return true
 ```
 
-# Planning:
+# Planning
 
 This repo is quite new. To make it some-how complete, need more works on these:
 
-- [x] basic validation: (just return true or false)
-  - [x] China ID card (basic)
-  - [x] Taiwan ID card
-  - [x] Hong Kong ID card
+- [x] basic validation (just return true or false)
 - [x] publish to npm and bower
-- [ ] more on 2nd generation of China ID card: validate address code
+- [ ] test script
 
 And plan to give more:
 
@@ -109,6 +106,9 @@ And plan to give more:
   - 1st generation of China ID card
   - Macau ID card
   - \[...\]
+- [ ] validate address code (using plugin, not in core)
+  - 2nd generation of China ID card
+  - Korea
 - [ ] get information from the ID number
 - [ ] ~~generate random number~~
 - [ ] as a framework of taking input, test and returning value. Make things consistent.
