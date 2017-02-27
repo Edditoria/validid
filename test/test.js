@@ -2,9 +2,15 @@
 (function() {
   var errors, i, len, obj, result, results, testData, validid;
 
-  validid = require('./../lib/validid.js');
+  if ((typeof module !== "undefined" && module !== null) && module.exports) {
+    validid = require('./../lib/validid.js');
+    testData = require('./testData.js');
+  }
 
-  testData = require('./testData.js');
+  if (typeof window !== "undefined" && window !== null) {
+    validid = window.validid;
+    testData = window.testData;
+  }
 
   results = [];
 

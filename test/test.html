@@ -5,30 +5,7 @@
   </head>
   <body>
     <script type='text/javascript' src='./validid.js'></script>
-    <script type='text/javascript'>
-      //<![CDATA[
-      testValidid = function (id, cardType) {
-        console.log('test id: ' + id + ' of: ' + cardType);
-        console.log('result: ' + validid[cardType](id));
-      }
-      console.log('=======');
-      console.log('Test Starting:');
-      testValidid('G123456A', 'hkid');
-      testValidid('A5555550', 'hkid');
-      testValidid('AB9876542', 'hkid');
-      testValidid('A123456789', 'twid');
-      testValidid('M115187864', 'twid');
-      testValidid('Z256783650', 'twid');
-      testValidid('11010120170210193X', 'cnid');
-      testValidid('310101200001013948', 'cnid');
-      testValidid('120103198806018241', 'cnid');
-      testValidid('500111200110145630', 'cnid');
-      testValidid('781030-5668081', 'krid');
-      testValidid('951103-5438151', 'krid');
-      testValidid('700623-2711917', 'krid');
-      console.log('Test Finished.');
-      console.log('=======');
-      //]]>
-    </script>
+    <script type='text/javascript' src='./testData.js'></script>
+    <script type='text/javascript' src='./test.js'></script>
   </body>
 </html>

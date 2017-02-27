@@ -1,5 +1,9 @@
-validid = require './../lib/validid.js'
-testData = require './testData.js'
+if module? and module.exports
+  validid = require './../lib/validid.js'
+  testData = require './testData.js'
+if window?
+  validid = window.validid
+  testData = window.testData
 
 results = []
 errors = []
