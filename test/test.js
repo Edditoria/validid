@@ -29,6 +29,9 @@
 
   if (errors.length !== 0) {
     console.log(errors);
+    if ((typeof module !== "undefined" && module !== null) && module.exports) {
+      throw new Error("Test fail. Process exit now.");
+    }
   }
 
 }).call(this);

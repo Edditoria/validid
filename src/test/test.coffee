@@ -19,3 +19,5 @@ console.log """
 """
 if errors.length isnt 0
   console.log errors
+  if module? and module.exports
+    throw new Error("Test fail. Process exit now.")
