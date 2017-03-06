@@ -11,20 +11,34 @@ testData = [
   {id: '781030-5668081', cardType: 'krid', expect: true}
   {id: '951103-5438151', cardType: 'krid', expect: true}
   {id: '700623-2711917', cardType: 'krid', expect: true}
+
   # fail test: length
   {id: '98765432101234567', cardType: 'cnid', expect: false}
   {id: '9876543210123456789', cardType: 'cnid', expect: false}
+  {id: 'A12345678', cardType: 'twid', expect: false}
+  {id: 'A1234567890', cardType: 'twid', expect: false}
+
   # fail test: characters and format
   {id: '110102YYYYMMDD888X', cardType: 'cnid', expect: false}
   {id: '98765432101234567A', cardType: 'cnid', expect: false}
   {id: 'A87654321012345678', cardType: 'cnid', expect: false}
+  {id: 'A12345678X', cardType: 'twid', expect: false}
+  {id: 'AXXXXXXXX9', cardType: 'twid', expect: false}
+  {id: '0123456789', cardType: 'twid', expect: false}
+
   # fail test: date and future date
   {id: '110101188606258888', cardType: 'cnid', expect: true}
   {id: '110101188606248882', cardType: 'cnid', expect: false}
   {id: '110101201701018886', cardType: 'cnid', expect: true} #todo to be dynamic
   {id: '110101201712128888', cardType: 'cnid', expect: false} #todo to be dynamic
+
+  # fail test: gender
+  # {id: 'C987654321', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
+  # {id: 'E345678901', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
+
   # fail test: checksum
   {id: '110102197810272321', cardType: 'cnid', expect: false}
+  {id: 'A234567890', cardType: 'twid', expect: false}
 ]
 
 if module? and module.exports

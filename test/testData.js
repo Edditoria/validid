@@ -60,6 +60,14 @@
       cardType: 'cnid',
       expect: false
     }, {
+      id: 'A12345678',
+      cardType: 'twid',
+      expect: false
+    }, {
+      id: 'A1234567890',
+      cardType: 'twid',
+      expect: false
+    }, {
       id: '110102YYYYMMDD888X',
       cardType: 'cnid',
       expect: false
@@ -70,6 +78,18 @@
     }, {
       id: 'A87654321012345678',
       cardType: 'cnid',
+      expect: false
+    }, {
+      id: 'A12345678X',
+      cardType: 'twid',
+      expect: false
+    }, {
+      id: 'AXXXXXXXX9',
+      cardType: 'twid',
+      expect: false
+    }, {
+      id: '0123456789',
+      cardType: 'twid',
       expect: false
     }, {
       id: '110101188606258888',
@@ -90,6 +110,10 @@
     }, {
       id: '110102197810272321',
       cardType: 'cnid',
+      expect: false
+    }, {
+      id: 'A234567890',
+      cardType: 'twid',
       expect: false
     }
   ];
