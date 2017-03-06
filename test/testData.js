@@ -68,6 +68,14 @@
       cardType: 'twid',
       expect: false
     }, {
+      id: 'A123456',
+      cardType: 'hkid',
+      expect: false
+    }, {
+      id: 'AB12345678',
+      cardType: 'hkid',
+      expect: false
+    }, {
       id: '110102YYYYMMDD888X',
       cardType: 'cnid',
       expect: false
@@ -92,6 +100,22 @@
       cardType: 'twid',
       expect: false
     }, {
+      id: '01234560',
+      cardType: 'hkid',
+      expect: false
+    }, {
+      id: 'A555555X',
+      cardType: 'hkid',
+      expect: false
+    }, {
+      id: 'AXXXXXX0',
+      cardType: 'hkid',
+      expect: false
+    }, {
+      id: 'A12345670',
+      cardType: 'hkid',
+      expect: false
+    }, {
       id: '110101188606258888',
       cardType: 'cnid',
       expect: true
@@ -114,6 +138,10 @@
     }, {
       id: 'A234567890',
       cardType: 'twid',
+      expect: false
+    }, {
+      id: 'C668668E',
+      cardType: 'hkid',
       expect: false
     }
   ];

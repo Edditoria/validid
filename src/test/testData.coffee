@@ -17,6 +17,8 @@ testData = [
   {id: '9876543210123456789', cardType: 'cnid', expect: false}
   {id: 'A12345678', cardType: 'twid', expect: false}
   {id: 'A1234567890', cardType: 'twid', expect: false}
+  {id: 'A123456', cardType: 'hkid', expect: false}
+  {id: 'AB12345678', cardType: 'hkid', expect: false}
 
   # fail test: characters and format
   {id: '110102YYYYMMDD888X', cardType: 'cnid', expect: false}
@@ -25,6 +27,10 @@ testData = [
   {id: 'A12345678X', cardType: 'twid', expect: false}
   {id: 'AXXXXXXXX9', cardType: 'twid', expect: false}
   {id: '0123456789', cardType: 'twid', expect: false}
+  {id: '01234560', cardType: 'hkid', expect: false}
+  {id: 'A555555X', cardType: 'hkid', expect: false}
+  {id: 'AXXXXXX0', cardType: 'hkid', expect: false}
+  {id: 'A12345670', cardType: 'hkid', expect: false}
 
   # fail test: date and future date
   {id: '110101188606258888', cardType: 'cnid', expect: true}
@@ -39,6 +45,7 @@ testData = [
   # fail test: checksum
   {id: '110102197810272321', cardType: 'cnid', expect: false}
   {id: 'A234567890', cardType: 'twid', expect: false}
+  {id: 'C668668E', cardType: 'hkid', expect: false}
 ]
 
 if module? and module.exports
