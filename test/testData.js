@@ -4,57 +4,93 @@
 
   testData = [
     {
-      'id': 'G123456A',
+      id: 'G123456A',
       cardType: 'hkid',
       expect: true
     }, {
-      'id': 'A5555550',
+      id: 'A5555550',
       cardType: 'hkid',
       expect: true
     }, {
-      'id': 'AB9876542',
+      id: 'AB9876542',
       cardType: 'hkid',
       expect: true
     }, {
-      'id': 'A123456789',
+      id: 'A123456789',
       cardType: 'twid',
       expect: true
     }, {
-      'id': 'M115187864',
+      id: 'M115187864',
       cardType: 'twid',
       expect: true
     }, {
-      'id': 'Z256783650',
+      id: 'Z256783650',
       cardType: 'twid',
       expect: true
     }, {
-      'id': '11010120170210193X',
+      id: '11010120170210193X',
       cardType: 'cnid',
       expect: true
     }, {
-      'id': '310101200001013948',
+      id: '120103198806018241',
       cardType: 'cnid',
       expect: true
     }, {
-      'id': '120103198806018241',
+      id: '310101200001013948',
       cardType: 'cnid',
       expect: true
     }, {
-      'id': '120103198806018241',
-      cardType: 'cnid',
-      expect: true
-    }, {
-      'id': '781030-5668081',
+      id: '781030-5668081',
       cardType: 'krid',
       expect: true
     }, {
-      'id': '951103-5438151',
+      id: '951103-5438151',
       cardType: 'krid',
       expect: true
     }, {
-      'id': '700623-2711917',
+      id: '700623-2711917',
       cardType: 'krid',
       expect: true
+    }, {
+      id: '98765432101234567',
+      cardType: 'cnid',
+      expect: false
+    }, {
+      id: '9876543210123456789',
+      cardType: 'cnid',
+      expect: false
+    }, {
+      id: '110102YYYYMMDD888X',
+      cardType: 'cnid',
+      expect: false
+    }, {
+      id: '98765432101234567A',
+      cardType: 'cnid',
+      expect: false
+    }, {
+      id: 'A87654321012345678',
+      cardType: 'cnid',
+      expect: false
+    }, {
+      id: '110101188606258888',
+      cardType: 'cnid',
+      expect: true
+    }, {
+      id: '110101188606248882',
+      cardType: 'cnid',
+      expect: false
+    }, {
+      id: '110101201701018886',
+      cardType: 'cnid',
+      expect: true
+    }, {
+      id: '110101201712128888',
+      cardType: 'cnid',
+      expect: false
+    }, {
+      id: '110102197810272321',
+      cardType: 'cnid',
+      expect: false
     }
   ];
 
