@@ -1,6 +1,6 @@
 {
   "name": "validid",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
   "main": "./lib/validid.js",
   "directories": {

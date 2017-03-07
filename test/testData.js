@@ -76,6 +76,14 @@
       cardType: 'hkid',
       expect: false
     }, {
+      id: '781030-566805',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '781030-56680810',
+      cardType: 'krid',
+      expect: false
+    }, {
       id: '110102YYYYMMDD888X',
       cardType: 'cnid',
       expect: false
@@ -116,6 +124,26 @@
       cardType: 'hkid',
       expect: false
     }, {
+      id: 'YYMMDD-0123456',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '010101-S123456',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '010101-0bbbb56',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '010101-01234N6',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '010101-012345C',
+      cardType: 'krid',
+      expect: false
+    }, {
       id: '110101188606258888',
       cardType: 'cnid',
       expect: true
@@ -132,6 +160,46 @@
       cardType: 'cnid',
       expect: false
     }, {
+      id: '000101-3234560',
+      cardType: 'krid',
+      expect: true
+    }, {
+      id: '001231-3234565',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '991128-9123457',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '991129-9123451',
+      cardType: 'krid',
+      expect: true
+    }, {
+      id: '170101-3234569',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '171231-3234564',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '990001-1234568',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '991301-1234561',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '990100-1234560',
+      cardType: 'krid',
+      expect: false
+    }, {
+      id: '990132-1234561',
+      cardType: 'krid',
+      expect: false
+    }, {
       id: '110102197810272321',
       cardType: 'cnid',
       expect: false
@@ -142,6 +210,10 @@
     }, {
       id: 'C668668E',
       cardType: 'hkid',
+      expect: false
+    }, {
+      id: '980123-1234567',
+      cardType: 'krid',
       expect: false
     }
   ];

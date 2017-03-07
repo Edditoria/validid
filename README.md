@@ -97,7 +97,7 @@ This repo is quite new. To make it some-how complete, need more works on these:
 
 - [x] basic validation (just return true or false)
 - [x] publish to npm and bower
-- [ ] test script
+- [x] test script
 
 And plan to give more:
 
