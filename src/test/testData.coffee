@@ -65,6 +65,10 @@ testData = [
   {id: 'A234567890', cardType: 'twid', expect: false}
   {id: 'C668668E', cardType: 'hkid', expect: false}
   {id: '980123-1234567', cardType: 'krid', expect: false}
+
+  # false test: other impossible ID, e.g. according to practice
+  {id: 'N1234569', cardType: 'hkid', expect: false} # no O or N
+  {id: 'O1234561', cardType: 'hkid', expect: false} # no O or N
 ]
 
 if module? and module.exports

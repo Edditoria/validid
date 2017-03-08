@@ -227,6 +227,14 @@
       id: '980123-1234567',
       cardType: 'krid',
       expect: false
+    }, {
+      id: 'N1234569',
+      cardType: 'hkid',
+      expect: false
+    }, {
+      id: 'O1234561',
+      cardType: 'hkid',
+      expect: false
     }
   ];
 
