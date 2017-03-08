@@ -192,7 +192,7 @@ class Validid
 
     getLetterValue = (letter) ->
       # charCode = { A: 65, B: 66... Z: 90 }
-      # HKID:    = { A:  1, B:  2... Z: 26 }
+      # HKID     = { A:  1, B:  2... Z: 26 }
       # diff = 64
       letter.charCodeAt(0) - 64
 
@@ -201,12 +201,6 @@ class Validid
 
     isLengthValid = (id) ->
       id.length is 8 or id.length is 9
-
-    isAllCharValid = (id) ->
-      # isFormatValid() includes this checking
-      # but will be useful for providing error msg
-      # note: assume all characters are uppercase
-      !/[^A-Z0-9]/.test(id)
 
     isFormatValid = (id) ->
       /^[A-Z]{1,2}[0-9]{6}[0-9A]$/.test(id)
@@ -227,7 +221,7 @@ class Validid
       remainder is 0
 
     id = @tools.normalize(id)
-    isLengthValid(id) and isAllCharValid(id) and isFormatValid(id) and isChecksumValid(id)
+    isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
 
 
   #
