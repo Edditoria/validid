@@ -39,6 +39,11 @@ testData = [
   {id: '010101-01234N6', cardType: 'krid', expect: false}
   {id: '010101-012345C', cardType: 'krid', expect: false}
 
+  # fail test: gender
+  {id: 'D012345678', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
+  {id: 'C987654321', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
+  {id: 'E345678901', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
+
   # fail test: date and future date
   {id: '110101188606258888', cardType: 'cnid', expect: true}
   {id: '110101188606248882', cardType: 'cnid', expect: false}
@@ -54,10 +59,6 @@ testData = [
   {id: '991301-1234561', cardType: 'krid', expect: false} # false month
   {id: '990100-1234560', cardType: 'krid', expect: false} # false day
   {id: '990132-1234561', cardType: 'krid', expect: false} # false day
-
-  # fail test: gender
-  # {id: 'C987654321', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
-  # {id: 'E345678901', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
 
   # fail test: checksum
   {id: '110102197810272321', cardType: 'cnid', expect: false}

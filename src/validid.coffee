@@ -157,7 +157,7 @@ class Validid
       id.length is 10
 
     isFormatValid = (id) ->
-      /^[A-Z][0-9]{9}$/.test(id)
+      /^[A-Z][12][0-9]{8}$/.test(id)
 
     isChecksumValid = (id) ->
       idLen = id.length

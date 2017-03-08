@@ -144,6 +144,18 @@
       cardType: 'krid',
       expect: false
     }, {
+      id: 'D012345678',
+      cardType: 'twid',
+      expect: false
+    }, {
+      id: 'C987654321',
+      cardType: 'twid',
+      expect: false
+    }, {
+      id: 'E345678901',
+      cardType: 'twid',
+      expect: false
+    }, {
       id: '110101188606258888',
       cardType: 'cnid',
       expect: true
