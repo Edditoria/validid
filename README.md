@@ -4,6 +4,13 @@
 
 \(`validid` 是一個 Javascript 程式庫，用作校驗身份證號碼是否基本正確，現時支援中國丶台灣丶香港和韓國 :\)
 
+# What It Excels
+
+- Deeper validation, not only checksum, e.g. gender, excluding characters in real practice
+- Same code base and usage in front-end and back-end
+- Able to validate multiple card types (Welcome requests for more!)
+- Supports IE
+
 # Quick Examples
 
 Just simply provide cardType and ID, and `validid` will return `true` or `false`:
@@ -93,16 +100,10 @@ console.log(validid.cnid('120103198806018241')); // return true
 
 # Planning
 
-This repo is quite new. To make it some-how complete, need more works on these:
-
-- [x] basic validation (just return true or false)
-- [x] publish to npm and bower
-- [x] test script
-
-And plan to give more:
+This repo is in stable and ready for you, while here is the plan to give more:
 
 - [ ] return reason(s) that ID is invalid
-- [ ] more countries and places:
+- [ ] more countries and places, if checksum is available:
   - 1st generation of China ID card
   - Macau ID card
   - \[...\]
