@@ -3,6 +3,6 @@
 echo "Compile coffeescript files..."
 coffee -o ./lib/ -c ./src/*.coffee
 coffee -o ./dist/ -c ./src/*.coffee
-coffee -o ./test/ -c ./src/test/*coffee
+coffee -o ./test/ -c ./src/test/*.coffee
 coffee -o ./test/ -c ./src/*.coffee
 echo "Compile finish."
