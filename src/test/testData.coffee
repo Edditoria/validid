@@ -48,14 +48,14 @@ testData = [
   # fail test: date and future date
   {id: '110101188606258888', cardType: 'cnid', expect: true}
   {id: '110101188606248882', cardType: 'cnid', expect: false}
-  {id: '110101201701018886', cardType: 'cnid', expect: true} #todo to be dynamic
-  {id: '110101201712128888', cardType: 'cnid', expect: false} #todo to be dynamic
-  {id: '000101-3234560', cardType: 'krid', expect: true} # age 17 in 2017
-  {id: '001231-3234565', cardType: 'krid', expect: false} # age 16 in 2017
+  {id: '110101201901018880', cardType: 'cnid', expect: true} #todo update every year
+  {id: '110101201912128882', cardType: 'cnid', expect: false} #todo update every year
+  {id: '020101-3234564', cardType: 'krid', expect: true} #todo age 17 in 2019 (update every year)
+  {id: '021231-3234560', cardType: 'krid', expect: false} #todo age 16 in 2019 (update every year)
   {id: '991128-9123457', cardType: 'krid', expect: false} # date before 18991129
   {id: '991129-9123451', cardType: 'krid', expect: true} # date before 18991129
-  {id: '170101-3234569', cardType: 'krid', expect: false} # false year, 2017
-  {id: '171231-3234564', cardType: 'krid', expect: false} # false year, future date
+  {id: '190101-3234563', cardType: 'krid', expect: false} # false year, 2017
+  {id: '191231-3234569', cardType: 'krid', expect: false} # false year, future date
   {id: '990001-1234568', cardType: 'krid', expect: false} # false month
   {id: '991301-1234561', cardType: 'krid', expect: false} # false month
   {id: '990100-1234560', cardType: 'krid', expect: false} # false day
