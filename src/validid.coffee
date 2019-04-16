@@ -192,9 +192,9 @@ class Validid
 
     getLetterValue = (letter) ->
       # charCode = { A: 65, B: 66... Z: 90 }
-      # HKID     = { A:  1, B:  2... Z: 26 }
-      # diff = 64
-      letter.charCodeAt(0) - 64
+      # HKID     = { A: 10, B: 11... Z: 35 }
+      # diff = 55
+      letter.charCodeAt(0) - 55
 
     isLetter = (char) ->
       /[a-zA-Z]/.test(char)
@@ -209,8 +209,10 @@ class Validid
       # check digit algorithm is variation of the ISBN-10 check digit algorithm
       # for each character (except the last digit): character * weight
       # weight from largest to smallest (1)
+      # if ID is 8 character long, a space is added to the beginning
+      # value of space is 36, hence 36 * 9 = 324
       weight = id.length
-      weightedSum = 0
+      weightedSum = if weight is 8 then 324 else 0
       identifier = id.slice(0, -1)
       checkDigit = if id.slice(-1) is 'A' then 10 else +id.slice(-1)
       for char in identifier

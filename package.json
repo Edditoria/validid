@@ -35,6 +35,6 @@
     "url": "https://github.com/Edditoria/validid/issues"
   },
   "devDependencies": {
-    "coffee-script": "^1.12.7"
+    "coffeescript": "^2.4.1"
   }
 }
