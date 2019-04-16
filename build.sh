@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 echo "Compile coffeescript files..."
-coffee -o ./lib/ -c ./src/*.coffee
-coffee -o ./dist/ -c ./src/*.coffee
-coffee -o ./test/ -c ./src/test/*.coffee
-coffee -o ./test/ -c ./src/*.coffee
+npx coffee --transpile --output ./lib/ --compile ./src/*.coffee
+npx coffee --transpile --output ./dist/ --compile ./src/*.coffee
+npx coffee --transpile --output ./test/ --compile ./src/test/*.coffee
+npx coffee --transpile --output ./test/ --compile ./src/*.coffee
 echo "Compile finish."
