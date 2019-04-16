@@ -1,7 +1,8 @@
 testData = [
   {id: 'G123456A', cardType: 'hkid', expect: true}
   {id: 'A5555550', cardType: 'hkid', expect: true}
-  {id: 'AB9876542', cardType: 'hkid', expect: true}
+  {id: 'AB9876543', cardType: 'hkid', expect: true}
+  {id: 'WX1234569', cardType: 'hkid', expect: true}
   {id: 'A123456789', cardType: 'twid', expect: true}
   {id: 'M115187864', cardType: 'twid', expect: true}
   {id: 'Z256783650', cardType: 'twid', expect: true}
