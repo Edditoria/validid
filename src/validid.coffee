@@ -3,7 +3,7 @@ Validid is open source in:
 https://github.com/Edditoria/validid
 
 under MIT license:
-https://github.com/Edditoria/validid/blob/master/LICENSE.md
+https://github.com/Edditoria/validid/blob/master/LICENSE.txt
 ###
 
 class Validid
