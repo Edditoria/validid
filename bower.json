@@ -1,7 +1,8 @@
 {
   "name": "validid",
   "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
-  "main": "./lib/validid.js",
+  "main": "./dist/validid.js",
+  "moduleType": "globals",
   "authors": [
     "Edditoria <edditoria@gmail.com>"
   ],
@@ -27,10 +28,12 @@
     "src",
     "test",
     "tests",
+    ".babelrc",
     ".gitignore",
     ".npmignore",
     "build.sh",
     "CONTRIBUTING.md",
+    "package-lock.json",
     "package.json",
     "README.md"
   ]

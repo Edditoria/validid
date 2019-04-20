@@ -22,10 +22,13 @@ validid.cnid('120103198806018241') // true
 // validate a number of Taiwan ID card
 validid.twid('A123456789') // true
 
+// validate a number of Taiwan Resident Certificate
+validid.twrc('AB12345677') // true
+
 // validate a number of Hong Kong ID card
 validid.hkid('A5555550') // true
 // supports two leading letters of HKID
-validid.hkid('AB9876542') // true
+validid.hkid('AB9876543') // true
 
 // validate a number of Korea ID card
 validid.krid('781030-5668081') // true
@@ -38,6 +41,7 @@ Currently support:
 | cnid     | China           | China ID card, Resident Identity Card of the People's Republic of China (PRC), 中华人民共和国居民身份证 |
 | hkid     | Hong Kong       | Hong Kong ID card, 香港身份證 |
 | twid     | Taiwan          | Taiwan ID card, National Identification Card of the Republic of China, 中華民國國民身分證, 臺灣身分證 |
+| twrc     | Taiwan          | Taiwan Resident Certificate (Uniform ID Numbers), 中華民國居留證 (統一證號) |
 | krid     | South Korea     | South Korea ID card, Resident Registration Number (RRN), 주민등록번호, 住民登錄番號 |
 
 # Install and Usage
