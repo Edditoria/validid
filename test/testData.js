@@ -40,6 +40,30 @@
     cardType: 'twrc',
     expect: true
   }, {
+    id: 'AB00207171',
+    cardType: 'twrc',
+    expect: true
+  }, {
+    id: 'AC03095424',
+    cardType: 'twrc',
+    expect: true
+  }, {
+    id: 'BD01300667',
+    cardType: 'twrc',
+    expect: true
+  }, {
+    id: 'CC00151114',
+    cardType: 'twrc',
+    expect: true
+  }, {
+    id: 'HD02717288',
+    cardType: 'twrc',
+    expect: true
+  }, {
+    id: 'TD00251124',
+    cardType: 'twrc',
+    expect: true
+  }, {
     id: '11010120170210193X',
     cardType: 'cnid',
     expect: true
