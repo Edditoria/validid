@@ -6,6 +6,8 @@ testData = [
   {id: 'A123456789', cardType: 'twid', expect: true}
   {id: 'M115187864', cardType: 'twid', expect: true}
   {id: 'Z256783650', cardType: 'twid', expect: true}
+  {id: 'AB12345677', cardType: 'twrc', expect: true}
+  {id: 'AC12345679', cardType: 'twrc', expect: true}
   {id: '11010120170210193X', cardType: 'cnid', expect: true}
   {id: '120103198806018241', cardType: 'cnid', expect: true}
   {id: '310101200001013948', cardType: 'cnid', expect: true}
@@ -18,6 +20,8 @@ testData = [
   {id: '9876543210123456789', cardType: 'cnid', expect: false}
   {id: 'A12345678', cardType: 'twid', expect: false}
   {id: 'A1234567890', cardType: 'twid', expect: false}
+  {id: 'AB1234566', cardType: 'twrc', expect: false}
+  {id: 'AB123456780', cardType: 'twrc', expect: false}
   {id: 'A123456', cardType: 'hkid', expect: false}
   {id: 'AB12345678', cardType: 'hkid', expect: false}
   {id: '781030-566805', cardType: 'krid', expect: false}
@@ -30,6 +34,9 @@ testData = [
   {id: 'A12345678X', cardType: 'twid', expect: false}
   {id: 'AXXXXXXXX9', cardType: 'twid', expect: false}
   {id: '0123456789', cardType: 'twid', expect: false}
+  {id: 'A12345678X', cardType: 'twrc', expect: false}
+  {id: 'AB1234567X', cardType: 'twrc', expect: false}
+  {id: 'ABC1234567', cardType: 'twrc', expect: false}
   {id: '01234560', cardType: 'hkid', expect: false}
   {id: 'A555555X', cardType: 'hkid', expect: false}
   {id: 'AXXXXXX0', cardType: 'hkid', expect: false}
@@ -44,6 +51,7 @@ testData = [
   {id: 'D012345678', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
   {id: 'C987654321', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
   {id: 'E345678901', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
+  {id: 'AE12345673', cardType: 'twrc', expect: false} # only [A-D] in 2nd character
 
   # fail test: date and future date
   {id: '110101188606258888', cardType: 'cnid', expect: true}
@@ -64,6 +72,7 @@ testData = [
   # fail test: checksum
   {id: '110102197810272321', cardType: 'cnid', expect: false}
   {id: 'A234567890', cardType: 'twid', expect: false}
+  {id: 'AB12345670', cardType: 'twrc', expect: false}
   {id: 'C668668E', cardType: 'hkid', expect: false}
   {id: '980123-1234567', cardType: 'krid', expect: false}
 
