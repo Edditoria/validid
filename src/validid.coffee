@@ -230,7 +230,7 @@ class Validid
       id.length is 8 or id.length is 9
 
     isFormatValid = (id) ->
-      /^[A-MP-Z]{1,2}[0-9]{6}[0-9A]$/.test(id)
+      /^[A-NP-Z]{1,2}[0-9]{6}[0-9A]$/.test(id)
 
     isChecksumValid = (id) ->
       # check digit algorithm is variation of the ISBN-10 check digit algorithm
