@@ -1,6 +1,7 @@
 testData = [
   {id: 'G123456A', cardType: 'hkid', expect: true}
   {id: 'A5555550', cardType: 'hkid', expect: true}
+  {id: 'C5678909', cardType: 'hkid', expect: true} # modify from Caring and Sharing Scheme sample (2019)
   {id: 'AB9876543', cardType: 'hkid', expect: true}
   {id: 'WX1234569', cardType: 'hkid', expect: true}
   {id: 'A123456789', cardType: 'twid', expect: true}
@@ -62,10 +63,10 @@ testData = [
   # fail test: date and future date
   {id: '110101188606258888', cardType: 'cnid', expect: true}
   {id: '110101188606248882', cardType: 'cnid', expect: false}
-  {id: '110101201901018880', cardType: 'cnid', expect: true} #todo update every year
-  {id: '110101201912128882', cardType: 'cnid', expect: false} #todo update every year
-  {id: '020101-3234564', cardType: 'krid', expect: true} #todo age 17 in 2019 (update every year)
-  {id: '021231-3234560', cardType: 'krid', expect: false} #todo age 16 in 2019 (update every year)
+  {id: '11010120200101888X', cardType: 'cnid', expect: true} #todo update every year
+  {id: '110101202012128881', cardType: 'cnid', expect: false} #todo update every year
+  {id: '030101-3234561', cardType: 'krid', expect: true} #todo age 17 in 2019 (update every year)
+  {id: '031231-3234567', cardType: 'krid', expect: false} #todo age 16 in 2019 (update every year)
   {id: '991128-9123457', cardType: 'krid', expect: false} # date before 18991129
   {id: '991129-9123451', cardType: 'krid', expect: true} # date before 18991129
   {id: '190101-3234563', cardType: 'krid', expect: false} # false year, 2017
@@ -80,6 +81,7 @@ testData = [
   {id: 'A234567890', cardType: 'twid', expect: false}
   {id: 'AB12345670', cardType: 'twrc', expect: false}
   {id: 'C668668E', cardType: 'hkid', expect: false}
+  {id: 'C5678901', cardType: 'hkid', expect: false} # copy from Caring and Sharing Scheme sample (2019)
   {id: '980123-1234567', cardType: 'krid', expect: false}
 
   # false test: other impossible ID, e.g. according to practice
