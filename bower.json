@@ -1,12 +1,13 @@
 {
   "name": "validid",
   "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
-  "main": "./dist/validid.js",
+  "license": "MIT",
+  "main": "dist/validid.js",
   "moduleType": "globals",
   "authors": [
     "Edditoria <edditoria@gmail.com>"
   ],
-  "license": "MIT",
+  "homepage": "https://github.com/Edditoria/validid",
   "keywords": [
     "validate",
     "id number",
@@ -18,7 +19,6 @@
     "korea",
     "id"
   ],
-  "homepage": "https://github.com/Edditoria/validid",
   "ignore": [
     "**/.*",
     "bower_components",
@@ -28,10 +28,8 @@
     "src",
     "test",
     "tests",
-    ".babelrc",
-    ".gitignore",
-    ".npmignore",
     "build.sh",
+    "coffeelint.json",
     "CONTRIBUTING.md",
     "package-lock.json",
     "package.json",

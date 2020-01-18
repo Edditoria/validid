@@ -2,10 +2,11 @@
   "name": "validid",
   "version": "1.2.0",
   "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
-  "main": "./lib/validid.js",
+  "license": "MIT",
+  "main": "lib/validid.js",
   "directories": {
-    "lib": "./lib",
-    "test": "./test"
+    "lib": "lib",
+    "test": "test"
   },
   "files": [
     "/lib/**/*",
@@ -23,9 +24,14 @@
     "test": "npm run build && npm run doTest",
     "prepublish": "npm run test"
   },
+  "author": "Edditoria <edditoria@gmail.com>",
+  "homepage": "https://github.com/Edditoria/validid",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Edditoria/validid.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Edditoria/validid/issues"
   },
   "keywords": [
     "validate",
@@ -38,12 +44,7 @@
     "korea",
     "id"
   ],
-  "author": "Edditoria <edditoria@gmail.com>",
-  "homepage": "https://github.com/Edditoria/validid",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Edditoria/validid/issues"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
