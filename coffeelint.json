@@ -1,0 +1,12 @@
+{
+	"max_line_length": {
+		"level": "warn"
+	},
+	"indentation": {
+		"value": 1,
+		"level": "warn"
+	},
+	"no_tabs": {
+		"level": "ignore"
+	}
+}

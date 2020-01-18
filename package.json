@@ -13,6 +13,10 @@
     "LICENSE.txt",
     "README.md"
   ],
+  "engines": {
+    "//": "Please use node >=13 to develop this package",
+    "node": ">=4.9.0"
+  },
   "scripts": {
     "doTest": "node ./test/test.js",
     "build": "source ./build.sh",
