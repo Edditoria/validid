@@ -7,6 +7,12 @@
     "lib": "./lib",
     "test": "./test"
   },
+  "files": [
+    "/lib/**/*",
+    "package.json",
+    "LICENSE.txt",
+    "README.md"
+  ],
   "scripts": {
     "doTest": "node ./test/test.js",
     "build": "source ./build.sh",

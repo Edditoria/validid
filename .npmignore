@@ -1,8 +1,0 @@
-.babelrc
-dist
-docs
-src
-test
-bower.json
-build.sh
-CONTRIBUTING.md
