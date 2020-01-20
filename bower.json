@@ -2,7 +2,7 @@
   "name": "validid",
   "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
   "license": "MIT",
-  "main": "dist/validid.js",
+  "main": "lib/validid.js",
   "moduleType": "globals",
   "authors": [
     "Edditoria <edditoria@gmail.com>"
@@ -23,7 +23,6 @@
     "**/.*",
     "bower_components",
     "docs",
-    "lib",
     "node_modules",
     "src",
     "test",
