@@ -3,7 +3,8 @@
   "version": "1.2.0",
   "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
   "license": "MIT",
-  "main": "lib/validid.js",
+  "main": "lib/validid.umd.js",
+  "browser": "lib/validid.browser.js",
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -48,6 +49,10 @@
   "devDependencies": {
     "@babel/core": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
-    "coffeescript": "^2.5.0"
+    "@rollup/plugin-commonjs": "^11.0.1",
+    "coffeescript": "^2.5.0",
+    "rollup": "^1.29.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-coffee-script": "^2.0.0"
   }
 }
