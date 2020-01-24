@@ -1,3 +1,5 @@
+import normalize from '../utils/normalize'
+
 export default (id) ->
 	# format of Taiwan Resident Certificate: AB12345678
 
@@ -22,5 +24,5 @@ export default (id) ->
 		remainder = (weightedSum + +id.slice(-1)) % 10
 		remainder is 0
 
-	id = @tools.normalize(id)
+	id = normalize(id)
 	isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)

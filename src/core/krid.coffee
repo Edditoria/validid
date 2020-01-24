@@ -1,3 +1,7 @@
+import normalize from '../utils/normalize'
+import getMaxDate from '../utils/get-max-date'
+import isDateValid from '../utils/is-date-valid'
+
 export default (id) ->
 	# format of South Korea ID card: YYMMDD-SBBBBNC
 
@@ -15,8 +19,8 @@ export default (id) ->
 			when '3','4','7','8' then '20'
 			else '18'
 		date = yearPrefix + id.substring(0,6)
-		maxDate = @tools.getMaxDate(17) # 17 years old to register for an ID
-		@tools.isDateValid(date, 'default', maxDate)
+		maxDate = getMaxDate(17) # 17 years old to register for an ID
+		isDateValid(date, 'default', maxDate)
 
 	isChecksumValid = (id) ->
 		weight = [2,3,4,5,6,7,8,9,2,3,4,5,0] # add 0 for check digit
@@ -28,5 +32,5 @@ export default (id) ->
 		remainder = (11 - weightedSum % 11) % 10 - +id.slice(-1)
 		remainder is 0
 
-	id = @tools.normalize(id)
-	isLengthValid(id) and isFormatValid(id) and isDateValid(id) and isChecksumValid(id)
+	id = normalize(id)
+	isLengthValid(id) and isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)

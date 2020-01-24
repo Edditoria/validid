@@ -1,3 +1,5 @@
+import normalize from '../utils/normalize'
+
 export default (id) ->
 	# format of HKID: X123456(A) or XY123456(A)
 
@@ -33,5 +35,5 @@ export default (id) ->
 		remainder = (weightedSum + checkDigit) % 11
 		remainder is 0
 
-	id = @tools.normalize(id)
+	id = normalize(id)
 	isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)

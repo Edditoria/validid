@@ -1,3 +1,6 @@
+import normalize from '../utils/normalize'
+import isDateValid from '../utils/is-date-valid'
+
 export default (id) ->
 	# the 2nd generation of China ID Card
 	# format of card ID: LLLLLLYYYYMMDD000X
@@ -10,7 +13,7 @@ export default (id) ->
 
 	# assume the oldest Chinese, Luo Meizhen, was born in 25 Jun, 1886 and he had an ID card
 	# source: http://www.scmp.com/news/china/article/1297022/uygur-alimihan-seyiti-age-127-may-set-record-oldest-person-alive
-	isDateValid = => @tools.isDateValid(id.substring(6,14), '18860625')
+	isThisDateValid = -> isDateValid(id.substring(6,14), '18860625')
 
 	isChecksumValid = (id) ->
 		# adapts ISO 7064:1983.MOD 11-2
@@ -25,5 +28,5 @@ export default (id) ->
 		remainder = (12 - weightedSum % 11) % 11 - checkDigit
 		remainder is 0
 
-	id = @tools.normalize(id)
-	isLengthValid(id) and isFormatValid(id) and isDateValid() and isChecksumValid(id)
+	id = normalize(id)
+	isLengthValid(id) and isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)
