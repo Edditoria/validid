@@ -2,17 +2,23 @@ import normalize from '../utils/normalize'
 import getMaxDate from '../utils/get-max-date'
 import isDateValid from '../utils/is-date-valid'
 
+###*
+Validate ID card number of South Korea
+@module core/krid
+@param {string} id
+@return {boolean}
+
+Original name: Resident Registration Number (RRN)
+Format of card id: YYMMDD-SBBBBNC
+###
 export default (id) ->
-	# format of South Korea ID card: YYMMDD-SBBBBNC
 
-	isLengthValid = (id) ->
-		id.length is 13
+	isLengthValid = (id) -> id.length is 13
 
-	isFormatValid = (id) ->
-		/^[0-9]{13}$/.test(id)
+	isFormatValid = (id) -> /^[0-9]{13}$/.test(id)
 
-	isDateValid = (id) =>
-		# parse the date into 'YYYYMMDD' according to 'S' digit
+	# Parse the date into 'YYYYMMDD' according to 'S' digit
+	isThisDateValid = (id) ->
 		sDigit = id.substring(6,7)
 		yearPrefix = switch sDigit
 			when '1','2','5','6' then '19'
@@ -20,17 +26,17 @@ export default (id) ->
 			else '18'
 		date = yearPrefix + id.substring(0,6)
 		maxDate = getMaxDate(17) # 17 years old to register for an ID
-		isDateValid(date, 'default', maxDate)
+		return isDateValid(date, 'default', maxDate)
 
 	isChecksumValid = (id) ->
-		weight = [2,3,4,5,6,7,8,9,2,3,4,5,0] # add 0 for check digit
+		weight = [2,3,4,5,6,7,8,9,2,3,4,5,0] # 0 is added for check digit
 		weightedSum = 0
 		index = 0
 		for char in id
 			weightedSum += +char * weight[index]
 			index++
 		remainder = (11 - weightedSum % 11) % 10 - +id.slice(-1)
-		remainder is 0
+		return remainder is 0
 
 	id = normalize(id)
-	isLengthValid(id) and isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)
+	return isLengthValid(id) and isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)

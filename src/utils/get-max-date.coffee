@@ -1,7 +1,12 @@
+###*
+Calculate the expected birthday by providing year only
+Useful for putting maxDate in isDateValid()
+
+@module utils/get-max-coffee
+@param {number} yearsOld - Should be a whole number
+@return {Object} An Date() object
+###
 export default (yearsOld) ->
-	# yearsOld should be a whole number
-	# return Date() object
-	# useful for puting maxDate in isDateValid()
 	now = new Date()
 	year = now.getFullYear() - yearsOld
-	new Date(year, now.getMonth(), now.getDate())
+	return new Date(year, now.getMonth(), now.getDate())

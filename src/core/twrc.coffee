@@ -1,28 +1,36 @@
 import normalize from '../utils/normalize'
 
+###*
+Validate ID number of Taiwan Resident Certificate (Uniform ID Numbers)
+@module core/twrc
+@param {string} id
+@return {boolean}
+
+Format of the id: AB12345678
+
+In Taiwan, there is another system called National Identification Card
+@see module:core/twid
+###
 export default (id) ->
-	# format of Taiwan Resident Certificate: AB12345678
 
-	isLengthValid = (id) ->
-		id.length is 10
+	isLengthValid = (id) -> id.length is 10
 
-	isFormatValid = (id) ->
-		/^[A-Z][A-D][0-9]{8}$/.test(id)
+	isFormatValid = (id) -> /^[A-Z][A-D][0-9]{8}$/.test(id)
 
 	isChecksumValid = (id) ->
 		idLen = id.length
-		# each letter represents value from [10..35]
+		# Each letter represents a value from [10..35]
 		letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO'
 		letterIndex = letters.indexOf(id[0])
 		weightedSum = Math.floor(letterIndex / 10 + 1) + letterIndex * (idLen - 1)
 		weightedSum += letters.indexOf(id[1]) * (idLen - 2)
-		idTail = id.slice(2) # drop the letters
-		weight = idLen - 3 # minus letter digit and check digit
+		idTail = id.slice(2) # Drop the letters
+		weight = idLen - 3 # Minus letter digit and check digit
 		for char in idTail
 			weightedSum += +char * weight
 			weight--
 		remainder = (weightedSum + +id.slice(-1)) % 10
-		remainder is 0
+		return remainder is 0
 
 	id = normalize(id)
-	isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
+	return isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)

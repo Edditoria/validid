@@ -1,10 +1,17 @@
+###*
+Normalize an ID by:
+- id.toUpperCase()
+- Remove '-' and '/' at any position
+- Remove whitespace
+- Remove '(' and ')' at the end of the string, e.g. 'A123456(0)'
+
+@module utils/normalize
+@param {string} id
+@return {string} Normalized ID
+###
 export default (id) ->
-	# make id toUpperCase
-	# remove '-' and '/' at any position
-	# remove whitespace
-	# remove '(' and ')' at the end of the string
 	re = /[-\/\s]/g
 	id = id.toUpperCase().replace(re, '')
 	re = /\([A-Z0-9]\)$/
 	if re.test(id) then id = id.replace(/[\(\)]/g, '')
-	id
+	return id

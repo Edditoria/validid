@@ -1,8 +1,11 @@
-###
+###*
+Validid is a Javascript library to validate ID Card numbers of China, Taiwan, Hong Kong and South Korea.
 Validid is open source in:
 https://github.com/Edditoria/validid
 
-under MIT license:
+@author Edditoria
+@license MIT
+Code released under the MIT license:
 https://github.com/Edditoria/validid/blob/master/LICENSE.txt
 ###
 
