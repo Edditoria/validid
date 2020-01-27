@@ -26,10 +26,10 @@ export default [
 				file: outputFileUmd,
 				format: 'umd',
 				name: packageName
-			}, {
-				file: `${test}/${packageName}.umd.js`,
-				format: 'umd',
-				name: packageName
+			// }, {
+			// 	file: `${test}/umd/${packageName}.umd.js`,
+			// 	format: 'umd',
+			// 	name: packageName
 			}
 		],
 		plugins: [
@@ -45,11 +45,41 @@ export default [
 				format: 'iife',
 				name: packageName
 			}, {
-				file: `${test}/${packageName}.browser.js`,
+				file: `${test}/browser/${packageName}.browser.js`,
 				format: 'iife',
 				name: packageName
 			}
 		],
+		plugins: [
+			coffee(),
+			cjs({ extensions: resolveExt }),
+			babel({
+				babelrc: false,
+				presets: ['@babel/env'],
+				exclude: 'node_modules/**',
+				extensions: resolveExt
+			})
+		]
+	}, {
+		// UMD test file
+		input: `${src}/test/umd/test.coffee`,
+		output: {
+			file: `${test}/umd/test.js`,
+			format: 'umd',
+			name: 'test'
+		},
+		plugins: [
+			coffee(),
+			cjs({ extensions: resolveExt })
+		]
+	}, {
+		// Browser test file
+		input: `${src}/test/browser/test.coffee`,
+		output: {
+			file: `${test}/browser/test.js`,
+			format: 'iife',
+			name: 'test'
+		},
 		plugins: [
 			coffee(),
 			cjs({ extensions: resolveExt }),
