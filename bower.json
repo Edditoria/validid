@@ -27,7 +27,6 @@
     "src",
     "test",
     "tests",
-    "build.sh",
     "coffeelint.json",
     "CONTRIBUTING.md",
     "package-lock.json",

@@ -20,8 +20,8 @@
     "node": ">=4.9.0"
   },
   "scripts": {
-    "doTest": "node ./test/test.js",
-    "build": "source ./build.sh",
+    "doTest": "node ./test/umd/test.js",
+    "build": "rollup -c ./rollup.config.js",
     "test": "npm run build && npm run doTest",
     "prepublish": "npm run test"
   },
