@@ -4,7 +4,6 @@
   "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
   "license": "MIT",
   "main": "lib/validid.umd.js",
-  "browser": "lib/validid.browser.js",
   "directories": {
     "lib": "lib",
     "test": "test"

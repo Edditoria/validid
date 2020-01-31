@@ -11,46 +11,12 @@ const test = packageJson.directories.test;
 
 const inputFile = `${src}/${packageJson.name}.coffee`;
 const outputFileUmd = packageJson.main;
-const outputFileBrowser = packageJson.browser;
 
 const packageName = packageJson.name;
 const resolveExt = ['.coffee', '.litcoffee', '.mjs', 'js'];
-
-
-export default [
-	{
-		// UMD format as default; Not supported by some browsers, e.g. class in IE
-		input: inputFile,
-		output: [
-			{
-				file: outputFileUmd,
-				format: 'umd',
-				name: packageName
-			// }, {
-			// 	file: `${test}/umd/${packageName}.umd.js`,
-			// 	format: 'umd',
-			// 	name: packageName
-			}
-		],
-		plugins: [
-			coffee(),
-			cjs({ extensions: resolveExt })
-		]
-	}, {
-		// IIFE format for legacy browsers; Class is transpiled by babel
-		input: inputFile,
-		output: [
-			{
-				file: outputFileBrowser,
-				format: 'iife',
-				name: packageName
-			}, {
-				file: `${test}/browser/${packageName}.browser.js`,
-				format: 'iife',
-				name: packageName
-			}
-		],
-		plugins: [
+const indent = '  '; // '  ' or '\t'
+// #todo: not sure how to use tab as indentation in all codes
+const commonPlugins = [
 			coffee(),
 			cjs({ extensions: resolveExt }),
 			babel({
@@ -59,36 +25,46 @@ export default [
 				exclude: 'node_modules/**',
 				extensions: resolveExt
 			})
-		]
+		];
+
+
+export default [
+	{
+		// UMD format as default
+		input: inputFile,
+		output: [
+			{
+				file: outputFileUmd,
+				format: 'umd',
+				name: packageName,
+				indent: indent
+			}, {
+				file: `${test}/browser/${packageName}.umd.js`,
+				format: 'umd',
+				name: packageName,
+				indent: indent
+			}
+		],
+		plugins: commonPlugins
 	}, {
 		// UMD test file
 		input: `${src}/test/umd/test.coffee`,
 		output: {
 			file: `${test}/umd/test.js`,
 			format: 'umd',
-			name: 'test'
+			name: 'test',
+			indent: indent
 		},
-		plugins: [
-			coffee(),
-			cjs({ extensions: resolveExt })
-		]
+		plugins: commonPlugins
 	}, {
 		// Browser test file
 		input: `${src}/test/browser/test.coffee`,
 		output: {
 			file: `${test}/browser/test.js`,
 			format: 'iife',
-			name: 'test'
+			name: 'test',
+			indent: indent
 		},
-		plugins: [
-			coffee(),
-			cjs({ extensions: resolveExt }),
-			babel({
-				babelrc: false,
-				presets: ['@babel/env'],
-				exclude: 'node_modules/**',
-				extensions: resolveExt
-			})
-		]
+		plugins: commonPlugins
 	}
 ];
