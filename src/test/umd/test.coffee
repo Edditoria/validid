@@ -6,5 +6,5 @@ results = test(data, validid) # return {errors, summary}
 
 console.log results.summary
 if results.errors.length isnt 0
-	console.log errors
+	console.log results.errors
 	throw new Error("Test fail. Process exit now.")
