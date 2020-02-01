@@ -1,9 +1,12 @@
 /*jshint esversion: 6 */
 
+import packageJson from './package.json';
+
 import babel from 'rollup-plugin-babel';
 import cjs from '@rollup/plugin-commonjs';
+import cleaner from 'rollup-plugin-cleaner';
 import coffee from 'rollup-plugin-coffee-script';
-import packageJson from './package.json';
+import copy from 'rollup-plugin-copy';
 
 const src = 'src';
 const dest = packageJson.directories.lib;
@@ -30,6 +33,15 @@ const commonPlugins = [
 
 export default [
 	{
+		// Clean up and copy files
+		input: 'src/test/shared/rollup-other-tasks.js',
+		plugins: [
+			cleaner({ targets: [`./${dest}/`, `./${test}/`]}),
+			copy({ targets: [
+				{ src: `${src}/test/browser/index.html`, dest: `${test}/browser/` }
+			]})
+		]
+	}, {
 		// UMD format as default
 		input: inputFile,
 		output: [
