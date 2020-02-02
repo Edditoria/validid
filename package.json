@@ -22,7 +22,8 @@
     "doTest": "node ./test/umd/test.js",
     "build": "rollup -c ./rollup.config.js",
     "test": "npm run build && npm run doTest",
-    "prepublish": "npm run test"
+    "prepublishOnly": "npm run test",
+    "prepack": "npm run test"
   },
   "author": "Edditoria <edditoria@gmail.com>",
   "homepage": "https://github.com/Edditoria/validid",
