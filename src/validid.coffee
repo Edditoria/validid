@@ -19,19 +19,17 @@ import normalize from './utils/normalize'
 import isDateValid from './utils/is-date-valid'
 import getMaxDate from './utils/get-max-date'
 
-class Validid
+validid = () -> return null
 
-	tools:
-		normalize: normalize
-		isDateValid: isDateValid
-		getMaxDate: getMaxDate
-
-	cnid: cnid
-	twid: twid
-	twrc: twrc
-	hkid: hkid
-	krid: krid
-
-validid = new Validid()
+validid.tools = {
+	normalize: normalize
+	isDateValid: isDateValid
+	getMaxDate: getMaxDate
+}
+validid.cnid = cnid
+validid.twid = twid
+validid.twrc = twrc
+validid.hkid = hkid
+validid.krid = krid
 
 export default validid
