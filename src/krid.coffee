@@ -1,6 +1,6 @@
-import normalize from '../utils/normalize'
-import getMaxDate from '../utils/get-max-date'
-import isDateValid from '../utils/is-date-valid'
+import normalize from './utils/normalize'
+import getMaxDate from './utils/get-max-date'
+import isDateValid from './utils/is-date-valid'
 
 ###*
 Validate ID card number of South Korea

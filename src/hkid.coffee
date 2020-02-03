@@ -1,4 +1,4 @@
-import normalize from '../utils/normalize'
+import normalize from './utils/normalize'
 
 ###*
 Validate ID card number of Hong Kong

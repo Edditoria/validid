@@ -9,11 +9,11 @@ Code released under the MIT license:
 https://github.com/Edditoria/validid/blob/master/LICENSE.txt
 ###
 
-import cnid from './core/cnid'
-import twid from './core/twid'
-import twrc from './core/twrc'
-import hkid from './core/hkid'
-import krid from './core/krid'
+import cnid from './cnid'
+import twid from './twid'
+import twrc from './twrc'
+import hkid from './hkid'
+import krid from './krid'
 
 import normalize from './utils/normalize'
 import isDateValid from './utils/is-date-valid'
