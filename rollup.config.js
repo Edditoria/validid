@@ -8,12 +8,6 @@ import cleaner from 'rollup-plugin-cleaner';
 import coffee from 'rollup-plugin-coffee-script';
 import copy from 'rollup-plugin-copy';
 
-const src = 'src';
-const dest = packageJson.directories.lib;
-const test = packageJson.directories.test;
-
-const inputFile = `${src}/${packageJson.name}.coffee`;
-const outputFileUmd = packageJson.main;
 
 const packageName = packageJson.name;
 const resolveExt = ['.coffee', '.litcoffee', '.mjs', 'js'];
@@ -36,33 +30,45 @@ export default [
 		// Clean up and copy files
 		input: 'src/test/shared/rollup-other-tasks.js',
 		plugins: [
-			cleaner({ targets: [`./${dest}/`, `./${test}/`]}),
+			cleaner({ targets: ['./bundles/', './test/']}),
 			copy({ targets: [
-				{ src: `${src}/test/browser/index.html`, dest: `${test}/browser/` }
+				{ src: 'src/test/browser/index.html', dest: 'test/browser/' }
 			]})
 		]
 	}, {
-		// UMD format as default
-		input: inputFile,
+		// Build bundles:
+		input: 'src/index.coffee',
 		output: [
 			{
-				file: outputFileUmd,
+				// UMD; Bundle in one file; Not minified
+				file: `bundles/${packageName}.umd.js`,
 				format: 'umd',
 				name: packageName,
 				indent: indent
 			}, {
-				file: `${test}/browser/${packageName}.umd.js`,
-				format: 'umd',
+				// ESM; Bundle in one file; Not minified
+				file: `bundles/${packageName}.esm.js`,
+				format: 'esm',
 				name: packageName,
 				indent: indent
 			}
 		],
 		plugins: commonPlugins
 	}, {
-		// UMD test file
-		input: `${src}/test/umd/test.coffee`,
+		// Build bundled UMD for test in browser
+		input: 'src/index.coffee',
 		output: {
-			file: `${test}/umd/test.js`,
+			file: `test/browser/${packageName}.umd.js`,
+			format: 'umd',
+			name: packageName,
+			indent: indent
+		},
+		plugins: commonPlugins
+	}, {
+		// UMD test file
+		input: 'src/test/umd/test.coffee',
+		output: {
+			file: 'test/umd/test.js',
 			format: 'umd',
 			name: 'test',
 			indent: indent
@@ -70,9 +76,9 @@ export default [
 		plugins: commonPlugins
 	}, {
 		// Browser test file
-		input: `${src}/test/browser/test.coffee`,
+		input: 'src/test/browser/test.coffee',
 		output: {
-			file: `${test}/browser/test.js`,
+			file: 'test/browser/test.js',
 			format: 'iife',
 			name: 'test',
 			indent: indent

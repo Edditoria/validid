@@ -1,6 +1,6 @@
 import test from '../shared/main'
 import data from '../shared/data'
-import validid from '../../validid'
+import validid from '../../index'
 
 results = test(data, validid) # return {errors, summary}
 
