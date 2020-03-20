@@ -53,8 +53,8 @@
     "coffeescript": "^2.5.1",
     "rollup": "^1.31.0",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-cleaner": "^1.0.0",
     "rollup-plugin-coffee-script": "^2.0.0",
-    "rollup-plugin-copy": "^3.3.0"
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-delete": "^1.2.0"
   }
 }
