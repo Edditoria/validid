@@ -3,6 +3,7 @@
 import packageJson from './package.json';
 
 import babel from 'rollup-plugin-babel';
+import banner from 'rollup-plugin-banner';
 import cjs from '@rollup/plugin-commonjs';
 import coffee from 'rollup-plugin-coffee-script';
 import copy from 'rollup-plugin-copy';
@@ -21,7 +22,8 @@ const commonPlugins = [
 				presets: ['@babel/env'],
 				exclude: 'node_modules/**',
 				extensions: resolveExt
-			})
+			}),
+			banner({ file: 'src/index.head.txt' })
 		];
 
 

@@ -1,14 +1,3 @@
-###*
-Validid is a Javascript library to validate ID Card numbers of China, Taiwan, Hong Kong and South Korea.
-Validid is open source in:
-https://github.com/Edditoria/validid
-
-@author Edditoria
-@license MIT
-Code released under the MIT license:
-https://github.com/Edditoria/validid/blob/master/LICENSE.txt
-###
-
 import cnid from './cnid'
 import twid from './twid'
 import twrc from './twrc'
@@ -19,6 +8,9 @@ import normalize from './utils/normalize'
 import isDateValid from './utils/is-date-valid'
 import getMaxDate from './utils/get-max-date'
 
+###*
+Throw an error when validid.tools is called. This is a temporarily function in v2.
+###
 depreciatedError = ->
 	throw new Error('validid.tools is depreciated. Please use validid.utils instead')
 	return null
