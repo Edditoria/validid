@@ -8,6 +8,7 @@ import cjs from '@rollup/plugin-commonjs';
 import coffee from 'rollup-plugin-coffee-script';
 import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
+import { terser } from 'rollup-plugin-terser';
 
 
 const packageName = packageJson.name;
@@ -25,6 +26,10 @@ const commonPlugins = [
 			}),
 			banner({ file: 'src/index.head.txt' })
 		];
+const pluginsMinify = Array.from(commonPlugins);
+pluginsMinify.push(
+	terser({ mangle: { reserved: [packageName] } })
+);
 
 
 export default [
@@ -56,6 +61,25 @@ export default [
 			}
 		],
 		plugins: commonPlugins
+	}, {
+		// Build bundles:
+		input: 'src/index.coffee',
+		output: [
+			{
+				// UMD; Bundles in one file; Minified
+				file: `bundles/${packageName}.umd.min.js`,
+				format: 'umd',
+				name: packageName,
+				indent: indent
+			}, {
+				// ESM; Bundles in one file; Minified
+				file: `bundles/${packageName}.esm.min.js`,
+				format: 'esm',
+				name: packageName,
+				indent: indent
+			}
+		],
+		plugins: pluginsMinify
 	}, {
 		// Build bundled UMD for test in browser
 		input: 'src/index.coffee',
