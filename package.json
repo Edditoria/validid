@@ -3,25 +3,25 @@
   "version": "1.2.0",
   "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
   "license": "MIT",
-  "main": "lib/validid.umd.js",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
-  },
+  "private": true,
+  "//main": "UMD format; Bundle in one file; Minified; Act as fallback",
+  "main": "bundles/validid.umd.min.js",
+  "//module": "ESM format; Bundle in one file; Minified; Consume using import",
+  "module": "bundles/validid.esm.min.js",
   "files": [
-    "/lib/**/*",
+    "/bundles/**/*",
     "package.json",
     "LICENSE.txt",
     "README.md"
   ],
   "engines": {
-    "//": "Please use node >=13 to develop this package",
+    "//": "Recommend node >=13.2 to develop this package",
     "node": ">=4.9.0"
   },
   "scripts": {
-    "doTest": "node ./test/umd/test.js",
     "build": "rollup -c ./rollup.config.js",
-    "test": "npm run build && npm run doTest",
+    "test": "npm run build && npm run testOnly",
+    "testOnly": "node ./test/umd/test.js",
     "prepublishOnly": "npm run test",
     "prepack": "npm run test"
   },
@@ -47,12 +47,12 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "@rollup/plugin-commonjs": "^11.0.1",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@rollup/plugin-commonjs": "^11.0.2",
     "coffeescript": "^2.5.1",
-    "rollup": "^1.31.0",
-    "rollup-plugin-babel": "^4.3.3",
+    "rollup": "^1.32.1",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-banner": "^0.2.1",
     "rollup-plugin-coffee-script": "^2.0.0",
     "rollup-plugin-copy": "^3.3.0",

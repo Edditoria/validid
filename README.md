@@ -54,16 +54,23 @@ Currently support:
 npm install validid
 ```
 
-For node.js
+Require in node.js:
 
 ```js
 var validid = require('validid');
 console.log(validid.cnid('120103198806018241')); // return true
 ```
 
+Or, import using ES6 syntax:
+
+```js
+import validid from 'validid';
+console.log(validid.cnid('120103198806018241')); // return true
+```
+
 ### Bower
 
-You can download and easily update `validid` via [Bower package manager](https://bower.io/).
+You can download and easily update `validid` via [Bower package manager](https://bower.io/). In Bower, only the minified UMD is provided.
 
 ```shell
 bower install validid
@@ -74,7 +81,7 @@ And it is ready to serve in front-end environment:
 ```html
 <html>
   <head>
-    <script src='bower_components/validid/dist/validid.js'></script>
+    <script src='bower_components/validid/bundles/validid.umd.min.js'></script>
   </head>
 </html>
 
@@ -86,12 +93,12 @@ console.log(validid.cnid('120103198806018241')); // return true
 
 ### Direct Download
 
-Nothing can stop you. Download the file `validid.js` and refer it in your html file:
+Nothing can stop you. Download the file `validid.umd.min.js` and refer it in your html file:
 
 ```html
 <html>
   <head>
-    <script src='validid.js'></script>
+    <script src='validid.umd.min.js'></script>
   </head>
 </html>
 ```
@@ -108,17 +115,16 @@ This repo is in stable and ready for you, while here is the plan to give more:
 
 - [ ] return reason(s) that ID is invalid
 - [ ] more countries and places, if checksum is available:
-  - 1st generation of China ID card
-  - Macau ID card
-  - \[...\]
+	- 1st generation of China ID card
+	- Macau ID card
+	- \[...\]
 - [ ] validate address code (using plugin, not in core)
-  - 2nd generation of China ID card
-  - Korea
+	- 2nd generation of China ID card
+	- Korea
 - [ ] get information from the ID number
-- [ ] ~~generate random number~~
-- [ ] as a framework of taking input, test and returning value. Make things consistent.
+- [ ] ~~generate random number~~ (I don't know any use case. Please comment in issue if you need it.)
 
-## Copyright and license
+## Copyright and License
 
 Copyright (c) 2017-2020 Edditoria. All rights reserved. Code released under the [MIT License](LICENSE.txt). Docs released under [Creative Commons](https://creativecommons.org/licenses/by/4.0/).
 

@@ -13,19 +13,19 @@ import { terser } from 'rollup-plugin-terser';
 
 const packageName = packageJson.name;
 const resolveExt = ['.coffee', '.litcoffee', '.mjs', 'js'];
-const indent = '  '; // '  ' or '\t'
 // #todo: not sure how to use tab as indentation in all codes
+const indent = '  '; // '  ' or '\t'
 const commonPlugins = [
-			coffee(),
-			cjs({ extensions: resolveExt }),
-			babel({
-				babelrc: false,
-				presets: ['@babel/env'],
-				exclude: 'node_modules/**',
-				extensions: resolveExt
-			}),
-			banner({ file: 'src/index.head.txt' })
-		];
+	coffee(),
+	cjs({ extensions: resolveExt }),
+	babel({
+		babelrc: false,
+		presets: ['@babel/env'],
+		exclude: 'node_modules/**',
+		extensions: resolveExt
+	}),
+	banner({ file: 'src/index.head.txt' })
+];
 const pluginsMinify = Array.from(commonPlugins);
 pluginsMinify.push(
 	terser({ mangle: { reserved: [packageName] } })

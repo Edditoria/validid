@@ -2,7 +2,7 @@
 Calculate the expected birthday by providing year only
 Useful for putting maxDate in isDateValid()
 
-@module utils/get-max-coffee
+@module utils/get-max-date
 @param {number} yearsOld - Should be a whole number
 @return {Object} An Date() object
 ###
