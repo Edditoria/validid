@@ -20,19 +20,9 @@
     "id"
   ],
   "ignore": [
-    "**/.*",
-    "bower_components",
-    "bundles",
-    "docs",
-    "node_modules",
-    "src",
-    "test",
-    "tests",
-    "coffeelint.json",
-    "CONTRIBUTING.md",
-    "package-lock.json",
-    "package.json",
-    "README.md",
-    "rollup.config.js"
+    "**/*",
+    "!LICENSE.txt",
+    "!bundles/",
+    "!bundles/validid.umd.min.js"
   ]
 }
