@@ -6,8 +6,8 @@
   "private": true,
   "//main": "UMD format; Bundle in one file; Minified; Act as fallback",
   "main": "bundles/validid.umd.min.js",
-  "//module": "ESM format; Bundle in one file; Minified; Consume using import",
-  "module": "bundles/validid.esm.min.js",
+  "//module": "ESM format; Bundle in one file; Not minified; Consume using import",
+  "module": "bundles/validid.esm.js",
   "files": [
     "/bundles/**/*",
     "package.json",

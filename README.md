@@ -46,7 +46,7 @@ Currently support:
 
 ## Install and Usage
 
-`validid` can be installed via npm or Bower, or run in browser directly.
+`validid` can be installed via npm, Bower, or run in browser directly. You can also consume it using your favorite bundling tools.
 
 ### npm
 
@@ -57,20 +57,35 @@ npm install validid
 Require in node.js:
 
 ```js
-var validid = require('validid');
+var validid = require('validid'); // point to validid.umd.min.js
 console.log(validid.cnid('120103198806018241')); // return true
 ```
 
-Or, import using ES6 syntax:
+Or, import using ES6 syntax in Node 13+:
 
 ```js
-import validid from 'validid';
+import validid from 'validid'; // point to validid.umd.min.js
 console.log(validid.cnid('120103198806018241')); // return true
 ```
+
+### Bundling Tools :new:
+
+In v2.0 , validid bundles ESM and UMD formats. You can make use of them in bundling tools such as Webpack, Rollup and more. Please see `<package.json>`:
+
+```json
+{
+  "//": "...",
+  "main": "bundles/validid.umd.min.js",
+  "module": "bundles/validid.esm.js",
+  "//": "..."
+}
+```
+
+In most cases, you may import validid by resolving "module" rather than "main".
 
 ### Bower
 
-You can download and easily update `validid` via [Bower package manager](https://bower.io/). In Bower, only the minified UMD is provided.
+You can download and easily update `validid` via [Bower package manager](https://bower.io/). In Bower, both bundled UMD `<validid.umd.js>` and minified UMD `<validid.umd.min.js>` are provided.
 
 ```shell
 bower install validid
@@ -80,26 +95,28 @@ And it is ready to serve in front-end environment:
 
 ```html
 <html>
-  <head>
-    <script src='bower_components/validid/bundles/validid.umd.min.js'></script>
-  </head>
+	<head>
+		<script src="bower_components/validid/bundles/validid.umd.js"></script>
+		<script src="test.js"></script>
+	</head>
 </html>
 
 ```
 
 ```js
+/* In test.js */
 console.log(validid.cnid('120103198806018241')); // return true
 ```
 
 ### Direct Download
 
-Nothing can stop you. Download the file `validid.umd.min.js` and refer it in your html file:
+Nothing can stop you. Download the file `validid.umd.js` and refer it in your html file:
 
 ```html
 <html>
-  <head>
-    <script src='validid.umd.min.js'></script>
-  </head>
+	<head>
+		<script src="validid.umd.js"></script>
+	</head>
 </html>
 ```
 
@@ -109,20 +126,15 @@ And you are ready to go:
 console.log(validid.cnid('120103198806018241')); // return true
 ```
 
-## Planning
+## Help Me Out!
 
-This repo is in stable and ready for you, while here is the plan to give more:
+This repo is in stable and ready for you, while here are some aspects need your help:
 
-- [ ] return reason(s) that ID is invalid
-- [ ] more countries and places, if checksum is available:
-	- 1st generation of China ID card
-	- Macau ID card
-	- \[...\]
-- [ ] validate address code (using plugin, not in core)
-	- 2nd generation of China ID card
-	- Korea
-- [ ] get information from the ID number
-- [ ] ~~generate random number~~ (I don't know any use case. Please comment in issue if you need it.)
+- Bugs and new policy that may need an update. However, please do not expose any real ID. 
+- Grammar and writing, including code comments.
+- Open an issue if you want more than simple true/false validation.
+- I'm not sure why developers need an ID generator. Please tell me your need.
+- Any suggestion you want to make.
 
 ## Copyright and License
 
@@ -130,4 +142,4 @@ Copyright (c) 2017-2020 Edditoria. All rights reserved. Code released under the 
 
 As human-readable summary (but not a substitute for the license):
 
-You can use it, share it, modify the codes and distribute your work for private and commercial uses. Please share your works to me. :pizza:
+You can use it, share it, modify the codes and distribute your work for private and commercial uses. If you like, please share your works to me. :pizza:
