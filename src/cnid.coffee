@@ -1,5 +1,5 @@
-import normalize from './utils/normalize'
-import isDateValid from './utils/is-date-valid'
+import normalize from './utils/normalize.coffee'
+import isDateValid from './utils/is-date-valid.coffee'
 
 ###*
 Validate ID card number of China (2nd generation)

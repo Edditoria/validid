@@ -1,12 +1,12 @@
-import cnid from './cnid'
-import twid from './twid'
-import twrc from './twrc'
-import hkid from './hkid'
-import krid from './krid'
+import cnid from './cnid.coffee'
+import twid from './twid.coffee'
+import twrc from './twrc.coffee'
+import hkid from './hkid.coffee'
+import krid from './krid.coffee'
 
-import normalize from './utils/normalize'
-import isDateValid from './utils/is-date-valid'
-import getMaxDate from './utils/get-max-date'
+import normalize from './utils/normalize.coffee'
+import isDateValid from './utils/is-date-valid.coffee'
+import getMaxDate from './utils/get-max-date.coffee'
 
 ###*
 Throw an error when validid.tools is called. This is a temporarily function in v2.

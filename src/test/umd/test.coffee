@@ -1,6 +1,6 @@
-import test from '../shared/main'
-import data from '../shared/data'
-import validid from '../../index'
+import test from '../shared/main.coffee'
+import data from '../shared/data.coffee'
+import validid from '../../index.coffee'
 
 results = test(data, validid) # return {errors, summary}
 

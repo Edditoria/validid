@@ -1,5 +1,5 @@
-import test from '../shared/main'
-import data from '../shared/data'
+import test from '../shared/main.coffee'
+import data from '../shared/data.coffee'
 
 unless window?
 	console.warn 'Suppose this test runs on a browser'
