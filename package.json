@@ -19,7 +19,8 @@
     "node": ">=4.9.0"
   },
   "scripts": {
-    "build": "rollup -c ./rollup.config.js",
+    "build": "rollup -c ./rollup.config.js && npm run build:esm",
+    "build:esm": "gulp -f gulpfile.coffee",
     "test": "npm run build && npm run testOnly",
     "testOnly": "node ./test/umd/test.js",
     "prepublishOnly": "npm run test",
@@ -51,6 +52,8 @@
     "@babel/preset-env": "^7.9.0",
     "@rollup/plugin-commonjs": "^11.0.2",
     "coffeescript": "^2.5.1",
+    "gulp": "^4.0.2",
+    "gulp-coffee": "^3.0.3",
     "rollup": "^1.32.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-banner": "^0.2.1",
