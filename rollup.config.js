@@ -7,7 +7,6 @@ import banner from 'rollup-plugin-banner';
 import cjs from '@rollup/plugin-commonjs';
 import coffee from 'rollup-plugin-coffee-script';
 import copy from 'rollup-plugin-copy';
-import del from 'rollup-plugin-delete';
 import { terser } from 'rollup-plugin-terser';
 
 
@@ -34,10 +33,9 @@ pluginsMinify.push(
 
 export default [
 	{
-		// Clean up and copy files
+		// Copy files
 		input: 'src/test/shared/rollup-other-tasks.js',
 		plugins: [
-			del({ targets: ['bundles/*', 'test/*'] }),
 			copy({ targets: [
 				{ src: 'src/test/browser/index.html', dest: 'test/browser/' }
 			]})
