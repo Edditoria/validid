@@ -15,7 +15,7 @@
     "README.md"
   ],
   "engines": {
-    "//": "Recommend node >=13.2 to develop this package",
+    "//": "Recommend node >=14.0 to develop this package",
     "node": ">=4.9.0"
   },
   "scripts": {
