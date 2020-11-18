@@ -6,10 +6,11 @@
   "private": true,
   "//main": "UMD format; Bundle in one file; Minified; Act as fallback",
   "main": "bundles/validid.umd.min.js",
-  "//module": "ESM format; Bundle in one file; Not minified; Consume using import",
-  "module": "bundles/validid.esm.js",
+  "//module": "ESM format; Entry point of modules; Not minified; Consume using import",
+  "module": "esm/index.mjs",
   "files": [
-    "/bundles/**/*",
+    "bundles/**/*",
+    "esm/**/*",
     "package.json",
     "LICENSE.txt",
     "README.md"
@@ -57,6 +58,7 @@
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-coffee": "^3.0.3",
+    "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.0.0",
     "rollup": "^2.33.3",
     "rollup-plugin-banner": "^0.2.1",
