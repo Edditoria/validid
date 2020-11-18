@@ -21,6 +21,7 @@ const indent = '  '; // '  ' or '\t'
 const babelOptions = {
 	babelrc: false,
 	presets: ['@babel/env'],
+	babelHelpers: 'bundled',
 	exclude: 'node_modules/**',
 	extensions: resolveExt
 };
