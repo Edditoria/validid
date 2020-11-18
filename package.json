@@ -21,7 +21,7 @@
   "scripts": {
     "clean": "gulp -f gulpfile.coffee clean",
     "build": "npm run clean && npm run build:esm && rollup -c ./rollup.config.js",
-    "build:esm": "gulp -f gulpfile.coffee",
+    "build:esm": "gulp -f gulpfile.coffee buildESM",
     "test": "npm run build && npm run testOnly",
     "testOnly": "node ./test/umd/test.js",
     "prepublishOnly": "npm run test",

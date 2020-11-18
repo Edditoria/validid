@@ -17,15 +17,19 @@ delGlobs = [
 regex = /(.coffee)(['"];\s*)$/gm
 extname = '.js'
 
+buildESM = (cb) ->
+	gulp.src(srcGlobs)
+		.pipe coffee()
+		# Replace extension name from .coffee to .js in import statements
+		.pipe replace(regex, extname + '$2')
+		.pipe gulp.dest('esm/')
+	cb()
+	return
+
 clean = (cb) ->
 	del(delGlobs)
 	cb()
 	return
 
-exports.default = ->
-	return gulp.src(srcGlobs)
-		.pipe coffee()
-		# Replace extension name from .coffee to .js in import statements
-		.pipe replace(regex, extname + '$2')
-		.pipe gulp.dest('esm/')
+exports.buildESM = buildESM
 exports.clean = clean
