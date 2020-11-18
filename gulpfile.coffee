@@ -1,5 +1,6 @@
 gulp = require 'gulp'
 coffee = require 'gulp-coffee'
+prettier = require 'gulp-prettier'
 replace = require 'gulp-replace'
 rename = require 'gulp-rename'
 del = require 'del'
@@ -21,6 +22,10 @@ extname = '.mjs'
 buildESM = (cb) ->
 	gulp.src(srcGlobs)
 		.pipe coffee()
+		.pipe prettier(
+			editorconfig: true
+			singleQuote:true
+		)
 		# Replace extension name from .coffee to .mjs in import statements
 		.pipe replace(regex, extname + '$2')
 		.pipe rename({ extname: extname })

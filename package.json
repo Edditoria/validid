@@ -59,6 +59,7 @@
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-coffee": "^3.0.3",
+    "gulp-prettier": "^3.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.0.0",
     "rollup": "^2.33.3",
