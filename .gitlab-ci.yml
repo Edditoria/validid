@@ -1,0 +1,19 @@
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/node/tags/
+image: node:14
+
+# Pick zero or more services to be used on all builds.
+# Only needed when using a docker container to run your tests in.
+# Check out: http://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
+# services: null
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ee/ci/yaml/README.html#cache
+cache:
+  paths:
+    - node_modules/
+
+test_async:
+  script:
+    - npm install
+    - npm run test # build then testOnly
