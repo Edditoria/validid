@@ -1,34 +1,47 @@
-/*jshint esversion: 6 */
+/* jshint esversion: 6 */
 
 import packageJson from './package.json';
-
-import babel from '@rollup/plugin-babel';
-import banner from 'rollup-plugin-banner';
-import cjs from '@rollup/plugin-commonjs';
 import coffee from 'rollup-plugin-coffee-script';
-import copy from 'rollup-plugin-copy';
+import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import banner from 'rollup-plugin-banner';
+import copy from 'rollup-plugin-copy';
 
+// Setup Some Vars
+// ===============
 
 const packageName = packageJson.name;
 const resolveExt = ['.coffee', '.litcoffee', '.mjs', 'js'];
 // #todo: not sure how to use tab as indentation in all codes
 const indent = '  '; // '  ' or '\t'
-const commonPlugins = [
+
+// Options for Plugins
+// ===================
+
+const babelOptions = {
+	babelrc: false,
+	presets: ['@babel/env'],
+	exclude: 'node_modules/**',
+	extensions: resolveExt
+};
+const terserOptions = {
+	mangle: { reserved: [packageName] }
+};
+
+// Preset Plugins Configs
+// ======================
+
+const pluginsCommon = [
 	coffee(),
-	cjs({ extensions: resolveExt }),
-	babel({
-		babelrc: false,
-		presets: ['@babel/env'],
-		exclude: 'node_modules/**',
-		extensions: resolveExt
-	}),
+	babel(babelOptions),
 	banner({ file: 'src/index.head.txt' })
 ];
-const pluginsMinify = Array.from(commonPlugins);
-pluginsMinify.push(
-	terser({ mangle: { reserved: [packageName] } })
-);
+const pluginsMinify = [
+	coffee(),
+	babel(babelOptions),
+	terser(terserOptions),
+	banner({ file: 'src/index.head.txt' })
+];
 
 
 export default [
@@ -58,7 +71,7 @@ export default [
 				indent: indent
 			}
 		],
-		plugins: commonPlugins
+		plugins: pluginsCommon
 	}, {
 		// Build bundles:
 		input: 'src/index.coffee',
@@ -87,7 +100,7 @@ export default [
 			name: packageName,
 			indent: indent
 		},
-		plugins: commonPlugins
+		plugins: pluginsCommon
 	}, {
 		// UMD test file
 		input: 'src/test/umd/test.coffee',
@@ -97,7 +110,7 @@ export default [
 			name: 'test',
 			indent: indent
 		},
-		plugins: commonPlugins
+		plugins: pluginsCommon
 	}, {
 		// Browser test file
 		input: 'src/test/browser/test.coffee',
@@ -107,6 +120,6 @@ export default [
 			name: 'test',
 			indent: indent
 		},
-		plugins: commonPlugins
+		plugins: pluginsCommon
 	}
 ];
