@@ -20,13 +20,27 @@ const indent = '  '; // '  ' or '\t'
 
 const babelOptions = {
 	babelrc: false,
-	presets: ['@babel/env'],
+	presets: [
+		[
+			'@babel/preset-env',
+			{ targets: { ie: "9", node: "4" } }
+		]
+	],
 	babelHelpers: 'bundled',
 	exclude: 'node_modules/**',
 	extensions: resolveExt
 };
 const terserOptions = {
-	mangle: { reserved: [packageName] }
+	ecma: 5,
+	compress: false,
+	mangle: false,
+	keep_classnames: true,
+	keep_fnames: true,
+	output: {
+		beautify: false,
+		comments: false,
+		indent_level: 2
+	}
 };
 
 // Preset Plugins Configs
