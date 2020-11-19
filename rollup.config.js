@@ -80,7 +80,7 @@ export default [
 				indent: indent
 			}, {
 				// ESM; Bundle in one file; Not minified
-				file: `bundles/${packageName}.esm.js`,
+				file: `bundles/${packageName}.esm.mjs`,
 				format: 'esm',
 				name: packageName,
 				indent: indent
@@ -99,7 +99,7 @@ export default [
 				indent: indent
 			}, {
 				// ESM; Bundles in one file; Minified
-				file: `bundles/${packageName}.esm.min.js`,
+				file: `bundles/${packageName}.esm.min.mjs`,
 				format: 'esm',
 				name: packageName,
 				indent: indent
