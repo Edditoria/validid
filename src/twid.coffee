@@ -14,7 +14,7 @@ There is another system called Taiwan Resident Certificate (Uniform ID Numbers)
 ###
 export default (id) ->
 
-	isLengthValid = (id) -> id.length is 10
+	# isLengthValid = (id) -> id.length is 10
 
 	isFormatValid = (id) -> /^[A-Z][12][0-9]{8}$/.test(id)
 
@@ -34,4 +34,5 @@ export default (id) ->
 		return remainder is 0
 
 	id = normalize(id)
-	return isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
+	# return isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
+	return isFormatValid(id) and isChecksumValid(id)

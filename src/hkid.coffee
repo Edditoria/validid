@@ -19,7 +19,7 @@ export default (id) ->
 
 	isLetter = (char) -> /[a-zA-Z]/.test(char)
 
-	isLengthValid = (id) -> id.length is 8 or id.length is 9
+	# isLengthValid = (id) -> id.length is 8 or id.length is 9
 
 	isFormatValid = (id) -> /^[A-NP-Z]{1,2}[0-9]{6}[0-9A]$/.test(id)
 
@@ -43,4 +43,5 @@ export default (id) ->
 		return remainder is 0
 
 	id = normalize(id)
-	return isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
+	# return isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
+	return isFormatValid(id) and isChecksumValid(id)

@@ -13,7 +13,7 @@ Format of card id: YYMMDD-SBBBBNC
 ###
 export default (id) ->
 
-	isLengthValid = (id) -> id.length is 13
+	# isLengthValid = (id) -> id.length is 13
 
 	isFormatValid = (id) -> /^[0-9]{13}$/.test(id)
 
@@ -39,4 +39,5 @@ export default (id) ->
 		return remainder is 0
 
 	id = normalize(id)
-	return isLengthValid(id) and isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)
+	# return isLengthValid(id) and isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)
+	return isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)

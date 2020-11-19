@@ -13,7 +13,7 @@ In Taiwan, there is another system called National Identification Card
 ###
 export default (id) ->
 
-	isLengthValid = (id) -> id.length is 10
+	# isLengthValid = (id) -> id.length is 10
 
 	isFormatValid = (id) -> /^[A-Z][A-D][0-9]{8}$/.test(id)
 
@@ -33,4 +33,5 @@ export default (id) ->
 		return remainder is 0
 
 	id = normalize(id)
-	return isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
+	# return isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
+	return isFormatValid(id) and isChecksumValid(id)
