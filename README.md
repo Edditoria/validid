@@ -1,37 +1,35 @@
-## About `validid`
+# Validid: Validate ID Card Number
 
-`validid` is a Javascript library to validate ID Card numbers of China, Taiwan, Hong Kong and South Korea. Available in npm and bower.
+Validid is a Javascript library to validate ID Card numbers of China, Taiwan, Hong Kong and South Korea. Available in npm and bower.
 
-\(`validid` 是一個 Javascript 程式庫，用作校驗身份證號碼是否基本正確，現時支援中國丶台灣丶香港和韓國 :\)
+\(Validid 是一個 Javascript 程式庫，用作校驗身份證號碼是否基本正確，現時支援中國丶台灣丶香港和韓國 :\)
 
 ## What It Excels
 
-- Deeper validation, not only checksum, e.g. gender, excluding characters in real practice
-- Same code base and usage in front-end and back-end
-- Able to validate multiple card types (Welcome requests for more!)
-- Supports IE
+- Deeper validation, more than checksum, e.g. gender, excluding characters in real practice.
+- Same code base and usage in front-end and back-end.
+- Validate multiple card types, or selectively import individual modules (Welcome requests for more!).
+- Supports IE.
 
 ## Quick Examples
 
-Just simply provide cardType and ID, and `validid` will return `true` or `false`:
+Simply provide cardType and ID. `validid` will return `true` or `false`:
 
 ```js
-// validate a number of China ID card
-validid.cnid('120103198806018241') // true
+// China ID card
+validid.cnid('120103198806018241'); // return true
 
-// validate a number of Taiwan ID card
-validid.twid('A123456789') // true
+// Taiwan ID card
+validid.twid('A123456789'); // return true
 
-// validate a number of Taiwan Resident Certificate
-validid.twrc('AB12345677') // true
+// Taiwan Resident Certificate
+validid.twrc('AB12345677'); // return true
 
-// validate a number of Hong Kong ID card
-validid.hkid('A5555550') // true
-// supports two leading letters of HKID
-validid.hkid('AB9876543') // true
+// Hong Kong ID card: supports two leading letters
+validid.hkid('AB9876543'); // return true
 
-// validate a number of Korea ID card
-validid.krid('781030-5668081') // true
+// Korea ID card
+validid.krid('781030-5668081'); // return true
 ```
 
 Currently support:
@@ -46,7 +44,7 @@ Currently support:
 
 ## Install and Usage
 
-`validid` can be installed via npm, Bower, or run in browser directly. You can also consume it using your favorite bundling tools.
+Validid can be installed via npm, Bower, or run in browser directly. You can also consume it using your favorite bundling tools.
 
 ### npm
 
@@ -58,30 +56,38 @@ Require in node.js:
 
 ```js
 var validid = require('validid'); // point to validid.umd.min.js
-console.log(validid.cnid('120103198806018241')); // return true
+validid.cnid('120103198806018241'); // return true
 ```
 
-Or, import using ES6 syntax in Node 13+:
+Or, import module(s) in Node 13+:
 
 ```js
-import validid from 'validid'; // point to validid.umd.min.js
-console.log(validid.cnid('120103198806018241')); // return true
+// import the whole validid object
+import validid from 'validid/esm/index.mjs';
+// import individual module function
+import krid from 'validid/esm/krid.mjs';
+// import utility in your project
+import normalize from 'validid/esm/utils/normalize.mjs';
+
+validid.krid('781030-5668081'); // return true
+krid('781030-5668081'); // return true
+normalize('g123456(a)'); // return 'G123456A'
 ```
 
 ### Bundling Tools :new:
 
-In v2.0 , validid bundles ESM and UMD formats. You can make use of them in bundling tools such as Webpack, Rollup and more. Please see `<package.json>`:
+In v2, validid bundles ESM and UMD formats. You can make use of them in bundling tools such as Webpack, Rollup and more. Please see `<package.json>`:
 
 ```json
 {
   "//": "...",
   "main": "bundles/validid.umd.min.js",
-  "module": "bundles/validid.esm.js",
+  "module": "bundles/validid.esm.mjs",
   "//": "..."
 }
 ```
 
-In most cases, you may import validid by resolving "module" rather than "main".
+In most cases, you may import `validid` by resolving "module" rather than "main".
 
 ### Bower
 
@@ -105,7 +111,7 @@ And it is ready to serve in front-end environment:
 
 ```js
 /* In test.js */
-console.log(validid.cnid('120103198806018241')); // return true
+console.log(validid.cnid('120103198806018241')); // true
 ```
 
 ### Direct Download
@@ -123,7 +129,7 @@ Nothing can stop you. Download the file `validid.umd.js` and refer it in your ht
 And you are ready to go:
 
 ```js
-console.log(validid.cnid('120103198806018241')); // return true
+console.log(validid.cnid('120103198806018241')); // true
 ```
 
 ## Help Me Out!
@@ -142,4 +148,4 @@ Copyright (c) 2017-2020 Edditoria. All rights reserved. Code released under the 
 
 As human-readable summary (but not a substitute for the license):
 
-You can use it, share it, modify the codes and distribute your work for private and commercial uses. If you like, please share your works to me. :pizza:
+You can use it, share it, modify the code and distribute your work for private and commercial uses. If you like, please share your work with me. :pizza:
