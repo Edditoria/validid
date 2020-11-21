@@ -26,7 +26,6 @@
     "build:bundles": "rollup -c rollup.config.js",
     "test": "npm run build && npm run testOnly",
     "testOnly": "node ./test/umd/test.js",
-    "prepublishOnly": "npm run test",
     "prepack": "npm run test"
   },
   "author": "Edditoria <edditoria@gmail.com>",
