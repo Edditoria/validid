@@ -155,11 +155,7 @@ Format of card id: LLLLLLYYYYMMDD000X
 */
 
 function cnid (id) {
-  var isChecksumValid, isFormatValid, isLengthValid, isThisDateValid;
-
-  isLengthValid = function isLengthValid(id) {
-    return id.length === 18;
-  };
+  var isChecksumValid, isFormatValid, isThisDateValid; // isLengthValid = (id) -> id.length is 18
 
   isFormatValid = function isFormatValid(id) {
     return /^[0-9]{17}[0-9X]$/.test(id);
@@ -173,8 +169,7 @@ function cnid (id) {
 
 
   isChecksumValid = function isChecksumValid(id) {
-    var _char, checkDigit, getWeight, i, identifier, index, len, remainder, weightedSum;
-
+    var char, checkDigit, getWeight, i, identifier, index, len, remainder, weightedSum;
     identifier = id.slice(0, -1);
     checkDigit = id.slice(-1) === 'X' ? 10 : +id.slice(-1);
 
@@ -186,8 +181,8 @@ function cnid (id) {
     index = id.length;
 
     for (i = 0, len = identifier.length; i < len; i++) {
-      _char = identifier[i];
-      weightedSum += +_char * getWeight(index);
+      char = identifier[i];
+      weightedSum += +char * getWeight(index);
       index--;
     }
 
@@ -195,8 +190,47 @@ function cnid (id) {
     return remainder === 0;
   };
 
-  id = normalize(id);
-  return isLengthValid(id) && isFormatValid(id) && isThisDateValid(id) && isChecksumValid(id);
+  id = normalize(id); // return isLengthValid(id) and isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)
+
+  return isFormatValid(id) && isThisDateValid(id) && isChecksumValid(id);
+}
+
+/**
+Validate checksum for TWID and TWRC.
+@module utils/is-twid-checksum-valid
+@param {string} id - The whole ID including checksum.
+@param {string} letterNum - Manually put how many letter(s) in the ID: Either 1 or 2.
+@return {boolean}
+*/
+function isTwidChecksumValid (id, letterNum) {
+  var char, i, idLen, idLetters, idNumbers, len, letterIndex, letters, remainder, weight, weightedSum;
+  idLetters = id.slice(0, letterNum);
+  idNumbers = id.slice(letterNum); // ID in format of 'AA0000000C' or 'A00000000C'
+
+  idLen = 10; // fixed
+  // Each letter represents a value from [10..35]
+
+  letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO'; // weightedSum for idLetters
+
+  letterIndex = letters.indexOf(idLetters[0]);
+  weightedSum = Math.floor(letterIndex / 10 + 1) + letterIndex * (idLen - 1);
+
+  if (letterNum === 2) {
+    weightedSum += letters.indexOf(idLetters[1]) * (idLen - 2);
+  } // weightedSum for idNumbers
+
+
+  weight = idLen - idLetters.length - 1; // Minus letter digit and check digit
+
+  for (i = 0, len = idNumbers.length; i < len; i++) {
+    char = idNumbers[i];
+    weightedSum += +char * weight;
+    weight--;
+  } // Note: the check digit of 'idNumbers' is weighted 0
+
+
+  remainder = (weightedSum + +idNumbers.slice(-1)) % 10;
+  return remainder === 0;
 }
 
 /**
@@ -213,41 +247,15 @@ There is another system called Taiwan Resident Certificate (Uniform ID Numbers)
 */
 
 function twid (id) {
-  var isChecksumValid, isFormatValid, isLengthValid;
-
-  isLengthValid = function isLengthValid(id) {
-    return id.length === 10;
-  };
+  var isFormatValid; // isLengthValid = (id) -> id.length is 10
 
   isFormatValid = function isFormatValid(id) {
     return /^[A-Z][12][0-9]{8}$/.test(id);
   };
 
-  isChecksumValid = function isChecksumValid(id) {
-    var _char, i, idLen, idTail, len, letterIndex, letters, remainder, weight, weightedSum;
+  id = normalize(id); // return isLengthValid(id) and isFormatValid(id) and isChecksumValid(id, 1)
 
-    idLen = id.length; // Each letter represents a value from [10..35]
-
-    letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
-    letterIndex = letters.indexOf(id[0]);
-    weightedSum = Math.floor(letterIndex / 10 + 1) + letterIndex * (idLen - 1);
-    idTail = id.slice(1); // Drop the letter
-
-    weight = idLen - 2; // Minus letter digit and check digit
-
-    for (i = 0, len = idTail.length; i < len; i++) {
-      _char = idTail[i];
-      weightedSum += +_char * weight;
-      weight--;
-    } // Note: the check digit of 'id' is weighted 0
-
-
-    remainder = (weightedSum + +id.slice(-1)) % 10;
-    return remainder === 0;
-  };
-
-  id = normalize(id);
-  return isLengthValid(id) && isFormatValid(id) && isChecksumValid(id);
+  return isFormatValid(id) && isTwidChecksumValid(id, 1);
 }
 
 /**
@@ -263,41 +271,15 @@ In Taiwan, there is another system called National Identification Card
 */
 
 function twrc (id) {
-  var isChecksumValid, isFormatValid, isLengthValid;
-
-  isLengthValid = function isLengthValid(id) {
-    return id.length === 10;
-  };
+  var isFormatValid; // isLengthValid = (id) -> id.length is 10
 
   isFormatValid = function isFormatValid(id) {
     return /^[A-Z][A-D][0-9]{8}$/.test(id);
   };
 
-  isChecksumValid = function isChecksumValid(id) {
-    var _char, i, idLen, idTail, len, letterIndex, letters, remainder, weight, weightedSum;
+  id = normalize(id); // return isLengthValid(id) and isFormatValid(id) and isChecksumValid(id, 2)
 
-    idLen = id.length; // Each letter represents a value from [10..35]
-
-    letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
-    letterIndex = letters.indexOf(id[0]);
-    weightedSum = Math.floor(letterIndex / 10 + 1) + letterIndex * (idLen - 1);
-    weightedSum += letters.indexOf(id[1]) * (idLen - 2);
-    idTail = id.slice(2); // Drop the letters
-
-    weight = idLen - 3; // Minus letter digit and check digit
-
-    for (i = 0, len = idTail.length; i < len; i++) {
-      _char = idTail[i];
-      weightedSum += +_char * weight;
-      weight--;
-    }
-
-    remainder = (weightedSum + +id.slice(-1)) % 10;
-    return remainder === 0;
-  };
-
-  id = normalize(id);
-  return isLengthValid(id) && isFormatValid(id) && isChecksumValid(id);
+  return isFormatValid(id) && isTwidChecksumValid(id, 2);
 }
 
 /**
@@ -323,35 +305,31 @@ function hkid (id) {
   If ID is 8 character long, a space is added to the beginning
   Value of space is 36, hence 36 * 9 = 324
   */
-  var getLetterValue, isChecksumValid, isFormatValid, isLengthValid, isLetter;
+  var getLetterValue, isChecksumValid, isFormatValid, isLetter;
 
   getLetterValue = function getLetterValue(letter) {
     return letter.charCodeAt(0) - 55;
   };
 
-  isLetter = function isLetter(_char) {
-    return /[a-zA-Z]/.test(_char);
-  };
+  isLetter = function isLetter(char) {
+    return /[a-zA-Z]/.test(char);
+  }; // isLengthValid = (id) -> id.length is 8 or id.length is 9
 
-  isLengthValid = function isLengthValid(id) {
-    return id.length === 8 || id.length === 9;
-  };
 
   isFormatValid = function isFormatValid(id) {
     return /^[A-NP-Z]{1,2}[0-9]{6}[0-9A]$/.test(id);
   };
 
   isChecksumValid = function isChecksumValid(id) {
-    var _char2, charValue, checkDigit, i, identifier, len, remainder, weight, weightedSum;
-
+    var char, charValue, checkDigit, i, identifier, len, remainder, weight, weightedSum;
     weight = id.length;
     weightedSum = weight === 8 ? 324 : 0;
     identifier = id.slice(0, -1);
     checkDigit = id.slice(-1) === 'A' ? 10 : +id.slice(-1);
 
     for (i = 0, len = identifier.length; i < len; i++) {
-      _char2 = identifier[i];
-      charValue = isLetter(_char2) ? getLetterValue(_char2) : +_char2;
+      char = identifier[i];
+      charValue = isLetter(char) ? getLetterValue(char) : +char;
       weightedSum += charValue * weight;
       weight--;
     }
@@ -360,8 +338,9 @@ function hkid (id) {
     return remainder === 0;
   };
 
-  id = normalize(id);
-  return isLengthValid(id) && isFormatValid(id) && isChecksumValid(id);
+  id = normalize(id); // return isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
+
+  return isFormatValid(id) && isChecksumValid(id);
 }
 
 /**
@@ -390,11 +369,7 @@ Format of card id: YYMMDD-SBBBBNC
 */
 
 function krid (id) {
-  var isChecksumValid, isFormatValid, isLengthValid, isThisDateValid;
-
-  isLengthValid = function isLengthValid(id) {
-    return id.length === 13;
-  };
+  var isChecksumValid, isFormatValid, isThisDateValid; // isLengthValid = (id) -> id.length is 13
 
   isFormatValid = function isFormatValid(id) {
     return /^[0-9]{13}$/.test(id);
@@ -431,16 +406,15 @@ function krid (id) {
   };
 
   isChecksumValid = function isChecksumValid(id) {
-    var _char, i, index, len, remainder, weight, weightedSum;
-
+    var char, i, index, len, remainder, weight, weightedSum;
     weight = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 0 // 0 is added for check digit
     ];
     weightedSum = 0;
     index = 0;
 
     for (i = 0, len = id.length; i < len; i++) {
-      _char = id[i];
-      weightedSum += +_char * weight[index];
+      char = id[i];
+      weightedSum += +char * weight[index];
       index++;
     }
 
@@ -448,8 +422,9 @@ function krid (id) {
     return remainder === 0;
   };
 
-  id = normalize(id);
-  return isLengthValid(id) && isFormatValid(id) && isThisDateValid(id) && isChecksumValid(id);
+  id = normalize(id); // return isLengthValid(id) and isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)
+
+  return isFormatValid(id) && isThisDateValid(id) && isChecksumValid(id);
 }
 
 /**
@@ -468,13 +443,15 @@ validid = function validid() {
 validid.utils = {
   normalize: normalize,
   isDateValid: isDateValid,
-  getMaxDate: getMaxDate
+  getMaxDate: getMaxDate,
+  isTwidChecksumValid: isTwidChecksumValid
 }; //todo: Remove in v3
 
 validid.tools = {
   normalize: depreciatedError,
   isDateValid: depreciatedError,
-  getMaxDate: depreciatedError
+  getMaxDate: depreciatedError,
+  isTwidChecksumValid: depreciatedError
 };
 validid.cnid = cnid;
 validid.twid = twid;
