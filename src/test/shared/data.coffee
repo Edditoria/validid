@@ -55,6 +55,12 @@ export default [
 	# Taiwan Resident Certificate
 	# ===========================
 
+	# New UID format from 2021
+	{id: 'A800000014', cardType: 'twrc', expect: true} # immigration.gov.tw
+	{id: 'A823456783', cardType: 'twrc', expect: true} # self created ID
+	{id: 'A923456785', cardType: 'twrc', expect: true} # self created ID
+
+	# Legacy UID format before 2021 but still valid
 	{id: 'AB12345677', cardType: 'twrc', expect: true}
 	{id: 'AC12345679', cardType: 'twrc', expect: true}
 	{id: 'AB00207171', cardType: 'twrc', expect: true}
