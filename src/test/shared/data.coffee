@@ -7,7 +7,7 @@ export default [
 	{id: 'A5555550', cardType: 'hkid', expect: true}
 	{id: 'C5678909', cardType: 'hkid', expect: true} # modify from Caring and Sharing Scheme sample (2019)
 	{id: 'AB9876543', cardType: 'hkid', expect: true}
-	{id: 'WX1234569', cardType: 'hkid', expect: true}
+	{id: 'WX1234569', cardType: 'hkid', expect: true} # from repo PR5
 
 	# fail test: length
 	{id: 'A123456', cardType: 'hkid', expect: false}
@@ -20,8 +20,10 @@ export default [
 	{id: 'A12345670', cardType: 'hkid', expect: false}
 
 	# fail test: checksum
-	{id: 'C668668E', cardType: 'hkid', expect: false}
+	{id: 'C668668E', cardType: 'hkid', expect: false} # src: SCMP
 	{id: 'C5678901', cardType: 'hkid', expect: false} # copy from Caring and Sharing Scheme sample (2019)
+	{id: 'Z6833655', cardType: 'hkid', expect: false} # src: Wikipedia
+	{id: 'Z6833672', cardType: 'hkid', expect: false} # src: immd.gov.hk
 
 	# false test: other impossible ID, e.g. according to practice
 	{id: 'O1234561', cardType: 'hkid', expect: false} # no ID starting with "O"
@@ -43,13 +45,13 @@ export default [
 	{id: 'AXXXXXXXX9', cardType: 'twid', expect: false}
 	{id: '0123456789', cardType: 'twid', expect: false}
 
-	# fail test: gender
-	{id: 'D012345678', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
-	{id: 'C987654321', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
-	{id: 'E345678901', cardType: 'twid', expect: false} # only 1 or 2 in 2nd character
+	# fail test: gender (2nd character has to be 1 or 2)
+	{id: 'D012345678', cardType: 'twid', expect: false}
+	{id: 'C987654321', cardType: 'twid', expect: false}
+	{id: 'E345678901', cardType: 'twid', expect: false}
 
 	# fail test: checksum
-	{id: 'A234567890', cardType: 'twid', expect: false}
+	{id: 'A234567890', cardType: 'twid', expect: false} # src: Apple Daily TW
 
 
 	# Taiwan Resident Certificate
@@ -63,12 +65,12 @@ export default [
 	# Legacy UID format before 2021 but still valid
 	{id: 'AB12345677', cardType: 'twrc', expect: true}
 	{id: 'AC12345679', cardType: 'twrc', expect: true}
-	{id: 'AB00207171', cardType: 'twrc', expect: true}
-	{id: 'AC03095424', cardType: 'twrc', expect: true}
-	{id: 'BD01300667', cardType: 'twrc', expect: true}
-	{id: 'CC00151114', cardType: 'twrc', expect: true}
-	{id: 'HD02717288', cardType: 'twrc', expect: true}
-	{id: 'TD00251124', cardType: 'twrc', expect: true}
+	{id: 'AB00207171', cardType: 'twrc', expect: true} # from repo PR4
+	{id: 'AC03095424', cardType: 'twrc', expect: true} # from repo PR4
+	{id: 'BD01300667', cardType: 'twrc', expect: true} # from repo PR4
+	{id: 'CC00151114', cardType: 'twrc', expect: true} # src: Wikimedia Commons
+	{id: 'HD02717288', cardType: 'twrc', expect: true} # from repo PR4
+	{id: 'TD00251124', cardType: 'twrc', expect: true} # from repo PR4
 
 	# fail test: length
 	{id: 'AB1234566', cardType: 'twrc', expect: false}
@@ -79,11 +81,14 @@ export default [
 	{id: 'AB1234567X', cardType: 'twrc', expect: false}
 	{id: 'ABC1234567', cardType: 'twrc', expect: false}
 
-	# fail test: gender
-	{id: 'AE12345673', cardType: 'twrc', expect: false} # only [A-D] in 2nd character
+	# fail test: gender (2nd character has to be [A-D])
+	{id: 'AE12345673', cardType: 'twrc', expect: false}
+	{id: 'YZ50000001', cardType: 'twrc', expect: false} # src: Taiwan News
 
 	# fail test: checksum
 	{id: 'AB12345670', cardType: 'twrc', expect: false}
+	{id: 'AD12345678', cardType: 'twrc', expect: false} # src: Wikipedia
+	{id: 'HC12345678', cardType: 'twrc', expect: false} # src: Taiwan News
 
 
 	# China Resident Identity Card
@@ -92,6 +97,8 @@ export default [
 	{id: '11010120170210193X', cardType: 'cnid', expect: true}
 	{id: '120103198806018241', cardType: 'cnid', expect: true}
 	{id: '310101200001013948', cardType: 'cnid', expect: true}
+	{id: '810000199408230021', cardType: 'cnid', expect: true} # src: Wikipedia
+	{id: '830000199201300022', cardType: 'cnid', expect: true} # src: Wikipedia
 
 	# fail test: length
 	{id: '98765432101234567', cardType: 'cnid', expect: false}
