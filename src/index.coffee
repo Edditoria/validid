@@ -1,12 +1,14 @@
 import cnid from './cnid.coffee'
 import twid from './twid.coffee'
 import twrc from './twrc.coffee'
+import twrcLegacy from './twrc-legacy.coffee'
 import hkid from './hkid.coffee'
 import krid from './krid.coffee'
 
 import normalize from './utils/normalize.coffee'
 import isDateValid from './utils/is-date-valid.coffee'
 import getMaxDate from './utils/get-max-date.coffee'
+import getTwrcFormat from './utils/get-twrc-format.coffee'
 import isTwidChecksumValid from './utils/is-twid-checksum-valid.coffee'
 
 ###*
@@ -23,6 +25,7 @@ validid.utils = {
 	isDateValid: isDateValid
 	getMaxDate: getMaxDate
 	isTwidChecksumValid: isTwidChecksumValid
+	getTwrcFormat: getTwrcFormat
 }
 #todo: Remove in v3
 validid.tools = {
@@ -30,6 +33,7 @@ validid.tools = {
 	isDateValid: depreciatedError
 	getMaxDate: depreciatedError
 	isTwidChecksumValid: depreciatedError
+	getTwrcFormat: depreciatedError
 }
 
 validid.cnid = cnid
@@ -37,5 +41,6 @@ validid.twid = twid
 validid.twrc = twrc
 validid.hkid = hkid
 validid.krid = krid
+validid.twrcLegacy = twrcLegacy
 
 export default validid
