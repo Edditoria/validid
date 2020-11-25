@@ -9,6 +9,8 @@ import twid from './twid.mjs';
 
 import twrc from './twrc.mjs';
 
+import twrcLegacy from './twrc-legacy.mjs';
+
 import hkid from './hkid.mjs';
 
 import krid from './krid.mjs';
@@ -18,6 +20,8 @@ import normalize from './utils/normalize.mjs';
 import isDateValid from './utils/is-date-valid.mjs';
 
 import getMaxDate from './utils/get-max-date.mjs';
+
+import getTwrcFormat from './utils/get-twrc-format.mjs';
 
 import isTwidChecksumValid from './utils/is-twid-checksum-valid.mjs';
 
@@ -37,6 +41,7 @@ validid.utils = {
 	isDateValid: isDateValid,
 	getMaxDate: getMaxDate,
 	isTwidChecksumValid: isTwidChecksumValid,
+	getTwrcFormat: getTwrcFormat,
 };
 
 //todo: Remove in v3
@@ -45,6 +50,7 @@ validid.tools = {
 	isDateValid: depreciatedError,
 	getMaxDate: depreciatedError,
 	isTwidChecksumValid: depreciatedError,
+	getTwrcFormat: depreciatedError,
 };
 
 validid.cnid = cnid;
@@ -56,5 +62,7 @@ validid.twrc = twrc;
 validid.hkid = hkid;
 
 validid.krid = krid;
+
+validid.twrcLegacy = twrcLegacy;
 
 export default validid;

@@ -265,7 +265,58 @@
   }
 
   /**
-  Validate ID number of Taiwan Resident Certificate (Uniform ID Numbers)
+  Check if the format of TWRC is old (before 2021), new (from 2021) or invalid.
+  @param {string} id - Expect the ID is normalized.
+  @return {string|boolean} - Either 'old', 'new' or false.
+  */
+  function getTwrcFormat (id) {
+    if (/^[A-Z][A-D][0-9]{8}$/.test(id)) {
+      return 'old';
+    }
+
+    if (/^[A-Z][89][0-9]{8}$/.test(id)) {
+      return 'new';
+    }
+
+    return false;
+  }
+
+  /**
+  Validate ID number of Taiwan Resident Certificate (Uniform ID Numbers).
+  @module core/twrc
+  @param {string} id
+  @return {boolean}
+
+  Format of the id:
+  - A123456789 (new ID in 2020)
+  - AB12345678 (legacy but still valid)
+
+  In Taiwan, there is another system called National Identification Card
+  @see module:core/twid
+  */
+
+  function twrc (id) {
+    /** @type {string|boolean} - Either 'new', 'old' or false */
+    var idFormat; // isLengthValid = (id) -> id.length is 10
+
+    id = normalize(id);
+    idFormat = getTwrcFormat(id);
+
+    if (idFormat === 'old') {
+      return isTwidChecksumValid(id, 2);
+    }
+
+    if (idFormat === 'new') {
+      return isTwidChecksumValid(id, 1);
+    } // else: idFormat is false
+
+
+    return false;
+  }
+
+  /**
+  Validate ID number of Taiwan Resident Certificate (Uniform ID Numbers).
+  Only validate ID in or before 2020.
   @module core/twrc
   @param {string} id
   @return {boolean}
@@ -273,10 +324,10 @@
   Format of the id: AB12345678
 
   In Taiwan, there is another system called National Identification Card
-  @see module:core/twid
+  @see module:core/twid-legacy
   */
 
-  function twrc (id) {
+  function twrcLegacy (id) {
     var isFormatValid; // isLengthValid = (id) -> id.length is 10
 
     isFormatValid = function isFormatValid(id) {
@@ -450,20 +501,23 @@
     normalize: normalize,
     isDateValid: isDateValid,
     getMaxDate: getMaxDate,
-    isTwidChecksumValid: isTwidChecksumValid
+    isTwidChecksumValid: isTwidChecksumValid,
+    getTwrcFormat: getTwrcFormat
   }; //todo: Remove in v3
 
   validid.tools = {
     normalize: depreciatedError,
     isDateValid: depreciatedError,
     getMaxDate: depreciatedError,
-    isTwidChecksumValid: depreciatedError
+    isTwidChecksumValid: depreciatedError,
+    getTwrcFormat: depreciatedError
   };
   validid.cnid = cnid;
   validid.twid = twid;
   validid.twrc = twrc;
   validid.hkid = hkid;
   validid.krid = krid;
+  validid.twrcLegacy = twrcLegacy;
   var validid$1 = validid;
 
   return validid$1;

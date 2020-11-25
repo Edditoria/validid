@@ -50,7 +50,7 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.12.7",
+    "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
     "@rollup/plugin-babel": "^5.2.1",
     "coffeescript": "^2.5.1",
