@@ -22,8 +22,12 @@ validid.cnid('120103198806018241'); // return true
 // Taiwan ID card
 validid.twid('A123456789'); // return true
 
-// Taiwan Resident Certificate
+// Taiwan Resident Certificate 2021
 validid.twrc('AB12345677'); // return true
+// while validate old format
+validid.twrc('A800000014'); // return true
+// old format "only" (not recommend, tho)
+validid.twrcLegacy('A800000014'); // return false
 
 // Hong Kong ID card: supports two leading letters
 validid.hkid('AB9876543'); // return true

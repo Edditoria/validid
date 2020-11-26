@@ -329,12 +329,12 @@
   }, {
     id: '11010120200101888X',
     cardType: 'cnid',
-    expect: true //todo update every year
+    expect: true //todo update yearly: born in 2020
 
   }, {
     id: '110101202012128881',
     cardType: 'cnid',
-    expect: false //todo update every year
+    expect: false //todo update yearly: born in 2020
 
   }, {
     // fail test: checksum
@@ -389,12 +389,12 @@
     // fail test: date and future date
     id: '030101-3234561',
     cardType: 'krid',
-    expect: true //todo age 17 in 2019 (update every year)
+    expect: true //todo update yearly: age 17 in 2020
 
   }, {
     id: '031231-3234567',
     cardType: 'krid',
-    expect: false //todo age 16 in 2019 (update every year)
+    expect: false //todo update yearly: age 16 in 2020
 
   }, {
     id: '991128-9123457',
