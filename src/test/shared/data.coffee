@@ -112,8 +112,8 @@ export default [
 	# fail test: date and future date
 	{id: '110101188606258888', cardType: 'cnid', expect: true}
 	{id: '110101188606248882', cardType: 'cnid', expect: false}
-	{id: '11010120200101888X', cardType: 'cnid', expect: true} #todo update yearly: born in 2020
-	{id: '110101202012128881', cardType: 'cnid', expect: false} #todo update yearly: born in 2020
+	{id: '110101202201018884', cardType: 'cnid', expect: true} #todo update yearly: born in 2022
+	{id: '110101202212128886', cardType: 'cnid', expect: false} #todo update yearly: born in 2022
 
 	# fail test: checksum
 	{id: '110102197810272321', cardType: 'cnid', expect: false}
@@ -138,8 +138,8 @@ export default [
 	{id: '010101-012345C', cardType: 'krid', expect: false}
 
 	# fail test: date and future date
-	{id: '030101-3234561', cardType: 'krid', expect: true} #todo update yearly: age 17 in 2020
-	{id: '031231-3234567', cardType: 'krid', expect: false} #todo update yearly: age 16 in 2020
+	{id: '050101-3234566', cardType: 'krid', expect: true} #todo update yearly: age 17 in 2022
+	{id: '051231-3234561', cardType: 'krid', expect: false} #todo update yearly: age 16 in 2022
 	{id: '991128-9123457', cardType: 'krid', expect: false} # date before 18991129
 	{id: '991129-9123451', cardType: 'krid', expect: true} # date before 18991129
 	{id: '190101-3234563', cardType: 'krid', expect: false} # false year, 2017
