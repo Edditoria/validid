@@ -16,7 +16,7 @@
     "README.md"
   ],
   "engines": {
-    "//": "Recommend node >=14.0 to develop this package",
+    "//": "Recommend node >=16.0 to develop this package",
     "node": ">=4.9.0"
   },
   "scripts": {
@@ -50,20 +50,20 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/preset-env": "^7.12.7",
-    "@rollup/plugin-babel": "^5.2.1",
-    "coffeescript": "^2.5.1",
+    "@babel/core": "^7.17.4",
+    "@babel/preset-env": "^7.16.11",
+    "@rollup/plugin-babel": "^5.3.0",
+    "coffeescript": "^2.6.1",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-coffee": "^3.0.3",
-    "gulp-prettier": "^3.0.0",
+    "gulp-prettier": "^4.0.0",
     "gulp-rename": "^2.0.0",
-    "gulp-replace": "^1.0.0",
-    "rollup": "^2.33.3",
+    "gulp-replace": "^1.1.3",
+    "rollup": "^2.67.2",
     "rollup-plugin-banner": "^0.2.1",
     "rollup-plugin-coffee-script": "^2.0.0",
-    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-terser": "^7.0.2"
   }
 }
