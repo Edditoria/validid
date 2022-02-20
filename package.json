@@ -28,7 +28,7 @@
     "testOnly": "node ./test/umd/test.js",
     "prepack": "npm run test"
   },
-  "author": "Edditoria <edditoria@gmail.com>",
+  "author": "Edditoria <edditoria@pm.me>",
   "homepage": "https://github.com/Edditoria/validid",
   "repository": {
     "type": "git",
