@@ -2,7 +2,7 @@
 
 import packageJson from './package.json';
 import coffee from 'rollup-plugin-coffee-script';
-import babel from '@rollup/plugin-babel';
+import buble from '@rollup/plugin-buble';
 import { terser } from 'rollup-plugin-terser';
 import banner from 'rollup-plugin-banner';
 import copy from 'rollup-plugin-copy';
@@ -18,18 +18,19 @@ const indent = '  '; // '  ' or '\t'
 // Options for Plugins
 // ===================
 
-const babelOptions = {
-	babelrc: false,
-	presets: [
-		[
-			'@babel/preset-env',
-			{ targets: { ie: "9", node: "4" } }
-		]
-	],
-	babelHelpers: 'bundled',
-	exclude: 'node_modules/**',
-	extensions: resolveExt
-};
+// NOTE: Keep it tentatively.
+// const babelOptions = {
+//	babelrc: false,
+//	presets: [
+//		[
+//			'@babel/preset-env',
+//			{ targets: { ie: "9", node: "4" } }
+//		]
+//	],
+//	babelHelpers: 'bundled',
+//	exclude: 'node_modules/**',
+//	extensions: resolveExt
+//};
 const terserOptions = {
 	ecma: 5,
 	compress: false,
@@ -48,12 +49,14 @@ const terserOptions = {
 
 const pluginsCommon = [
 	coffee(),
-	babel(babelOptions),
+	buble(),
+	// babel(babelOptions),
 	banner({ file: 'src/index.head.txt' })
 ];
 const pluginsMinify = [
 	coffee(),
-	babel(babelOptions),
+	buble(),
+	// babel(babelOptions),
 	terser(terserOptions),
 	banner({ file: 'src/index.head.txt' })
 ];
