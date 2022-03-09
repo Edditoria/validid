@@ -1,11 +1,21 @@
+# NOTE: Remember to update .editorconfig for new changes.
+
 * text=auto
 
-*.bash text eol=lf
-*.fish text eol=lf
-*.sh text eol=lf
-*.bat text eol=crlf
-*.cmd text eol=crlf
-*.ps1 text eol=crlf
+
+# Common
+
+*.md text eol=lf
+*.json text eol=lf
+
+
+# Javascript, npm
+
+*.js text eol=lf
+*.mjs text eol=lf
+
+
+# Images
 
 *.png binary
 *.jpg binary
@@ -14,7 +24,9 @@
 *.ico binary
 *.svg text
 
+
 # Exclude files from exporting
+
 .gitattributes export-ignore
 .gitignore export-ignore
-.gitkeep export-ignore
+.keep export-ignore

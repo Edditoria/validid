@@ -1,5 +1,7 @@
-# This file is for unifying the coding style for different editors and IDEs
-# editorconfig.org
+# This file is to unify coding style for different editors and IDEs.
+# Website: https://editorconfig.org
+#
+# NOTE: Remember to update .gitattributes for new changes.
 
 root=true
 
@@ -9,6 +11,22 @@ charset=utf-8
 indent_style=tab
 insert_final_newline=true
 
-[{*.yml,*.yaml,bower.json,package.json,package-lock.json}]
+# Common
+
+[{*.md,*json}]
+end_of_line=lf
+
+# Javascript, npm
+
+[{*.js,*.mjs}]
+end_of_line=lf
+
+[{bower.json,package.json,package-lock.json}]
+indent_style=space
+indent_size=2
+
+# YAML
+
+[{*.yml,*.yaml}]
 indent_style=space
 indent_size=2
