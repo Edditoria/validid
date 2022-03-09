@@ -26,7 +26,7 @@
     "build:bundles": "rollup -c rollup.config.js",
     "test": "npm run build && npm run testOnly",
     "testOnly": "node ./test/umd/test.js",
-    "prepack": "npm run test"
+    "prepack": "npm run clean && npm run test"
   },
   "author": "Edditoria <edditoria@pm.me>",
   "homepage": "https://github.com/Edditoria/validid",
