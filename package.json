@@ -49,18 +49,18 @@
     "id"
   ],
   "devDependencies": {
-    "@rollup/plugin-buble": "^0.21.3",
-    "coffeescript": "^2.6.1",
+    "@rollup/plugin-buble": "^1.0.2",
+    "@rollup/plugin-terser": "^0.4.0",
+    "coffeescript": "^2.7.0",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-coffee": "^3.0.3",
     "gulp-prettier": "^4.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.1.3",
-    "rollup": "^2.67.2",
+    "rollup": "^3.19.1",
     "rollup-plugin-banner": "^0.2.1",
     "rollup-plugin-coffee-script": "^2.0.0",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-copy": "^3.4.0"
   }
 }
