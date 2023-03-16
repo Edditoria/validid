@@ -20,9 +20,9 @@
     "node": ">=4.9.0"
   },
   "scripts": {
-    "clean": "gulp -f gulpfile.coffee clean",
+    "clean": "gulp -f gulpfile.js clean",
     "build": "npm run build:esm && npm run build:bundles",
-    "build:esm": "gulp -f gulpfile.coffee buildESM",
+    "build:esm": "gulp -f gulpfile.js buildESM",
     "build:bundles": "rollup -c rollup.config.mjs",
     "test": "npm run build && npm run testOnly",
     "testOnly": "node ./test/umd/test.js",
