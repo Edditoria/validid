@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
-
 import packageJson from './package.json' assert { type: 'json' };
 import coffee from 'rollup-plugin-coffee-script';
 import buble from '@rollup/plugin-buble';
@@ -67,9 +65,7 @@ export default [
 		input: 'src/test/shared/rollup-other-tasks.js',
 		plugins: [
 			copy({
-				targets: [
-					{ src: 'src/test/browser/index.html', dest: 'test/browser/' },
-				],
+				targets: [{ src: 'src/test/browser/index.html', dest: 'test/browser/' }],
 			}),
 		],
 	},

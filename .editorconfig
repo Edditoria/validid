@@ -1,32 +1,36 @@
-# This file is to unify coding style for different editors and IDEs.
+# EditorConfig is a file format and collection of text editor plugins for maintaining consistent coding styles between different editors and IDEs.
 # Website: https://editorconfig.org
 #
 # NOTE: Remember to update .gitattributes for new changes.
 
-root=true
+root = true
 
 [*]
-charset=utf-8
-# end_of_line=lf # text=auto in .gitattributes
-indent_style=tab
-insert_final_newline=true
+charset = utf-8
+# end_of_line = lf # text=auto in .gitattributes
+indent_style = tab
+insert_final_newline = true
 
 # Common
 
-[{*.md,*json}]
-end_of_line=lf
+[*.md]
+end_of_line = lf
 
-# Javascript, npm
+[*.{json,jsonc,json5}]
+end_of_line = lf
 
-[{*.js,*.mjs}]
-end_of_line=lf
+# Javascript, Typescript, npm
+
+[*.{js,mjs,cjs,jsx,ts,tsx}]
+end_of_line = lf
 
 [{bower.json,package.json,package-lock.json}]
-indent_style=space
-indent_size=2
+end_of_line = lf
+indent_style = space
+indent_size = 2
 
 # YAML
 
-[{*.yml,*.yaml}]
-indent_style=space
-indent_size=2
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2

@@ -2,18 +2,21 @@
 
 * text=auto
 
-
 # Common
 
 *.md text eol=lf
 *.json text eol=lf
+*.jsonc text eol=lf
+*.json5 text eol=lf
 
-
-# Javascript, npm
+# Javascript, Typescript, npm
 
 *.js text eol=lf
 *.mjs text eol=lf
-
+*.cjs text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
 
 # Images
 
@@ -23,7 +26,6 @@
 *.gif binary
 *.ico binary
 *.svg text
-
 
 # Exclude files from exporting
 
