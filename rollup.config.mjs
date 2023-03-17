@@ -124,7 +124,7 @@ export default [
 	},
 	{
 		// UMD test file
-		input: 'src/test/umd/test.coffee',
+		input: 'src/test/umd/test.mjs',
 		output: {
 			file: 'test/umd/test.js',
 			format: 'umd',
@@ -135,7 +135,7 @@ export default [
 	},
 	{
 		// Browser test file
-		input: 'src/test/browser/test.coffee',
+		input: 'src/test/browser/test.mjs',
 		output: {
 			file: 'test/browser/test.js',
 			format: 'iife',
