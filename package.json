@@ -25,7 +25,7 @@
     "build:esm": "gulp -f gulpfile.js buildESM",
     "build:bundles": "rollup -c rollup.config.mjs",
     "test": "npm run build && npm run testOnly",
-    "testOnly": "node ./test/umd/test.js",
+    "testOnly": "node ./test/esm.mjs",
     "prepack": "npm run clean && npm run test"
   },
   "author": "Edditoria <edditoria@pm.me>",
@@ -63,7 +63,6 @@
     "prettier": "^2.8.4",
     "rollup": "^3.19.1",
     "rollup-plugin-banner": "^0.2.1",
-    "rollup-plugin-coffee-script": "^2.0.0",
-    "rollup-plugin-copy": "^3.4.0"
+    "rollup-plugin-coffee-script": "^2.0.0"
   }
 }

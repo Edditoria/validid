@@ -6,7 +6,7 @@ const rename = require('gulp-rename');
 const del = require('del');
 
 const srcGlobs = ['src/**/*coffee', '!src/test/**'];
-const delGlobs = ['bundles/**', 'esm/**', 'test/**'];
+const delGlobs = ['bundles/**', 'esm/**'];
 
 // $1: Extension name to be replaced; $2: Two characters "';" to be reserved
 const regex = /(.coffee)(['"];\s*)$/gm;
