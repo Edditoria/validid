@@ -9,13 +9,10 @@ Normalize an ID by:
 @param {string} id
 @return {string} Normalized ID
 */
-export default function (id) {
-	var re;
-	re = /[-\/\s]/g;
+export default (function(id) {
+	let re = /[-\/\s]/g;
 	id = id.toUpperCase().replace(re, '');
 	re = /\([A-Z0-9]\)$/;
-	if (re.test(id)) {
-		id = id.replace(/[\(\)]/g, '');
-	}
+	if (re.test(id)) { id = id.replace(/[\(\)]/g, ''); }
 	return id;
-}
+});

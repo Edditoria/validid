@@ -1,7 +1,5 @@
 import normalize from './utils/normalize.mjs';
-
 import getFormat from './utils/get-twrc-format.mjs';
-
 import isChecksumValid from './utils/is-twid-checksum-valid.mjs';
 
 /**
@@ -17,12 +15,12 @@ Format of the id:
 In Taiwan, there is another system called National Identification Card
 @see module:core/twid
 */
-export default function (id) {
-	/** @type {string|boolean} - Either 'new', 'old' or false */
-	var idFormat;
+export default (function(id) {
 	// isLengthValid = (id) -> id.length is 10
+
 	id = normalize(id);
-	idFormat = getFormat(id);
+	/** @type {string|boolean} - Either 'new', 'old' or false */
+	const idFormat = getFormat(id);
 	if (idFormat === 'old') {
 		return isChecksumValid(id, 2);
 	}
@@ -31,4 +29,4 @@ export default function (id) {
 	}
 	// else: idFormat is false
 	return false;
-}
+});

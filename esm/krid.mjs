@@ -1,7 +1,11 @@
+/*
+ * decaffeinate suggestions:
+ * DS101: Remove unnecessary use of Array.from
+ * DS205: Consider reworking code to avoid use of IIFEs
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/main/docs/suggestions.md
+ */
 import normalize from './utils/normalize.mjs';
-
 import getMaxDate from './utils/get-max-date.mjs';
-
 import isDateValid from './utils/is-date-valid.mjs';
 
 /**
@@ -13,64 +17,38 @@ Validate ID card number of South Korea
 Original name: Resident Registration Number (RRN)
 Format of card id: YYMMDD-SBBBBNC
 */
-export default function (id) {
-	var isChecksumValid, isFormatValid, isThisDateValid;
+export default (function(id) {
+
 	// isLengthValid = (id) -> id.length is 13
-	isFormatValid = function (id) {
-		return /^[0-9]{13}$/.test(id);
-	};
+
+	const isFormatValid = id => /^[0-9]{13}$/.test(id);
+
 	// Parse the date into 'YYYYMMDD' according to 'S' digit
-	isThisDateValid = function (id) {
-		var date, maxDate, sDigit, yearPrefix;
-		sDigit = id.substring(6, 7);
-		yearPrefix = (function () {
-			switch (sDigit) {
-				case '1':
-				case '2':
-				case '5':
-				case '6':
-					return '19';
-				case '3':
-				case '4':
-				case '7':
-				case '8':
-					return '20';
-				default:
-					return '18';
-			}
-		})();
-		date = yearPrefix + id.substring(0, 6);
-		maxDate = getMaxDate(17); // 17 years old to register for an ID
+	const isThisDateValid = function(id) {
+		const sDigit = id.substring(6,7);
+		const yearPrefix = (() => { switch (sDigit) {
+			case '1':case '2':case '5':case '6': return '19';
+			case '3':case '4':case '7':case '8': return '20';
+			default: return '18';
+		} })();
+		const date = yearPrefix + id.substring(0,6);
+		const maxDate = getMaxDate(17); // 17 years old to register for an ID
 		return isDateValid(date, 'default', maxDate);
 	};
-	isChecksumValid = function (id) {
-		var char, i, index, len, remainder, weight, weightedSum;
-		weight = [
-			2,
-			3,
-			4,
-			5,
-			6,
-			7,
-			8,
-			9,
-			2,
-			3,
-			4,
-			5,
-			0, // 0 is added for check digit
-		];
-		weightedSum = 0;
-		index = 0;
-		for (i = 0, len = id.length; i < len; i++) {
-			char = id[i];
+
+	const isChecksumValid = function(id) {
+		const weight = [2,3,4,5,6,7,8,9,2,3,4,5,0]; // 0 is added for check digit
+		let weightedSum = 0;
+		let index = 0;
+		for (var char of Array.from(id)) {
 			weightedSum += +char * weight[index];
 			index++;
 		}
-		remainder = ((11 - (weightedSum % 11)) % 10) - +id.slice(-1);
+		const remainder = ((11 - (weightedSum % 11)) % 10) - +id.slice(-1);
 		return remainder === 0;
 	};
+
 	id = normalize(id);
 	// return isLengthValid(id) and isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)
 	return isFormatValid(id) && isThisDateValid(id) && isChecksumValid(id);
-}
+});

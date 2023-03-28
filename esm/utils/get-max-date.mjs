@@ -6,9 +6,8 @@ Useful for putting maxDate in isDateValid()
 @param {number} yearsOld - Should be a whole number
 @return {Object} An Date() object
 */
-export default function (yearsOld) {
-	var now, year;
-	now = new Date();
-	year = now.getFullYear() - yearsOld;
+export default (function(yearsOld) {
+	const now = new Date();
+	const year = now.getFullYear() - yearsOld;
 	return new Date(year, now.getMonth(), now.getDate());
-}
+});
