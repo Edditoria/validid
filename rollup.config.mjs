@@ -1,5 +1,4 @@
 import packageJson from './package.json' assert { type: 'json' };
-import coffee from 'rollup-plugin-coffee-script';
 import buble from '@rollup/plugin-buble';
 import terser from '@rollup/plugin-terser';
 import banner from 'rollup-plugin-banner';
@@ -45,14 +44,14 @@ const terserOptions = {
 // ======================
 
 const pluginsCommon = [
-	coffee(),
-	buble(),
+	// buble(),
 	// babel(babelOptions),
 	banner.default({ file: 'src/index.head.txt' }),
 ];
 const pluginsMinify = [
-	coffee(),
-	buble(),
+	buble({
+		transforms: { dangerousForOf: true },
+	}),
 	// babel(babelOptions),
 	terser(terserOptions),
 	banner.default({ file: 'src/index.head.txt' }),
@@ -61,7 +60,7 @@ const pluginsMinify = [
 export default [
 	{
 		// Build bundles:
-		input: 'src/index.coffee',
+		input: 'esm/index.mjs',
 		output: [
 			{
 				// UMD; Bundle in one file; Not minified
@@ -82,7 +81,7 @@ export default [
 	},
 	{
 		// Build bundles:
-		input: 'src/index.coffee',
+		input: 'esm/index.mjs',
 		output: [
 			{
 				// UMD; Bundles in one file; Minified

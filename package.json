@@ -21,9 +21,7 @@
   },
   "scripts": {
     "clean": "gulp -f gulpfile.js clean",
-    "build": "npm run build:esm && npm run build:bundles",
-    "build:esm": "gulp -f gulpfile.js buildESM",
-    "build:bundles": "rollup -c rollup.config.mjs",
+    "build": "rollup -c rollup.config.mjs",
     "test": "npm run build && npm run testOnly",
     "testOnly": "node ./test/esm.mjs",
     "prepack": "npm run clean && npm run test"
@@ -51,18 +49,12 @@
   "devDependencies": {
     "@rollup/plugin-buble": "^1.0.2",
     "@rollup/plugin-terser": "^0.4.0",
-    "coffeescript": "^2.7.0",
     "del": "^6.0.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "gulp": "^4.0.2",
-    "gulp-coffee": "^3.0.3",
-    "gulp-prettier": "^4.0.0",
-    "gulp-rename": "^2.0.0",
-    "gulp-replace": "^1.1.3",
     "prettier": "^2.8.4",
     "rollup": "^3.19.1",
-    "rollup-plugin-banner": "^0.2.1",
-    "rollup-plugin-coffee-script": "^2.0.0"
+    "rollup-plugin-banner": "^0.2.1"
   }
 }
