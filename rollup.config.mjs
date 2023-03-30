@@ -1,7 +1,6 @@
 import packageJson from './package.json' assert { type: 'json' };
 import buble from '@rollup/plugin-buble';
 import terser from '@rollup/plugin-terser';
-import banner from 'rollup-plugin-banner';
 
 // Setup Some Vars
 // ===============
@@ -10,6 +9,17 @@ const packageName = packageJson.name;
 const resolveExt = ['.coffee', '.litcoffee', '.mjs', 'js'];
 // #todo: not sure how to use tab as indentation in all codes
 const indent = '  '; // '  ' or '\t'
+const banner = `\
+/**
+ * Validid is a Javascript library to validate ID Card numbers of China, Taiwan, Hong Kong and South Korea. \\
+ * Validid is open source in: \\
+ * https://github.com/Edditoria/validid \\
+ * Code released under the ${packageJSON.license} license: \\
+ * https://github.com/Edditoria/validid/blob/master/LICENSE.txt
+ * @author ${packageJSON.author}
+ * @license ${packageJSON.license}
+ */
+`;
 
 // Options for Plugins
 // ===================
@@ -35,7 +45,7 @@ const terserOptions = {
 	keep_fnames: true,
 	output: {
 		beautify: false,
-		comments: false,
+		comments: 'some', // as default.
 		indent_level: 2,
 	},
 };
@@ -46,7 +56,6 @@ const terserOptions = {
 const pluginsCommon = [
 	// buble(),
 	// babel(babelOptions),
-	banner.default({ file: 'src/index.head.txt' }),
 ];
 const pluginsMinify = [
 	buble({
@@ -54,7 +63,6 @@ const pluginsMinify = [
 	}),
 	// babel(babelOptions),
 	terser(terserOptions),
-	banner.default({ file: 'src/index.head.txt' }),
 ];
 
 export default [
@@ -68,6 +76,7 @@ export default [
 				format: 'umd',
 				name: packageName,
 				indent: indent,
+				banner: banner,
 			},
 			{
 				// ESM; Bundle in one file; Not minified
@@ -75,6 +84,7 @@ export default [
 				format: 'esm',
 				name: packageName,
 				indent: indent,
+				banner: banner,
 			},
 		],
 		plugins: pluginsCommon,
@@ -89,6 +99,7 @@ export default [
 				format: 'umd',
 				name: packageName,
 				indent: indent,
+				banner: banner,
 			},
 			{
 				// ESM; Bundles in one file; Minified
@@ -96,6 +107,7 @@ export default [
 				format: 'esm',
 				name: packageName,
 				indent: indent,
+				banner: banner,
 			},
 		],
 		plugins: pluginsMinify,
