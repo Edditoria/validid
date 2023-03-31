@@ -1,32 +1,33 @@
-import normalize from './utils/normalize.mjs';
-import getFormat from './utils/get-twrc-format.mjs';
-import isChecksumValid from './utils/is-twid-checksum-valid.mjs';
+import { normalize } from './utils/normalize.mjs';
+import { getTWRCFormat } from './utils/get-twrc-format.mjs';
+import { isTWIDChecksumValid } from './utils/is-twid-checksum-valid.mjs';
 
 /**
-Validate ID number of Taiwan Resident Certificate (Uniform ID Numbers).
-@module core/twrc
-@param {string} id
-@return {boolean}
-
-Format of the id:
-- A123456789 (new ID in 2020)
-- AB12345678 (legacy but still valid)
-
-In Taiwan, there is another system called National Identification Card
-@see module:core/twid
-*/
-export default (function(id) {
+ * Validate ID number of Taiwan Resident Certificate (Uniform ID Numbers).
+ *
+ * Format of the ID:
+ * - "A123456789" - New ID in 2020.
+ * - "AB12345678" - Legacy but still valid.
+ *
+ * In Taiwan, there is another system called National Identification Card.
+ * @see module:core/twid
+ *
+ * @module core/twrc
+ * @param {string} id
+ * @return {boolean}
+ */
+export function twrc(id) {
 	// isLengthValid = (id) -> id.length is 10
 
 	id = normalize(id);
 	/** @type {string|boolean} - Either 'new', 'old' or false */
-	const idFormat = getFormat(id);
+	const idFormat = getTWRCFormat(id);
 	if (idFormat === 'old') {
-		return isChecksumValid(id, 2);
+		return isTWIDChecksumValid(id, 2);
 	}
 	if (idFormat === 'new') {
-		return isChecksumValid(id, 1);
+		return isTWIDChecksumValid(id, 1);
 	}
 	// else: idFormat is false
 	return false;
-});
+}

@@ -3,19 +3,18 @@
  * DS101: Remove unnecessary use of Array.from
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/main/docs/suggestions.md
  */
-import normalize from './utils/normalize.mjs';
-import isDateValid from './utils/is-date-valid.mjs';
+import { normalize } from './utils/normalize.mjs';
+import { isDateValid } from './utils/is-date-valid.mjs';
 
 /**
-Validate ID card number of China (2nd generation)
-@module core/cnid
-@param {string} id
-@return {boolean}
-
-Original name: Resident Identity Card of the People's Republic of China (PRC)
-Format of card id: LLLLLLYYYYMMDD000X
-*/
-export default (function(id) {
+ * Validate ID card number of China (2nd generation).
+ * - Original name: Resident Identity Card of the People's Republic of China (PRC).
+ * - Format: "LLLLLLYYYYMMDD000X".
+ * @module core/cnid
+ * @param {string} id
+ * @returns {boolean}
+ */
+export function cnid(id) {
 
 	// isLengthValid = (id) -> id.length is 18
 
@@ -43,4 +42,4 @@ export default (function(id) {
 	id = normalize(id);
 	// return isLengthValid(id) and isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)
 	return isFormatValid(id) && isThisDateValid(id) && isChecksumValid(id);
-});
+}

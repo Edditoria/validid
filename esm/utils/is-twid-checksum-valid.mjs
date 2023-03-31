@@ -1,16 +1,17 @@
-/*
+/* TODO:
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/main/docs/suggestions.md
  */
+
 /**
-Validate checksum for TWID and TWRC.
-@module utils/is-twid-checksum-valid
-@param {string} id - The whole ID including checksum.
-@param {string} letterNum - Manually put how many letter(s) in the ID: Either 1 or 2.
-@return {boolean}
-*/
-export default (function(id, letterNum) {
+ * Validate checksum for TWID and TWRC.
+ * @module utils/is-twid-checksum-valid
+ * @param {string} id - The whole ID including checksum.
+ * @param {number} letterNum - Number of letter in the ID. Either 1 or 2.
+ * @returns {boolean}
+ */
+export function isTWIDChecksumValid(id, letterNum) {
 	const idLetters = id.slice(0, letterNum);
 	const idNumbers = id.slice(letterNum);
 	// ID in format of 'AA0000000C' or 'A00000000C'
@@ -35,4 +36,4 @@ export default (function(id, letterNum) {
 
 	const remainder = (weightedSum + +idNumbers.slice(-1)) % 10;
 	return remainder === 0;
-});
+}

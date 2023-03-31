@@ -1,5 +1,5 @@
 import { allData } from './data/index.mjs';
-import validid from '../esm/index.mjs';
+import { validid } from '../esm/index.mjs';
 
 function reporter(testData, validid) {
 	const results = [];

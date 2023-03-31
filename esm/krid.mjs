@@ -4,20 +4,19 @@
  * DS205: Consider reworking code to avoid use of IIFEs
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/main/docs/suggestions.md
  */
-import normalize from './utils/normalize.mjs';
-import getMaxDate from './utils/get-max-date.mjs';
-import isDateValid from './utils/is-date-valid.mjs';
+import { normalize } from './utils/normalize.mjs';
+import { getMaxDate } from './utils/get-max-date.mjs';
+import { isDateValid } from './utils/is-date-valid.mjs';
 
 /**
-Validate ID card number of South Korea
-@module core/krid
-@param {string} id
-@return {boolean}
-
-Original name: Resident Registration Number (RRN)
-Format of card id: YYMMDD-SBBBBNC
-*/
-export default (function(id) {
+ * Validate ID card number of South Korea.
+ * - Original name: Resident Registration Number (RRN).
+ * - Format: "YYMMDD-SBBBBNC".
+ * @module core/krid
+ * @param {string} id
+ * @returns {boolean}
+ */
+export function krid(id) {
 
 	// isLengthValid = (id) -> id.length is 13
 
@@ -51,4 +50,4 @@ export default (function(id) {
 	id = normalize(id);
 	// return isLengthValid(id) and isFormatValid(id) and isThisDateValid(id) and isChecksumValid(id)
 	return isFormatValid(id) && isThisDateValid(id) && isChecksumValid(id);
-});
+}

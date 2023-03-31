@@ -3,17 +3,16 @@
  * DS101: Remove unnecessary use of Array.from
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/main/docs/suggestions.md
  */
-import normalize from './utils/normalize.mjs';
+import { normalize } from './utils/normalize.mjs';
 
 /**
-Validate ID card number of Hong Kong
-@module core/hkid
-@param {string} id
-@return {boolean}
-
-Format of card id: X123456(A) or XY123456(A)
-*/
-export default (function(id) {
+ * Validate ID card number of Hong Kong.
+ * Format: "X123456(A)" or "XY123456(A)".
+ * @module core/hkid
+ * @param {string} id
+ * @returns {boolean}
+ */
+export function hkid(id) {
 
 	/*
 	charCode = { A: 65, B: 66... Z: 90 }
@@ -52,4 +51,4 @@ export default (function(id) {
 	id = normalize(id);
 	// return isLengthValid(id) and isFormatValid(id) and isChecksumValid(id)
 	return isFormatValid(id) && isChecksumValid(id);
-});
+}
