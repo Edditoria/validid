@@ -1,9 +1,3 @@
-/* TODO:
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/main/docs/suggestions.md
- */
-
 /**
  * Validate checksum for TWID and TWRC.
  * @module utils/is-twid-checksum-valid
@@ -28,7 +22,7 @@ export function isTWIDChecksumValid(id, letterNum) {
 
 	// weightedSum for idNumbers
 	let weight = idLen - idLetters.length - 1; // Minus letter digit and check digit
-	for (var char of Array.from(idNumbers)) {
+	for (var char of idNumbers) {
 		weightedSum += +char * weight;
 		weight--;
 	}

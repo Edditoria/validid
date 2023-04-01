@@ -1,8 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/main/docs/suggestions.md
- */
 import { normalize } from './utils/normalize.mjs';
 import { isDateValid } from './utils/is-date-valid.mjs';
 
@@ -31,7 +26,7 @@ export function cnid(id) {
 		const getWeight = n => Math.pow(2, n - 1) % 11;
 		let weightedSum = 0;
 		let index = id.length;
-		for (var char of Array.from(identifier)) {
+		for (var char of identifier) {
 			weightedSum += +char * getWeight(index);
 			index--;
 		}

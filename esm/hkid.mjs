@@ -1,8 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/main/docs/suggestions.md
- */
 import { normalize } from './utils/normalize.mjs';
 
 /**
@@ -39,7 +34,7 @@ export function hkid(id) {
 		let weightedSum = weight === 8 ? 324 : 0;
 		const identifier = id.slice(0, -1);
 		const checkDigit = id.slice(-1) === 'A' ? 10 : +id.slice(-1);
-		for (var char of Array.from(identifier)) {
+		for (var char of identifier) {
 			var charValue = isLetter(char) ? getLetterValue(char) : +char;
 			weightedSum += charValue * weight;
 			weight--;

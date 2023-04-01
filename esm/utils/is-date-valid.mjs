@@ -1,11 +1,3 @@
-/* TODO:
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/main/docs/suggestions.md
- */
-
 /**
  * Check if the date is reasonably valid.
  *
@@ -52,8 +44,8 @@ export function isDateValid(idDate, minDate, maxDate) {
 		const date = new Date(year, +month - 1, day); // a Date object
 
 		// 2. Is day valid?
-		/** Do not use Array.indexOf() because of the suck IE */
-		const maxDay = (() => {
+		/** TODO: Refactor. */
+		const getDaysInMonth = (year, month) => {
 			if ('01,03,05,07,08,10,12'.indexOf(month) >= 0) {
 				return 31;
 			} else if ('04,06,09,11'.indexOf(month) >= 0) {
@@ -64,7 +56,8 @@ export function isDateValid(idDate, minDate, maxDate) {
 				if (isLeapYear) { return 29;
 				} else { return 28; }
 			}
-		})();
+		};
+		const maxDay = getDaysInMonth(year, month);
 		const isDayValid = (day > 0) && (day <= maxDay);
 		if (!isDayValid) { return false; }
 
