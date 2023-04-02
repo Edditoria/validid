@@ -20,7 +20,7 @@
     "node": ">=4.9.0"
   },
   "scripts": {
-    "clean": "gulp -f gulpfile.js clean",
+    "clean": "node ./tasks/clean.mjs",
     "build": "rollup -c rollup.config.mjs",
     "test": "npm run build && npm run testOnly",
     "testOnly": "node ./test/esm.mjs",
@@ -49,10 +49,9 @@
   "devDependencies": {
     "@rollup/plugin-buble": "^1.0.2",
     "@rollup/plugin-terser": "^0.4.0",
-    "del": "^6.0.0",
+    "del": "^7.0.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
-    "gulp": "^4.0.2",
     "prettier": "^2.8.4",
     "rollup": "^3.19.1"
   }
