@@ -2,6 +2,12 @@ import { normalize } from './utils/normalize.mjs';
 import { getTWRCFormat } from './utils/get-twrc-format.mjs';
 import { isTWIDChecksumValid } from './utils/is-twid-checksum-valid.mjs';
 
+/** @module core/twrc */
+
+function isLengthValid(id) {
+	return id.length === 10;
+}
+
 /**
  * Validate ID number of Taiwan Resident Certificate (Uniform ID Numbers).
  *
@@ -12,13 +18,10 @@ import { isTWIDChecksumValid } from './utils/is-twid-checksum-valid.mjs';
  * In Taiwan, there is another system called National Identification Card.
  * @see module:core/twid
  *
- * @module core/twrc
  * @param {string} id
  * @return {boolean}
  */
 export function twrc(id) {
-	// isLengthValid = (id) -> id.length is 10
-
 	id = normalize(id);
 	/** @type {string|boolean} - Either 'new', 'old' or false */
 	const idFormat = getTWRCFormat(id);
