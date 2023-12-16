@@ -1,4 +1,5 @@
 import { normalize } from './utils/normalize.mjs';
+import { isCaptialLetter } from './utils/is-capital-letter.mjs';
 
 /** @module core/hkid */
 
@@ -11,10 +12,6 @@ function getLetterValue(letter) {
 	return letter.charCodeAt(0) - 55;
 }
 
-function isLetter(char) {
-	return /[a-zA-Z]/.test(char);
-}
-
 function isLengthValid(id) {
 	return id.length === 8 || id.length === 9;
 }
@@ -24,24 +21,30 @@ function isFormatValid(id) {
 }
 
 /**
- * Check digit algorithm is variation of the ISBN-10 check digit algorithm
- * For each character (except the last digit): character * weight
- * Weight from largest to smallest (1)
- * If ID is 8 character long, a space is added to the beginning
- * Value of space is 36, hence 36 * 9 = 324
+ * Get check digit of a Hong Kong ID.
+ * NOTE: This function does not validate its pattern.
+ * @example getHkidDigit('A123456_') // returns 3.
+ * @param {string} id Full HKID with check digit. Use `_` if check digit is unknown.
+ * @returns {string} Check digit: "0" to "9" or "A".
  */
-function isChecksumValid(id) {
+export function getHkidDigit(id) {
+	/*
+	Check digit algorithm is variation of the ISBN-10 check digit algorithm.
+	For each character: character * weight.
+	Weight from largest to smallest (1).
+	If ID is 8 character long, a space is added to the beginning.
+	Value of space is 36, hence 36 * 9 = 324.
+	*/
 	let weight = id.length;
 	let weightedSum = weight === 8 ? 324 : 0;
 	const identifier = id.slice(0, -1);
-	const checkDigit = id.slice(-1) === 'A' ? 10 : +id.slice(-1);
-	for (var char of identifier) {
-		var charValue = isLetter(char) ? getLetterValue(char) : +char;
+	for (const char of identifier) {
+		const charValue = isCaptialLetter(char) ? getLetterValue(char) : +char;
 		weightedSum += charValue * weight;
 		weight--;
 	}
-	const remainder = (weightedSum + checkDigit) % 11;
-	return remainder === 0;
+	const remainder = (11 - (weightedSum % 11)) % 11;
+	return remainder === 10 ? 'A' : '' + remainder;
 }
 
 /**
@@ -52,6 +55,7 @@ function isChecksumValid(id) {
  */
 export function hkid(id) {
 	id = normalize(id);
-	// return isLengthValid(id) && isFormatValid(id) && isChecksumValid(id);
-	return isFormatValid(id) && isChecksumValid(id);
+	const isChecksumValid = id.slice(-1) === getHkidDigit(id);
+	// return isLengthValid(id) && isFormatValid(id) && isChecksumValid;
+	return isFormatValid(id) && isChecksumValid;
 }
