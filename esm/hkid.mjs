@@ -3,6 +3,13 @@ import { isCaptialLetter } from './utils/is-capital-letter.mjs';
 
 /** @module core/hkid */
 
+/**
+ * String for regular expression to validate pattern for HKID.
+ * @type {string}
+ * @example new RegExp(HKID_PATTERN).test('A123456A'); // returns true.
+ */
+export const HKID_PATTERN = '^[A-NP-Z]{1,2}[0-9]{6}[0-9A]$';
+
 function getLetterValue(letter) {
 	/*
 	charCode = { A: 65, B: 66... Z: 90 }
@@ -10,14 +17,6 @@ function getLetterValue(letter) {
 	Therefore, diff = 55
 	*/
 	return letter.charCodeAt(0) - 55;
-}
-
-function isLengthValid(id) {
-	return id.length === 8 || id.length === 9;
-}
-
-function isFormatValid(id) {
-	return /^[A-NP-Z]{1,2}[0-9]{6}[0-9A]$/.test(id);
 }
 
 /**
@@ -54,8 +53,13 @@ export function getHkidDigit(id) {
  * @returns {boolean}
  */
 export function hkid(id) {
-	id = normalize(id);
-	const isChecksumValid = id.slice(-1) === getHkidDigit(id);
-	// return isLengthValid(id) && isFormatValid(id) && isChecksumValid;
-	return isFormatValid(id) && isChecksumValid;
+	const normId = normalize(id);
+	// Validate length:
+	// if (normId.length < 8 && normId.length > 9) { return false; }
+	// Validate pattern:
+	if (!new RegExp(HKID_PATTERN).test(normId)) {
+		return false;
+	}
+	// Validate checksum:
+	return normId.slice(-1) === getHkidDigit(normId);
 }
