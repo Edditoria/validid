@@ -1,5 +1,5 @@
 import { normalize } from './utils/normalize.mjs';
-import { isTWIDChecksumValid } from './utils/is-twid-checksum-valid.mjs';
+import { getTwidDigit } from './twid.mjs';
 
 /** @module core/twrc-legacy */
 
@@ -9,6 +9,14 @@ function isLengthValid(id) {
 
 function isFormatValid(id) {
 	return /^[A-Z][A-D][0-9]{8}$/.test(id);
+}
+
+/**
+ * @param {string} id
+ * @returns {boolean}
+ */
+function isChecksumValid(id) {
+	return id.slice(-1) === getTwidDigit(id);
 }
 
 /**
@@ -24,6 +32,6 @@ function isFormatValid(id) {
  */
 export function twrcLegacy(id) {
 	id = normalize(id);
-	// return isLengthValid(id) && isFormatValid(id) && isTWIDChecksumValid(id, 2);
-	return isFormatValid(id) && isTWIDChecksumValid(id, 2);
+	// return isLengthValid(id) && isFormatValid(id) && isChecksumValid(id);
+	return isFormatValid(id) && isChecksumValid(id);
 }

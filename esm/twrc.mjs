@@ -1,11 +1,19 @@
 import { normalize } from './utils/normalize.mjs';
 import { getTWRCFormat } from './utils/get-twrc-format.mjs';
-import { isTWIDChecksumValid } from './utils/is-twid-checksum-valid.mjs';
+import { getTwidDigit } from './twid.mjs';
 
 /** @module core/twrc */
 
 function isLengthValid(id) {
 	return id.length === 10;
+}
+
+/**
+ * @param {string} id
+ * @returns {boolean}
+ */
+function isChecksumValid(id) {
+	return id.slice(-1) === getTwidDigit(id);
 }
 
 /**
@@ -23,14 +31,5 @@ function isLengthValid(id) {
  */
 export function twrc(id) {
 	id = normalize(id);
-	/** @type {string|boolean} - Either 'new', 'old' or false */
-	const idFormat = getTWRCFormat(id);
-	if (idFormat === 'old') {
-		return isTWIDChecksumValid(id, 2);
-	}
-	if (idFormat === 'new') {
-		return isTWIDChecksumValid(id, 1);
-	}
-	// else: idFormat is false
-	return false;
+	return !!getTWRCFormat(id) && isChecksumValid(id);
 }

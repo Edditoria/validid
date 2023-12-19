@@ -9,7 +9,6 @@ import { normalize } from './utils/normalize.mjs';
 import { isDateValid } from './utils/is-date-valid.mjs';
 import { getMaxDate } from './utils/get-max-date.mjs';
 import { getTWRCFormat } from './utils/get-twrc-format.mjs';
-import { isTWIDChecksumValid } from './utils/is-twid-checksum-valid.mjs';
 
 /**
  * Throw an error when validid.tools is called. This is a temporarily function in v2.
@@ -24,7 +23,7 @@ validid.utils = {
 	normalize,
 	isDateValid,
 	getMaxDate,
-	isTWIDChecksumValid,
+	isTWIDChecksumValid: depreciatedError,
 	getTWRCFormat
 };
 //todo: Remove in v3
