@@ -1,5 +1,5 @@
 import { normalize } from './utils/normalize.mjs';
-import { getTWRCFormat } from './utils/get-twrc-format.mjs';
+import { getTwrcFormat } from './utils/get-twrc-format.mjs';
 import { getTwidDigit } from './twid.mjs';
 
 /** @module core/twrc */
@@ -31,5 +31,5 @@ function isChecksumValid(id) {
  */
 export function twrc(id) {
 	id = normalize(id);
-	return !!getTWRCFormat(id) && isChecksumValid(id);
+	return !!getTwrcFormat(id) && isChecksumValid(id);
 }

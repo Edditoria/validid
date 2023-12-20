@@ -8,13 +8,10 @@ import { twrcLegacy } from './twrc-legacy.mjs';
 import { normalize } from './utils/normalize.mjs';
 import { isDateValid } from './utils/is-date-valid.mjs';
 import { getMaxDate } from './utils/get-max-date.mjs';
-import { getTWRCFormat } from './utils/get-twrc-format.mjs';
+import { getTwrcFormat } from './utils/get-twrc-format.mjs';
 
-/**
- * Throw an error when validid.tools is called. This is a temporarily function in v2.
- */
-const depreciatedError = function() {
-	throw new Error('validid.tools is depreciated. Please use validid.utils instead');
+const depreciatedError = function () {
+	throw new Error('Feature depreciated. Please request developer to update the program.');
 };
 
 const validid = () => null;
@@ -23,16 +20,16 @@ validid.utils = {
 	normalize,
 	isDateValid,
 	getMaxDate,
-	isTWIDChecksumValid: depreciatedError,
-	getTWRCFormat
+	isTwidChecksumValid: depreciatedError,
+	getTwrcFormat,
 };
 //todo: Remove in v3
 validid.tools = {
 	normalize: depreciatedError,
 	isDateValid: depreciatedError,
 	getMaxDate: depreciatedError,
-	isTWIDChecksumValid: depreciatedError,
-	getTWRCFormat: depreciatedError
+	isTwidChecksumValid: depreciatedError,
+	getTwrcFormat: depreciatedError,
 };
 
 validid.cnid = cnid;

@@ -3,7 +3,7 @@
  * @param {string} id - Expect the ID is normalized.
  * @returns {(string|boolean)} - Either 'old', 'new' or false.
  */
-export function getTWRCFormat(id) {
+export function getTwrcFormat(id) {
 	if (/^[A-Z][A-D][0-9]{8}$/.test(id)) {
 		return 'old';
 	}
