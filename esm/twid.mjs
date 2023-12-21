@@ -7,6 +7,50 @@ import { isCaptialLetter } from './utils/is-capital-letter.mjs';
 const letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
 
 /**
+ * Type of a TWID.
+ * You can get its name using symbol method such as `TwidType.NIC.description`.
+ * @readonly
+ * @enum {Symbol}
+ */
+export const TwidType = Object.freeze({
+	NIC: Symbol('National Identification Card'),
+	NEW_RC: Symbol('new Resident Certificate'),
+	LEGACY_RC: Symbol('legacy Resident Certificate'),
+	INVALID: Symbol('invalid'),
+});
+
+/**
+ * String for regular expression to validate pattern for TWID.
+ * @readonly
+ * @example new RegExp(twidPattern.NIC).test('A123456789'); // Returns true
+ */
+export const twidPattern = Object.freeze({
+	NIC: '^[A-Z][12][0-9]{8}$',
+	NEW_RC: '^[A-Z][89][0-9]{8}$',
+	LEGACY_RC: '^[A-Z][A-D][0-9]{8}$',
+});
+
+/**
+ * Identify the type of a Taiwan ID.
+ * You can get the name of the result using `returnedSymbol.description`.
+ * @param {string} id Expect the ID is normalized.
+ * @returns {TwidType} Either NIC, new RC, legacy RC or invalid.
+ */
+export function identifyTwidType(id) {
+	if (new RegExp(twidPattern.NIC).test(id)) {
+		return TwidType.NIC;
+	}
+	if (new RegExp(twidPattern.LEGACY_RC).test(id)) {
+		return TwidType.LEGACY_RC;
+	}
+	if (new RegExp(twidPattern.NEW_RC).test(id)) {
+		return TwidType.NEW_RC;
+	}
+	// Else:
+	return TwidType.INVALID;
+}
+
+/**
  * Get weighted sum of the region code, aka the first character in Taiwan ID.
  * @param {string} id The whole ID or its first character.
  * @param {number} [weight=9] Default: 9.
@@ -54,8 +98,12 @@ function isLengthValid(id) {
 	return id.length === 10;
 }
 
+/**
+ * @param {string} id
+ * @returns {boolean}
+ */
 function isFormatValid(id) {
-	return /^[A-Z][12][0-9]{8}$/.test(id);
+	return identifyTwidType(id) === TwidType.NIC;
 }
 
 /**

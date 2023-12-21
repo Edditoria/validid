@@ -1,11 +1,20 @@
 import { normalize } from './utils/normalize.mjs';
-import { getTwrcFormat } from './utils/get-twrc-format.mjs';
+import { TwidType, identifyTwidType } from './twid.mjs';
 import { getTwidDigit } from './twid.mjs';
 
 /** @module core/twrc */
 
 function isLengthValid(id) {
 	return id.length === 10;
+}
+
+/**
+ * @param {string} id
+ * @returns {boolean}
+ */
+function isFormatValid(id) {
+	const idFormat = identifyTwidType(id);
+	return idFormat === TwidType.NEW_RC || idFormat === TwidType.LEGACY_RC;
 }
 
 /**
@@ -31,5 +40,5 @@ function isChecksumValid(id) {
  */
 export function twrc(id) {
 	id = normalize(id);
-	return !!getTwrcFormat(id) && isChecksumValid(id);
+	return isFormatValid(id) && isChecksumValid(id);
 }

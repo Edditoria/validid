@@ -1,4 +1,5 @@
 import { normalize } from './utils/normalize.mjs';
+import { TwidType, identifyTwidType } from './twid.mjs';
 import { getTwidDigit } from './twid.mjs';
 
 /** @module core/twrc-legacy */
@@ -7,8 +8,12 @@ function isLengthValid(id) {
 	return id.length === 10;
 }
 
+/**
+ * @param {string} id
+ * @returns {boolean}
+ */
 function isFormatValid(id) {
-	return /^[A-Z][A-D][0-9]{8}$/.test(id);
+	return identifyTwidType(id) === TwidType.LEGACY_RC;
 }
 
 /**
