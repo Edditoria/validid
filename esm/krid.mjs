@@ -4,13 +4,12 @@ import { isDateValid } from './utils/is-date-valid.mjs';
 
 /** @module core/krid */
 
-function isLengthValid(id) {
-	return id.length === 13;
-}
-
-function isFormatValid(id) {
-	return /^[0-9]{13}$/.test(id);
-}
+/**
+ * String for regular expression to validate pattern for KRID.
+ * @type {string}
+ * @example new RegExp(KRID_PATTERN).test('7810305668081') // Returns true.
+ */
+export const KRID_PATTERN = '^[0-9]{13}$';
 
 /**
  * Parse the date into 'YYYYMMDD' according to 'S' digit.
@@ -59,7 +58,12 @@ function isChecksumValid(id) {
  * @returns {boolean}
  */
 export function krid(id) {
-	id = normalize(id);
-	// return isLengthValid(id) && isFormatValid(id) && isThisDateValid(id) && isChecksumValid(id);
-	return isFormatValid(id) && isThisDateValid(id) && isChecksumValid(id);
+	const normId = normalize(id);
+	// Validate length:
+	// if (normId.length !== 13) { return false; }
+	// Validate pattern:
+	if (!new RegExp(KRID_PATTERN).test(normId)) {
+		return false;
+	}
+	return isThisDateValid(normId) && isChecksumValid(normId);
 }
