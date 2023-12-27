@@ -38,16 +38,23 @@ function isThisDateValid(id) {
 	return isDateValid(date, 'default', maxDate);
 }
 
-function isChecksumValid(id) {
-	const weight = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 0]; // 0 is added for check digit
+/**
+ * Get check digit of a South Korea ID.
+ * NOTE: This function does not validate its pattern.
+ * @example getKridDigit('781030566808_') // returns 1.
+ * @param {string} id Full ID with check digit. Use `_` if check digit is unknown.
+ * @returns {string} Check digit: "0" to "9".
+ */
+export function getKridDigit(id) {
+	const weight = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 1]; // 1 is added for check digit
 	let weightedSum = 0;
-	let index = 0;
-	for (var char of id) {
-		weightedSum += +char * weight[index];
-		index++;
+	let idx = 0;
+	const identifier = id.slice(0, -1);
+	for (const char of identifier) {
+		weightedSum += +char * weight[idx];
+		idx++;
 	}
-	const remainder = ((11 - (weightedSum % 11)) % 10) - +id.slice(-1);
-	return remainder === 0;
+	return ((11 - (weightedSum % 11)) % 10).toString();
 }
 
 /**
@@ -65,5 +72,10 @@ export function krid(id) {
 	if (!new RegExp(KRID_PATTERN).test(normId)) {
 		return false;
 	}
-	return isThisDateValid(normId) && isChecksumValid(normId);
+	// Validate date:
+	if (!isThisDateValid(normId)) {
+		return false;
+	}
+	// Validate checksum:
+	return getKridDigit(normId) === normId.slice(-1);
 }
