@@ -1,6 +1,5 @@
 import { normalize } from './utils/normalize.mjs';
-import { getMaxDate } from './utils/get-max-date.mjs';
-import { isDateValid } from './utils/is-date-valid.mjs';
+import { getAge, validateDateString } from './utils/date-utils.mjs';
 
 /** @module core/krid */
 
@@ -11,11 +10,21 @@ import { isDateValid } from './utils/is-date-valid.mjs';
  */
 export const KRID_PATTERN = '^[0-9]{13}$';
 
+/** @type {number} Minimum age to register a ID card. */
+export const KRID_MIN_AGE = 17;
+
 /**
- * Parse the date into 'YYYYMMDD' according to 'S' digit.
+ * Capture birth date from KRID.
+ * @example
+ * // Use case: Compare with birthday entered by user:
+ * captureBirthDateFromKrid(normalizedId) === yyyymmddFromWebForm
+ * @param {string} normId A normalized ID. See: {@link normalize}
+ * @returns {string} A string in format of date "YYYYMMDD".
+ * @throws Invalid date, e.g. 2001-02-29.
  */
-function isThisDateValid(id) {
-	const sDigit = id.substring(6, 7);
+export function captureBirthDateFromKrid(normId) {
+	/** Recall the format of KRID: "YYMMDDSBBBBNC" */
+	const sDigit = normId.substring(6, 7);
 	let yearPrefix;
 	switch (sDigit) {
 		case '1':
@@ -33,9 +42,11 @@ function isThisDateValid(id) {
 		default:
 			yearPrefix = '18';
 	}
-	const date = yearPrefix + id.substring(0, 6);
-	const maxDate = getMaxDate(17); // 17 years old to register for an ID
-	return isDateValid(date, 'default', maxDate);
+	const dateStr = yearPrefix + normId.substring(0, 6);
+	if (!validateDateString(dateStr)) {
+		throw new Error('Invalid date');
+	}
+	return dateStr;
 }
 
 /**
@@ -73,8 +84,18 @@ export function krid(id) {
 		return false;
 	}
 	// Validate date:
-	if (!isThisDateValid(normId)) {
-		return false;
+	/** @type {string} */
+	let birthDate;
+	try {
+		birthDate = captureBirthDateFromKrid(normId);
+	} catch (error) {
+		return false; // Reason: The entered date is not a valid date, e.g. 2001-02-29.
+	}
+	const now = new Date().toLocaleDateString('sv').replace(/-/g, '');
+	// if (+now < +birthDate) return false; // Reason: Birth date is a future date.
+	const age = getAge(birthDate, now);
+	if (age < KRID_MIN_AGE) {
+		return false; // Reason: Not legal age to get a ID.
 	}
 	// Validate checksum:
 	return getKridDigit(normId) === normId.slice(-1);
