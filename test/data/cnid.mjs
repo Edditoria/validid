@@ -77,14 +77,14 @@ export const cnid = [
 		expect: false,
 	},
 	{
-		// TODO: Update yearly: born in 2023
-		id: '110101202301018881',
+		// TODO: Update yearly: born in 2024
+		id: '110101202401018889',
 		cardType: 'cnid',
 		expect: true,
 	},
 	{
-		// TODO: Update yearly: born in 2023
-		id: '110101202312128883',
+		// TODO: Update yearly: born in 2024
+		id: '110101202412128880',
 		cardType: 'cnid',
 		expect: false,
 	},

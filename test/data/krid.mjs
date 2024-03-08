@@ -65,14 +65,14 @@ export const krid = [
 	-------------------------------
 	*/
 	{
-		// TODO: Update yearly: age 17 in 2023
-		id: '060101-3234563',
+		// TODO: Update yearly: age 17 in 2024
+		id: '070101-3234561',
 		cardType: 'krid',
 		expect: true,
 	},
 	{
-		// TODO: Update yearly: age 16 in 2023
-		id: '061231-3234569',
+		// TODO: Update yearly: age 16 in 2024
+		id: '071231-3234566',
 		cardType: 'krid',
 		expect: false,
 	},
