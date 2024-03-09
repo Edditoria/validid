@@ -3,13 +3,12 @@ import { isDateValid } from './utils/is-date-valid.mjs';
 
 /** @module core/cnid */
 
-function isLengthValid(id) {
-	return id.length === 18;
-}
-
-function isFormatValid(id) {
-	return /^[0-9]{17}[0-9X]$/.test(id);
-}
+/**
+ * String for regular expression to validate pattern for CNID.
+ * @type {string}
+ * @example new RegExp(CNID_PATTERN).test('11010120170210193X'); // returns true.
+ */
+export const CNID_PATTERN = '^[0-9]{17}[0-9X]$';
 
 function isThisDateValid(id) {
 	/*
@@ -44,7 +43,12 @@ function isChecksumValid(id) {
  * @returns {boolean}
  */
 export function cnid(id) {
-	id = normalize(id);
-	// return isLengthValid(id) && isFormatValid(id) && isThisDateValid(id) && isChecksumValid(id);
-	return isFormatValid(id) && isThisDateValid(id) && isChecksumValid(id);
+	const normId = normalize(id);
+	// Validate length:
+	// if (normId.length !== 18) { return false; }
+	// Validate pattern:
+	if (!new RegExp(CNID_PATTERN).test(normId)) {
+		return false;
+	}
+	return isThisDateValid(normId) && isChecksumValid(normId);
 }
