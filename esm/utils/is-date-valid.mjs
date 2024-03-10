@@ -1,8 +1,30 @@
 /**
- * Check if the date is reasonably valid.
- *
- * Processes includes:
- * - Check day and month.
+ * Parse a date string to a `Date`.
+ * @deprecated
+ * @param {string} yyyymmdd A string of date in "YYYYMMDD".
+ * @returns {Date}
+ * @throws Error of invalid format.
+ */
+function parseDate(yyyymmdd) {
+	if (typeof yyyymmdd !== 'string') {
+		throw new TypeError('Input has to be string.');
+	}
+	if (yyyymmdd.length !== 8) {
+		throw new RangeError('Input has to be in format of "YYYYMMDD".');
+	}
+	const year = yyyymmdd.substring(0, 4);
+	const month = yyyymmdd.substring(4, 6);
+	const day = yyyymmdd.substring(6, 8);
+	const date = new Date(`${year}-${month}-${day}`);
+	if (Number.isNaN(date.valueOf())) {
+		throw new Error('Invalid date.');
+	}
+	return date;
+}
+
+/**
+ * Validate a date-string, includes:
+ * - Is a string in format "YYYYMMDD".
  * - Is not a future date.
  * - Is between `minDate` and `maxDate`.
  * - Any step is false, will interrupt and return false.
@@ -14,74 +36,57 @@
  * - NOT a dead person who does not act on internet.
  * - Source: https://en.wikipedia.org/wiki/Oldest_people
  *
- * @module utils/is-date-valid
- * @param {string} idDate  - Should be in format of 'YYYYMMDD'.
- * @param {string} minDate - Should be in format of 'YYYYMMDD'.
- * @param {(string|Date)} maxDate - Can be either 'YYYYMMDD' or a `Date` object.
+ * @deprecated Should not assume that only a living person can use a system.
+ * @param {string} idDate A string of date in "YYYYMMDD".
+ * @param {string} [minDate='default'] A string of date in "YYYYMMDD". Optional.
+ * @param {(string|Date)} [maxDate='today'] Either "YYYYMMDD" or a `Date` object. Optional.
  * @returns {boolean}
  */
-export function isDateValid(idDate, minDate, maxDate) {
+export function isDateValid(idDate, minDate = 'default', maxDate = 'today') {
+	/** @type {Date} */
+	let parsedIdDate;
+	/** @type {Date} */
+	let parsedMinDate;
+	/** @type {Date} */
+	let parsedMaxDate;
 
-	if (minDate == null) { minDate = 'default'; }
-	if (maxDate == null) { maxDate = 'today'; }
-	if ((minDate === 'default') || (minDate === '')) { minDate = '18991129'; }
+	// Keep for legacy reason.
+	if (minDate === 'default' || minDate === '') {
+		minDate = '18991129';
+	}
 
-	// 1. Check and parse idDate and minDate
-	const isFormatValid = date => (typeof date === 'string') && /^[0-9]{8}$/.test(date);
-	if (!isFormatValid(idDate)) { return false; }
-	if (!isFormatValid(minDate)) { return false; }
+	// In proper format:
+	try {
+		parsedIdDate = parseDate(idDate);
+		parsedMinDate = parseDate(minDate);
+	} catch (error) {
+		return false; // Early.
+	}
 
-	/**
-	Check if the date is valid. Also will return false if it is a future date.
-	@param {string} input - In format of 'YYYYMMDD'
-	@return {Object|boolean} Return false asap, else return a Date obj
-	*/
-	const parseDate = function(input) {
-		let startIndex = 0;
-		const year = +input.substring(startIndex, (startIndex += 4)); // number
-		const month = input.substring(startIndex, (startIndex += 2)); // string
-		const day = +input.substring(startIndex, (startIndex += 2)); // number
-		const date = new Date(year, +month - 1, day); // a Date object
+	// Not a future date:
+	const now = new Date();
+	if (parsedIdDate > now || parsedMinDate > now) {
+		return false;
+	}
 
-		// 2. Is day valid?
-		/** TODO: Refactor. */
-		const getDaysInMonth = (year, month) => {
-			if ('01,03,05,07,08,10,12'.indexOf(month) >= 0) {
-				return 31;
-			} else if ('04,06,09,11'.indexOf(month) >= 0) {
-				return 30;
-			} else {
-				const isLeapYear = (((year % 4) === 0) && ((year % 100) !== 0))
-					|| ((year % 400) === 0);
-				if (isLeapYear) { return 29;
-				} else { return 28; }
-			}
-		};
-		const maxDay = getDaysInMonth(year, month);
-		const isDayValid = (day > 0) && (day <= maxDay);
-		if (!isDayValid) { return false; }
-
-		// 3. Is month valid?
-		const isMonthValid = (+month > 0) && (+month <= 12);
-		if (!isMonthValid) { return false; }
-
-		// 4. Is date a future date?
-		const isFutureDate = new Date() < date;
-		if (isFutureDate) { return false; }
-
-		// else case
-		return date; // Date object
-	};
-
-	idDate = parseDate(idDate);
-	if (idDate === false) { return false; }
-	minDate = parseDate(minDate);
-	if (minDate === false) { return false; }
-	maxDate = maxDate === 'today' ? new Date()
-		: typeof maxDate === 'string' ? parseDate(maxDate)
-			: maxDate;
-	if (maxDate === false) { return false; }
+	// Parse maxDate:
+	if (maxDate === 'today') {
+		parsedMaxDate = now;
+	} else if (typeof maxDate === 'string') {
+		try {
+			parsedMaxDate = parseDate(maxDate);
+		} catch (error) {
+			return false;
+		}
+		if (parsedMaxDate < now) {
+			return false;
+		}
+	} else if (maxDate instanceof Date && isFinite(maxDate.getTime())) {
+		parsedMaxDate = maxDate;
+	} else {
+		return false;
+	}
 
 	// 5. Finally, check if the idDate falls between minDate and maxDate
-	return (idDate >= minDate) && (idDate <= maxDate);
+	return parsedIdDate >= parsedMinDate && parsedIdDate <= parsedMaxDate;
 }
