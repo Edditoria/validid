@@ -40,20 +40,27 @@ export function captureBirthDateFromCnid(normId) {
 }
 
 /**
- * Adapts "ISO 7064:1983.MOD 11-2".
+ * Get check digit of a China ID.
+ * NOTE: This function does not validate its pattern.
+ * @example getCnidDigit('11010120170210193_') // returns "X".
+ * @param {string} id Full ID with check digit. Use `_` if check digit is unknown.
+ * @returns {string} Check digit: "0" to "9" or "X".
  */
-function isChecksumValid(id) {
+export function getCnidDigit(id) {
+	/*
+	Check digit algorithm utilizes "ISO 7064:1983.MOD 11-2".
+	*/
 	const identifier = id.slice(0, -1);
-	const checkDigit = id.slice(-1) === 'X' ? 10 : +id.slice(-1);
-	const getWeight = (n) => Math.pow(2, n - 1) % 11;
 	let weightedSum = 0;
-	let index = id.length;
-	for (var char of identifier) {
-		weightedSum += +char * getWeight(index);
-		index--;
+	let idx = id.length;
+	for (const char of identifier) {
+		/** Weight coefficient: [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2] */
+		const weight = Math.pow(2, idx - 1) % 11;
+		weightedSum += +char * weight;
+		idx--;
 	}
-	const remainder = ((12 - (weightedSum % 11)) % 11) - checkDigit;
-	return remainder === 0;
+	const remainder = (12 - (weightedSum % 11)) % 11;
+	return remainder === 10 ? 'X' : '' + remainder;
 }
 
 /**
@@ -83,5 +90,6 @@ export function cnid(id) {
 	if (+birthDate >= +now) {
 		return false; // Reason: Invalid date: Birth date is in future.
 	}
-	return isChecksumValid(normId);
+	// Validate checksum:
+	return getCnidDigit(normId) === normId.slice(-1);
 }
