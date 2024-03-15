@@ -7,7 +7,7 @@ import { isCaptialLetter } from './utils/is-capital-letter.mjs';
 export const TWID_LENGTH = 10;
 
 /** Each letter represents a value from "10" to "35". */
-const letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
+const _LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
 
 /**
  * Type of a TWID.
@@ -59,8 +59,8 @@ export function identifyTwidType(id) {
  * @param {number} [weight=9] Default: 9.
  * @returns {number}
  */
-function getRegionCodeValue(id, weight = 9) {
-	const idx = letters.indexOf(id[0]);
+function _getRegionCodeValue(id, weight = 9) {
+	const idx = _LETTERS.indexOf(id[0]);
 	return Math.floor(idx / 10 + 1) + idx * weight;
 }
 
@@ -70,9 +70,9 @@ function getRegionCodeValue(id, weight = 9) {
  * @param {number} [weight=8] Default: 8.
  * @returns {number}
  */
-function getGenderCodeValue(id, weight = 8) {
+function _getGenderCodeValue(id, weight = 8) {
 	const gCode = id[1];
-	const val = isCaptialLetter(gCode) ? +letters.indexOf(gCode) : +gCode;
+	const val = isCaptialLetter(gCode) ? +_LETTERS.indexOf(gCode) : +gCode;
 	return val * weight;
 }
 
@@ -85,7 +85,7 @@ function getGenderCodeValue(id, weight = 8) {
  */
 export function getTwidDigit(id) {
 	// Weighted sum of 1st and 2nd characters:
-	let weightedSum = getRegionCodeValue(id) + getGenderCodeValue(id);
+	let weightedSum = _getRegionCodeValue(id) + _getGenderCodeValue(id);
 	// Process Weighted sum of other characters but check digit:
 	const identifier = id.slice(2, -1);
 	let weight = identifier.length;

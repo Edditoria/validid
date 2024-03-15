@@ -10,7 +10,7 @@ import { isCaptialLetter } from './utils/is-capital-letter.mjs';
  */
 export const HKID_PATTERN = '^[A-NP-Z]{1,2}[0-9]{6}[0-9A]$';
 
-function getLetterValue(letter) {
+function _getLetterValue(letter) {
 	/*
 	charCode = { A: 65, B: 66... Z: 90 }
 	HKID     = { A: 10, B: 11... Z: 35 }
@@ -38,7 +38,7 @@ export function getHkidDigit(id) {
 	let weightedSum = weight === 8 ? 324 : 0;
 	const identifier = id.slice(0, -1);
 	for (const char of identifier) {
-		const charValue = isCaptialLetter(char) ? getLetterValue(char) : +char;
+		const charValue = isCaptialLetter(char) ? _getLetterValue(char) : +char;
 		weightedSum += charValue * weight;
 		weight--;
 	}

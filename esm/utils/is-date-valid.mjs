@@ -5,7 +5,7 @@
  * @returns {Date}
  * @throws Error of invalid format.
  */
-function parseDate(yyyymmdd) {
+function _parseDate(yyyymmdd) {
 	if (typeof yyyymmdd !== 'string') {
 		throw new TypeError('Input has to be string.');
 	}
@@ -57,8 +57,8 @@ export function isDateValid(idDate, minDate = 'default', maxDate = 'today') {
 
 	// In proper format:
 	try {
-		parsedIdDate = parseDate(idDate);
-		parsedMinDate = parseDate(minDate);
+		parsedIdDate = _parseDate(idDate);
+		parsedMinDate = _parseDate(minDate);
 	} catch (error) {
 		return false; // Early.
 	}
@@ -74,7 +74,7 @@ export function isDateValid(idDate, minDate = 'default', maxDate = 'today') {
 		parsedMaxDate = now;
 	} else if (typeof maxDate === 'string') {
 		try {
-			parsedMaxDate = parseDate(maxDate);
+			parsedMaxDate = _parseDate(maxDate);
 		} catch (error) {
 			return false;
 		}
