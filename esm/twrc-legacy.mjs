@@ -4,26 +4,6 @@ import { getTwidDigit } from './twid.mjs';
 
 /** @module core/twrc-legacy */
 
-function isLengthValid(id) {
-	return id.length === 10;
-}
-
-/**
- * @param {string} id
- * @returns {boolean}
- */
-function isFormatValid(id) {
-	return identifyTwidType(id) === TwidType.LEGACY_RC;
-}
-
-/**
- * @param {string} id
- * @returns {boolean}
- */
-function isChecksumValid(id) {
-	return id.slice(-1) === getTwidDigit(id);
-}
-
 /**
  * Validate ID number of Taiwan Resident Certificate (Uniform ID Numbers).
  * Only validate ID in or before 2020.
@@ -36,7 +16,13 @@ function isChecksumValid(id) {
  * @returns {boolean}
  */
 export function twrcLegacy(id) {
-	id = normalize(id);
-	// return isLengthValid(id) && isFormatValid(id) && isChecksumValid(id);
-	return isFormatValid(id) && isChecksumValid(id);
+	const normId = normalize(id);
+	// Validate length:
+	// if (normId.length !== TWID_LENGTH) { return false; }
+	// Validate pattern:
+	if (identifyTwidType(id) !== TwidType.LEGACY_RC) {
+		return false;
+	}
+	// Validate checksum:
+	return getTwidDigit(normId) === normId.slice(-1);
 }

@@ -3,6 +3,9 @@ import { isCaptialLetter } from './utils/is-capital-letter.mjs';
 
 /** @module core/twid */
 
+/** 10 characters for National Identification Card and Resident Certificate. */
+export const TWID_LENGTH = 10;
+
 /** Each letter represents a value from "10" to "35". */
 const letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
 
@@ -94,26 +97,6 @@ export function getTwidDigit(id) {
 	// return String(10 - (weightedSum % 10)).slice(-1); // ~20% slower.
 }
 
-function isLengthValid(id) {
-	return id.length === 10;
-}
-
-/**
- * @param {string} id
- * @returns {boolean}
- */
-function isFormatValid(id) {
-	return identifyTwidType(id) === TwidType.NIC;
-}
-
-/**
- * @param {string} id
- * @returns {boolean}
- */
-function isChecksumValid(id) {
-	return id.slice(-1) === getTwidDigit(id);
-}
-
 /**
  * Validate ID card number of Taiwan.
  * - Original name: National Identification Card of the Republic of China.
@@ -126,7 +109,13 @@ function isChecksumValid(id) {
  * @returns {boolean}
  */
 export function twid(id) {
-	id = normalize(id);
-	// return isLengthValid(id) && isFormatValid(id) && isChecksumValid(id);
-	return isFormatValid(id) && isChecksumValid(id);
+	const normId = normalize(id);
+	// Validate length:
+	// if (normId.length !== TWID_LENGTH) { return false; }
+	// Validate pattern:
+	if (identifyTwidType(normId) !== TwidType.NIC) {
+		return false;
+	}
+	// Validate checksum:
+	return getTwidDigit(normId) === normId.slice(-1);
 }
