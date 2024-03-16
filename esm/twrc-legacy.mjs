@@ -1,5 +1,5 @@
 import { normalize } from './utils/normalize.mjs';
-import { TwidType, identifyTwidType } from './twid.mjs';
+import { TwrcVersion, identifyTwrcVersion } from './utils/twrc.mjs';
 import { getTwidDigit } from './twid.mjs';
 
 /** @module core/twrc-legacy */
@@ -20,7 +20,7 @@ export function twrcLegacy(id) {
 	// Validate length:
 	// if (normId.length !== TWID_LENGTH) { return false; }
 	// Validate pattern:
-	if (identifyTwidType(id) !== TwidType.LEGACY_RC) {
+	if (identifyTwrcVersion(normId) !== TwrcVersion.RC_LEGACY) {
 		return false;
 	}
 	// Validate checksum:

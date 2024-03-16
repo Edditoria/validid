@@ -1,6 +1,6 @@
 import { normalize } from './utils/normalize.mjs';
-import { TwidType, identifyTwidType } from './twid.mjs';
 import { getTwidDigit } from './twid.mjs';
+import { TwrcVersion, identifyTwrcVersion } from './utils/twrc.mjs';
 
 /** @module core/twrc */
 
@@ -22,8 +22,8 @@ export function twrc(id) {
 	// Validate length:
 	// if (normId.length !== TWID_LENGTH) { return false; }
 	// Validate pattern:
-	const idFormat = identifyTwidType(normId);
-	if (idFormat !== TwidType.NEW_RC && idFormat !== TwidType.LEGACY_RC) {
+	const idFormat = identifyTwrcVersion(id);
+	if (idFormat === TwrcVersion.NOT_RC) {
 		return false;
 	}
 	// Validate checksum:
