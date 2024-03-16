@@ -16,8 +16,7 @@ const _LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
  */
 export const TwidType = Object.freeze({
 	NIC: 'NIC',
-	NEW_RC: 'NEW_RC',
-	LEGACY_RC: 'LEGACY_RC',
+	RC: 'RC',
 	INVALID: 'INVALID',
 });
 
@@ -28,24 +27,20 @@ export const TwidType = Object.freeze({
  */
 export const TwidPattern = Object.freeze({
 	NIC: '^[A-Z][12][0-9]{8}$',
-	NEW_RC: '^[A-Z][89][0-9]{8}$',
-	LEGACY_RC: '^[A-Z][A-D][0-9]{8}$',
+	RC: '^[A-Z][89A-D][0-9]{8}$',
 });
 
 /**
  * Identify the type of a Taiwan ID.
  * @param {string} id Expect the ID is normalized.
- * @returns {TwidType} Either NIC, new RC, legacy RC or invalid.
+ * @returns {TwidType} Either NIC, RC or invalid.
  */
 export function identifyTwidType(id) {
 	if (new RegExp(TwidPattern.NIC).test(id)) {
 		return TwidType.NIC;
 	}
-	if (new RegExp(TwidPattern.LEGACY_RC).test(id)) {
-		return TwidType.LEGACY_RC;
-	}
-	if (new RegExp(TwidPattern.NEW_RC).test(id)) {
-		return TwidType.NEW_RC;
+	if (new RegExp(TwidPattern.RC).test(id)) {
+		return TwidType.RC;
 	}
 	// Else:
 	return TwidType.INVALID;
