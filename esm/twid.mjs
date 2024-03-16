@@ -11,23 +11,22 @@ const _LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
 
 /**
  * Type of a TWID.
- * You can get its name using symbol method such as `TwidType.NIC.description`.
  * @readonly
- * @enum {Symbol}
+ * @enum {string}
  */
 export const TwidType = Object.freeze({
-	NIC: Symbol('National Identification Card'),
-	NEW_RC: Symbol('new Resident Certificate'),
-	LEGACY_RC: Symbol('legacy Resident Certificate'),
-	INVALID: Symbol('invalid'),
+	NIC: 'NIC',
+	NEW_RC: 'NEW_RC',
+	LEGACY_RC: 'LEGACY_RC',
+	INVALID: 'INVALID',
 });
 
 /**
  * String for regular expression to validate pattern for TWID.
  * @readonly
- * @example new RegExp(twidPattern.NIC).test('A123456789'); // Returns true
+ * @example new RegExp(TwidPattern.NIC).test('A123456789'); // Returns true
  */
-export const twidPattern = Object.freeze({
+export const TwidPattern = Object.freeze({
 	NIC: '^[A-Z][12][0-9]{8}$',
 	NEW_RC: '^[A-Z][89][0-9]{8}$',
 	LEGACY_RC: '^[A-Z][A-D][0-9]{8}$',
@@ -35,18 +34,17 @@ export const twidPattern = Object.freeze({
 
 /**
  * Identify the type of a Taiwan ID.
- * You can get the name of the result using `returnedSymbol.description`.
  * @param {string} id Expect the ID is normalized.
  * @returns {TwidType} Either NIC, new RC, legacy RC or invalid.
  */
 export function identifyTwidType(id) {
-	if (new RegExp(twidPattern.NIC).test(id)) {
+	if (new RegExp(TwidPattern.NIC).test(id)) {
 		return TwidType.NIC;
 	}
-	if (new RegExp(twidPattern.LEGACY_RC).test(id)) {
+	if (new RegExp(TwidPattern.LEGACY_RC).test(id)) {
 		return TwidType.LEGACY_RC;
 	}
-	if (new RegExp(twidPattern.NEW_RC).test(id)) {
+	if (new RegExp(TwidPattern.NEW_RC).test(id)) {
 		return TwidType.NEW_RC;
 	}
 	// Else:
