@@ -1,5 +1,6 @@
 import { normalize } from './utils/normalize.mjs';
 import { isCaptialLetter } from './utils/is-capital-letter.mjs';
+import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './utils/response.mjs';
 
 /** @module core/twid */
 
@@ -29,6 +30,24 @@ export const TwidPattern = Object.freeze({
 	NIC: '^[A-Z][12][0-9]{8}$',
 	RC: '^[A-Z][89A-D][0-9]{8}$',
 });
+
+/** @enum {ValididStatus} */
+export const TwidStatus = {
+	OK: statusOk,
+	UNKNOWN_ERROR: statusUnknownError,
+	INVALID_LENGTH: statusInvalidLength,
+	INVALID_FORMAT: statusInvalidFormat,
+	INVALID_CHECKSUM: statusInvalidChecksum,
+	// DUMMY_ID: statusDummyId,
+};
+
+/** Just a magic trick for JSDoc and Typescript. */
+// @ts-ignore
+const _response = ValididResponse; // eslint-disable-line no-unused-vars
+
+/** Just a magic trick for JSDoc and Typescript. */
+// @ts-ignore
+const _status = ValididStatus; // eslint-disable-line no-unused-vars
 
 /**
  * Identify the type of a Taiwan ID.
@@ -88,6 +107,30 @@ export function getTwidDigit(id) {
 	}
 	return '' + ((10 - (weightedSum % 10)) % 10);
 	// return String(10 - (weightedSum % 10)).slice(-1); // ~20% slower.
+}
+
+/**
+ * Verify ID card number of Taiwan:
+ * - National Identification Card of the Republic of China.
+ * - Resident Certificate of the Republic of China, including new ID from 2021.
+ * @param {string} inputId
+ * @returns {ValididResponse}
+ */
+export function verifyTwid(inputId) {
+	const id = normalize(inputId);
+	const type = 'TWID';
+	const twidType = identifyTwidType(id);
+	if (id.length !== TWID_LENGTH) {
+		return { id, type, ok: false, status: TwidStatus.INVALID_LENGTH };
+	}
+	if (twidType === TwidType.INVALID) {
+		return { id, type, ok: false, status: TwidStatus.INVALID_FORMAT };
+	}
+	if (getTwidDigit(id) !== id.slice(-1)) {
+		return { id, type, ok: false, status: TwidStatus.INVALID_CHECKSUM };
+	}
+	// Hola!!
+	return { id, type, ok: true, status: TwidStatus.OK };
 }
 
 /**
