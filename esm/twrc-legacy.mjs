@@ -1,6 +1,5 @@
-import { normalize } from './utils/normalize.mjs';
+import { verifyTwid } from './twid.mjs';
 import { TwrcVersion, identifyTwrcVersion } from './utils/twrc.mjs';
-import { getTwidDigit } from './twid.mjs';
 
 /** @module core/twrc-legacy */
 
@@ -12,17 +11,11 @@ import { getTwidDigit } from './twid.mjs';
  * In Taiwan, there is another system called National Identification Card.
  * @see module:core/twid
  *
- * @param {string} id
+ * @param {string} inputId
  * @returns {boolean}
  */
-export function twrcLegacy(id) {
-	const normId = normalize(id);
-	// Validate length:
-	// if (normId.length !== TWID_LENGTH) { return false; }
-	// Validate pattern:
-	if (identifyTwrcVersion(normId) !== TwrcVersion.RC_LEGACY) {
-		return false;
-	}
-	// Validate checksum:
-	return getTwidDigit(normId) === normId.slice(-1);
+export function twrcLegacy(inputId) {
+	const res = verifyTwid(inputId);
+	const ver = identifyTwrcVersion(res.id);
+	return res.ok && ver === TwrcVersion.RC_LEGACY;
 }

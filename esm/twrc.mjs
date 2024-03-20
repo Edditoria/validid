@@ -1,5 +1,4 @@
-import { normalize } from './utils/normalize.mjs';
-import { TwidType, getTwidDigit, identifyTwidType } from './twid.mjs';
+import { TwidType, identifyTwidType, verifyTwid } from './twid.mjs';
 
 /** @module core/twrc */
 
@@ -13,18 +12,10 @@ import { TwidType, getTwidDigit, identifyTwidType } from './twid.mjs';
  * In Taiwan, there is another system called National Identification Card.
  * @see module:core/twid
  *
- * @param {string} id
+ * @param {string} inputId
  * @return {boolean}
  */
-export function twrc(id) {
-	const normId = normalize(id);
-	// Validate length:
-	// if (normId.length !== TWID_LENGTH) { return false; }
-	// Validate pattern:
-	const idFormat = identifyTwidType(normId);
-	if (idFormat !== TwidType.RC) {
-		return false;
-	}
-	// Validate checksum:
-	return getTwidDigit(normId) === normId.slice(-1);
+export function twrc(inputId) {
+	const res = verifyTwid(inputId);
+	return res.ok && identifyTwidType(res.id) === TwidType.RC;
 }

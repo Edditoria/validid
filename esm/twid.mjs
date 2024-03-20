@@ -141,17 +141,10 @@ export function verifyTwid(inputId) {
  * There is another system called Taiwan Resident Certificate (Uniform ID Numbers).
  * @see module:core/twrc
  *
- * @param {string} id
+ * @param {string} inputId
  * @returns {boolean}
  */
-export function twid(id) {
-	const normId = normalize(id);
-	// Validate length:
-	// if (normId.length !== TWID_LENGTH) { return false; }
-	// Validate pattern:
-	if (identifyTwidType(normId) !== TwidType.NIC) {
-		return false;
-	}
-	// Validate checksum:
-	return getTwidDigit(normId) === normId.slice(-1);
+export function twid(inputId) {
+	const res = verifyTwid(inputId);
+	return res.ok && identifyTwidType(res.id) === TwidType.NIC;
 }
