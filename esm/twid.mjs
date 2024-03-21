@@ -134,17 +134,14 @@ export function verifyTwid(inputId) {
 }
 
 /**
- * Validate ID card number of Taiwan.
- * - Original name: National Identification Card of the Republic of China.
- * - Format: "A123456789".
- *
- * There is another system called Taiwan Resident Certificate (Uniform ID Numbers).
- * @see module:core/twrc
- *
+ * Verify ID card number of Taiwan:
+ * National Identification Card of the Republic of China.
+ * @deprecated Use {@link verifyTwid} and {@link identifyTwidType} instead.
  * @param {string} inputId
  * @returns {boolean}
  */
 export function twid(inputId) {
+	console.warn('Warn: twid() is deprecated. Please contact the developer to update the program.');
 	const res = verifyTwid(inputId);
 	return res.ok && identifyTwidType(res.id) === TwidType.NIC;
 }

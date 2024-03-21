@@ -1,21 +1,15 @@
 import { TwidType, identifyTwidType, verifyTwid } from './twid.mjs';
 
-/** @module core/twrc */
-
 /**
- * Validate ID number of Taiwan Resident Certificate (Uniform ID Numbers).
- *
- * Format of the ID:
- * - "A123456789" - New ID in 2020.
- * - "AB12345678" - Legacy but still valid.
- *
- * In Taiwan, there is another system called National Identification Card.
- * @see module:core/twid
- *
+ * Verify ID number of Taiwan Resident Certificate (Uniform ID Numbers):
+ * - New format from 2021.
+ * - Legacy format before 2021.
+ * @deprecated Use {@link verifyTwid} and {@link identifyTwidType} instead.
  * @param {string} inputId
  * @return {boolean}
  */
 export function twrc(inputId) {
+	console.warn('Warn: twrc() is deprecated. Please contact the developer to update the program.');
 	const res = verifyTwid(inputId);
 	return res.ok && identifyTwidType(res.id) === TwidType.RC;
 }
