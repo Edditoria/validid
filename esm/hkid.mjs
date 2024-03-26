@@ -1,5 +1,6 @@
 import { normalize } from './utils/normalize.mjs';
 import { isCaptialLetter } from './utils/is-capital-letter.mjs';
+import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './utils/response.mjs';
 
 /** @module core/hkid */
 
@@ -9,6 +10,33 @@ import { isCaptialLetter } from './utils/is-capital-letter.mjs';
  * @example new RegExp(HKID_PATTERN).test('A123456A'); // returns true.
  */
 export const HKID_PATTERN = '^[A-NP-Z]{1,2}[0-9]{6}[0-9A]$';
+
+/** @enum {ValididStatus} */
+export const HkidStatus = {
+	OK: statusOk,
+	UNKNOWN_ERROR: statusUnknownError,
+	INVALID_LENGTH: statusInvalidLength,
+	INVALID_FORMAT: statusInvalidFormat,
+	INVALID_CHECKSUM: statusInvalidChecksum,
+	// DUMMY_ID: statusDummyId,
+};
+
+/** Just a magic trick for JSDoc and Typescript. */
+// @ts-ignore
+const _response = ValididResponse; // eslint-disable-line no-unused-vars
+
+/** Just a magic trick for JSDoc and Typescript. */
+// @ts-ignore
+const _status = ValididStatus; // eslint-disable-line no-unused-vars
+
+/**
+ * Verify whether a HKID contains 8 or 9 characters.
+ * @param {string} id A [normalized ID]{@link normalize}.
+ * @returns {boolean}
+ */
+export function verifyHkidLength(id) {
+	return id.length === 8 || id.length === 9;
+}
 
 function _getLetterValue(letter) {
 	/*
@@ -44,6 +72,28 @@ export function getHkidDigit(id) {
 	}
 	const remainder = (11 - (weightedSum % 11)) % 11;
 	return remainder === 10 ? 'A' : '' + remainder;
+}
+
+/**
+ * Verify ID card number of Hong Kong.
+ * Accepts format "X123456(A)" and "XY123456(A)".
+ * @param {string} inputId
+ * @returns {ValididResponse}
+ */
+export function verifyHkid(inputId) {
+	const id = normalize(inputId);
+	const type = 'HKID';
+	if (!verifyHkidLength(id)) {
+		return { id, type, ok: false, status: HkidStatus.INVALID_LENGTH };
+	}
+	if (!new RegExp(HKID_PATTERN).test(id)) {
+		return { id, type, ok: false, status: HkidStatus.INVALID_FORMAT };
+	}
+	if (id.slice(-1) !== getHkidDigit(id)) {
+		return { id, type, ok: false, status: HkidStatus.INVALID_CHECKSUM };
+	}
+	// Hola!!
+	return { id, type, ok: true, status: HkidStatus.OK };
 }
 
 /**
