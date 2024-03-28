@@ -97,19 +97,14 @@ export function verifyHkid(inputId) {
 }
 
 /**
- * Validate ID card number of Hong Kong.
- * Format: "X123456(A)" or "XY123456(A)".
- * @param {string} id
+ * Verify ID card number of Hong Kong.
+ * Accepts format "X123456(A)" and "XY123456(A)".
+ * @deprecated Use {@link verifyHkid} instead.
+ * @param {string} inputId
  * @returns {boolean}
  */
-export function hkid(id) {
-	const normId = normalize(id);
-	// Validate length:
-	// if (normId.length < 8 && normId.length > 9) { return false; }
-	// Validate pattern:
-	if (!new RegExp(HKID_PATTERN).test(normId)) {
-		return false;
-	}
-	// Validate checksum:
-	return normId.slice(-1) === getHkidDigit(normId);
+export function hkid(inputId) {
+	console.warn('Warn: hkid() is deprecated. Please contact the developer to update the program.');
+	const res = verifyHkid(inputId);
+	return res.ok;
 }
