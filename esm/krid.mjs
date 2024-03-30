@@ -1,7 +1,11 @@
 import { normalize } from './utils/normalize.mjs';
 import { getAge, validateDateString } from './utils/date-utils.mjs';
+import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidDate, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './utils/response.mjs';
 
 /** @module core/krid */
+
+/** 13 characters in KRID. Fixed. */
+export const KRID_LENGTH = 13;
 
 /**
  * String for regular expression to validate pattern for KRID.
@@ -12,6 +16,25 @@ export const KRID_PATTERN = '^[0-9]{13}$';
 
 /** @type {number} Minimum age to register a ID card. */
 export const KRID_MIN_AGE = 17;
+
+/** @enum {ValididStatus} */
+export const KridStatus = {
+	OK: statusOk,
+	UNKNOWN_ERROR: statusUnknownError,
+	INVALID_LENGTH: statusInvalidLength,
+	INVALID_FORMAT: statusInvalidFormat,
+	INVALID_DATE: statusInvalidDate,
+	INVALID_CHECKSUM: statusInvalidChecksum,
+	// DUMMY_ID: statusDummyId,
+};
+
+/** Just a magic trick for JSDoc and Typescript. */
+// @ts-ignore
+const _response = ValididResponse; // eslint-disable-line no-unused-vars
+
+/** Just a magic trick for JSDoc and Typescript. */
+// @ts-ignore
+const _status = ValididStatus; // eslint-disable-line no-unused-vars
 
 /**
  * Capture birth date from KRID.
@@ -66,6 +89,40 @@ export function getKridDigit(id) {
 		idx++;
 	}
 	return ((11 - (weightedSum % 11)) % 10).toString();
+}
+
+/**
+ * Verify ID card number of South Korea.
+ * Official name: Resident Registration Number (RRN).
+ * @param {string} inputId
+ * @returns {ValididResponse}
+ */
+export function verifyKrid(inputId) {
+	const id = normalize(inputId);
+	const type = 'KRID';
+	if (id.length !== KRID_LENGTH) {
+		return { id, type, ok: false, status: KridStatus.INVALID_LENGTH };
+	}
+	if (!new RegExp(KRID_PATTERN).test(id)) {
+		return { id, type, ok: false, status: KridStatus.INVALID_FORMAT };
+	}
+	/** @type {string} */
+	let birthDate;
+	try {
+		birthDate = captureBirthDateFromKrid(id);
+	} catch (error) {
+		return { id, type, ok: false, status: KridStatus.INVALID_DATE };
+	}
+	/** TODO: Optional date. */
+	const now = new Date().toLocaleDateString('sv').replace(/-/g, '');
+	const age = getAge(birthDate, now);
+	if (age < KRID_MIN_AGE) {
+		return { id, type, ok: false, status: KridStatus.INVALID_DATE };
+	}
+	if (getKridDigit(id) !== id.slice(-1)) {
+		return { id, type, ok: false, status: KridStatus.INVALID_CHECKSUM };
+	}
+	return { id, type, ok: true, status: KridStatus.OK };
 }
 
 /**
