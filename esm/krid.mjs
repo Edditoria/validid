@@ -116,6 +116,7 @@ export function verifyKrid(inputId) {
 	/** TODO: Optional date. */
 	const now = new Date().toLocaleDateString('sv').replace(/-/g, '');
 	const age = getAge(birthDate, now);
+	// if (+now < +birthDate) {
 	if (age < KRID_MIN_AGE) {
 		return { id, type, ok: false, status: KridStatus.INVALID_DATE };
 	}
@@ -126,34 +127,13 @@ export function verifyKrid(inputId) {
 }
 
 /**
- * Validate ID card number of South Korea.
- * - Original name: Resident Registration Number (RRN).
- * - Format: "YYMMDD-SBBBBNC".
- * @param {string} id
+ * Verify ID card number of South Korea.
+ * Official name: Resident Registration Number (RRN).
+ * @param {string} inputId
  * @returns {boolean}
  */
-export function krid(id) {
-	const normId = normalize(id);
-	// Validate length:
-	// if (normId.length !== 13) { return false; }
-	// Validate pattern:
-	if (!new RegExp(KRID_PATTERN).test(normId)) {
-		return false;
-	}
-	// Validate date:
-	/** @type {string} */
-	let birthDate;
-	try {
-		birthDate = captureBirthDateFromKrid(normId);
-	} catch (error) {
-		return false; // Reason: The entered date is not a valid date, e.g. 2001-02-29.
-	}
-	const now = new Date().toLocaleDateString('sv').replace(/-/g, '');
-	// if (+now < +birthDate) return false; // Reason: Birth date is a future date.
-	const age = getAge(birthDate, now);
-	if (age < KRID_MIN_AGE) {
-		return false; // Reason: Not legal age to get a ID.
-	}
-	// Validate checksum:
-	return getKridDigit(normId) === normId.slice(-1);
+export function krid(inputId) {
+	console.warn('Warn: krid() is deprecated. Please contact the developer to update the program.');
+	const res = verifyKrid(inputId);
+	return res.ok;
 }
