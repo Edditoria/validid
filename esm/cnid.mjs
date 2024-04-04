@@ -1,7 +1,11 @@
 import { normalize } from './utils/normalize.mjs';
 import { validateDateString } from './utils/date-utils.mjs';
+import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidDate, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './utils/response.mjs';
 
 /** @module core/cnid */
+
+/** 18 characters in CNID. Fixed. */
+export const CNID_LENGTH = 18;
 
 /**
  * String for regular expression to validate pattern for CNID.
@@ -20,6 +24,25 @@ export const CNID_PATTERN = '^[0-9]{17}[0-9X]$';
  * @type {string} A string of date "YYYYMMDD".
  */
 export const BIRTH_DATE_OF_OLDEST_CHINESE = '18860625';
+
+/** @enum {ValididStatus} */
+export const CnidStatus = {
+	OK: statusOk,
+	UNKNOWN_ERROR: statusUnknownError,
+	INVALID_LENGTH: statusInvalidLength,
+	INVALID_FORMAT: statusInvalidFormat,
+	INVALID_DATE: statusInvalidDate,
+	INVALID_CHECKSUM: statusInvalidChecksum,
+	// DUMMY_ID: statusDummyId,
+};
+
+/** Just a magic trick for JSDoc and Typescript. */
+// @ts-ignore
+const _response = ValididResponse; // eslint-disable-line no-unused-vars
+
+/** Just a magic trick for JSDoc and Typescript. */
+// @ts-ignore
+const _status = ValididStatus; // eslint-disable-line no-unused-vars
 
 /**
  * Capture birth date from CNID.
@@ -61,6 +84,40 @@ export function getCnidDigit(id) {
 	}
 	const remainder = (12 - (weightedSum % 11)) % 11;
 	return remainder === 10 ? 'X' : '' + remainder;
+}
+
+/**
+ * Verify ID card number of China (2nd generation):
+ * Resident Identity Card of the People's Republic of China (PRC).
+ * @param {string} inputId
+ * @returns {ValididResponse}
+ */
+export function verifyCnid(inputId) {
+	const id = normalize(inputId);
+	const type = 'CNID';
+	if (id.length !== CNID_LENGTH) {
+		return { id, type, ok: false, status: CnidStatus.INVALID_LENGTH };
+	}
+	if (!new RegExp(CNID_PATTERN).test(id)) {
+		return { id, type, ok: false, status: CnidStatus.INVALID_FORMAT };
+	}
+	/** @type {string} */
+	let birthDate;
+	try {
+		birthDate = captureBirthDateFromCnid(id);
+	} catch (error) {
+		return { id, type, ok: false, status: CnidStatus.INVALID_DATE };
+	}
+	/** TODO: Optional date. */
+	const now = new Date().toLocaleDateString('sv').replace(/-/g, '');
+	if (+birthDate >= +now) {
+		return { id, type, ok: false, status: CnidStatus.INVALID_DATE };
+	}
+	if (getCnidDigit(id) !== id.slice(-1)) {
+		return { id, type, ok: false, status: CnidStatus.INVALID_CHECKSUM };
+	}
+	// Hola!!
+	return { id, type, ok: true, status: CnidStatus.OK };
 }
 
 /**
