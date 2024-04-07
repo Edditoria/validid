@@ -121,32 +121,14 @@ export function verifyCnid(inputId) {
 }
 
 /**
- * Validate ID card number of China (2nd generation).
- * - Original name: Resident Identity Card of the People's Republic of China (PRC).
- * - Format: "LLLLLLYYYYMMDD000X".
- * @param {string} id
+ * Verify ID card number of China (2nd generation):
+ * Resident Identity Card of the People's Republic of China (PRC).
+ * @deprecated Use {@link verifyCnid} instead.
+ * @param {string} inputId
  * @returns {boolean}
  */
-export function cnid(id) {
-	const normId = normalize(id);
-	// Validate length:
-	// if (normId.length !== 18) { return false; }
-	// Validate pattern:
-	if (!new RegExp(CNID_PATTERN).test(normId)) {
-		return false;
-	}
-	// Validate date:
-	/** @type {string} */
-	let birthDate;
-	try {
-		birthDate = captureBirthDateFromCnid(normId);
-	} catch (error) {
-		return false; // Reason: Invalid date, e.g. 2001-02-29.
-	}
-	const now = new Date().toLocaleDateString('sv').replace(/-/g, '');
-	if (+birthDate >= +now) {
-		return false; // Reason: Invalid date: Birth date is in future.
-	}
-	// Validate checksum:
-	return getCnidDigit(normId) === normId.slice(-1);
+export function cnid(inputId) {
+	console.warn('Warn: cnid() is deprecated. Please contact the developer to update the program.');
+	const res = verifyCnid(inputId);
+	return res.ok;
 }
