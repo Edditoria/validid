@@ -24,7 +24,7 @@ end_of_line = lf
 [*.{js,mjs,cjs,jsx,ts,tsx}]
 end_of_line = lf
 
-[{bower.json,package.json,package-lock.json}]
+[bower.json]
 end_of_line = lf
 indent_style = space
 indent_size = 2

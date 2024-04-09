@@ -1,58 +1,58 @@
 {
-  "name": "validid",
-  "version": "2.2.1",
-  "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
-  "license": "MIT",
-  "private": true,
-  "//main": "UMD format; Bundle in one file; Minified; Act as fallback",
-  "main": "bundles/validid.umd.min.js",
-  "//module": "ESM format; Entry point of modules; Not minified; Consume using import",
-  "module": "esm/index.mjs",
-  "files": [
-    "bundles/**/*",
-    "esm/**/*",
-    "package.json",
-    "LICENSE.txt",
-    "README.md"
-  ],
-  "engines": {
-    "//devNode": "Recommend >=18.0. Require >=14.18 to build properly.",
-    "node": ">=4.9.0"
-  },
-  "scripts": {
-    "clean": "node ./tasks/clean.mjs",
-    "build": "rollup -c rollup.config.mjs",
-    "test": "npm run build && npm run testOnly",
-    "testOnly": "node ./test/esm.mjs",
-    "prepack": "npm run clean && npm run test"
-  },
-  "author": "Edditoria <edditoria@pm.me>",
-  "homepage": "https://github.com/Edditoria/validid",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Edditoria/validid.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Edditoria/validid/issues"
-  },
-  "keywords": [
-    "validate",
-    "id number",
-    "validation",
-    "china id",
-    "taiwan id",
-    "hong kong",
-    "hkid",
-    "korea",
-    "id"
-  ],
-  "devDependencies": {
-    "@rollup/plugin-buble": "^1.0.2",
-    "@rollup/plugin-terser": "^0.4.0",
-    "del": "^7.0.0",
-    "eslint": "^8.36.0",
-    "eslint-config-prettier": "^8.7.0",
-    "prettier": "^2.8.4",
-    "rollup": "^3.19.1"
-  }
+	"name": "validid",
+	"version": "2.2.1",
+	"description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
+	"license": "MIT",
+	"private": true,
+	"//main": "UMD format; Bundle in one file; Minified; Act as fallback",
+	"main": "bundles/validid.umd.min.js",
+	"//module": "ESM format; Entry point of modules; Not minified; Consume using import",
+	"module": "esm/index.mjs",
+	"files": [
+		"bundles/**/*",
+		"esm/**/*",
+		"package.json",
+		"LICENSE.txt",
+		"README.md"
+	],
+	"engines": {
+		"//devNode": "Recommend >=18.0. Require >=14.18 to build properly.",
+		"node": ">=4.9.0"
+	},
+	"scripts": {
+		"clean": "node ./tasks/clean.mjs",
+		"build": "rollup -c rollup.config.mjs",
+		"test": "npm run build && npm run testOnly",
+		"testOnly": "node ./test/esm.mjs",
+		"prepack": "npm run clean && npm run test"
+	},
+	"author": "Edditoria <edditoria@pm.me>",
+	"homepage": "https://github.com/Edditoria/validid",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Edditoria/validid.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Edditoria/validid/issues"
+	},
+	"keywords": [
+		"validate",
+		"id number",
+		"validation",
+		"china id",
+		"taiwan id",
+		"hong kong",
+		"hkid",
+		"korea",
+		"id"
+	],
+	"devDependencies": {
+		"@rollup/plugin-buble": "^1.0.2",
+		"@rollup/plugin-terser": "^0.4.0",
+		"del": "^7.0.0",
+		"eslint": "^8.36.0",
+		"eslint-config-prettier": "^8.7.0",
+		"prettier": "^2.8.4",
+		"rollup": "^3.19.1"
+	}
 }
