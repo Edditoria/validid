@@ -7,9 +7,9 @@ export default [
 	eslintConfigPrettier,
 	{
 		languageOptions: {
-			ecmaVersion: 2021, // aka 12.
+			ecmaVersion: 2022, // aka 13.
 			sourceType: 'module',
-			globals: { ...globals.es2021, ...globals.node },
+			globals: { ...globals.es2022, ...globals.node },
 		},
 		rules: {
 			'linebreak-style': ['error', 'unix'], // as default in ESLint.
