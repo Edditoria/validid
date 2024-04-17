@@ -87,12 +87,12 @@ export function getCnidDigit(id) {
 }
 
 /**
- * Verify ID card number of China (2nd generation):
+ * Validate ID card number of China (2nd generation):
  * Resident Identity Card of the People's Republic of China (PRC).
  * @param {string} inputId
  * @returns {ValididResponse}
  */
-export function verifyCnid(inputId) {
+export function validateCnid(inputId) {
 	const id = normalize(inputId);
 	const type = 'CNID';
 	if (id.length !== CNID_LENGTH) {
@@ -121,14 +121,14 @@ export function verifyCnid(inputId) {
 }
 
 /**
- * Verify ID card number of China (2nd generation):
+ * Validate ID card number of China (2nd generation):
  * Resident Identity Card of the People's Republic of China (PRC).
- * @deprecated Use {@link verifyCnid} instead.
+ * @deprecated Use {@link validateCnid} instead.
  * @param {string} inputId
  * @returns {boolean}
  */
 export function cnid(inputId) {
 	console.warn('Warn: cnid() is deprecated. Please contact the developer to update the program.');
-	const res = verifyCnid(inputId);
+	const res = validateCnid(inputId);
 	return res.ok;
 }

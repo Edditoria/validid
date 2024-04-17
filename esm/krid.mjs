@@ -92,12 +92,12 @@ export function getKridDigit(id) {
 }
 
 /**
- * Verify ID card number of South Korea.
+ * Validate ID card number of South Korea.
  * Official name: Resident Registration Number (RRN).
  * @param {string} inputId
  * @returns {ValididResponse}
  */
-export function verifyKrid(inputId) {
+export function validateKrid(inputId) {
 	const id = normalize(inputId);
 	const type = 'KRID';
 	if (id.length !== KRID_LENGTH) {
@@ -127,13 +127,13 @@ export function verifyKrid(inputId) {
 }
 
 /**
- * Verify ID card number of South Korea.
+ * Validate ID card number of South Korea.
  * Official name: Resident Registration Number (RRN).
  * @param {string} inputId
  * @returns {boolean}
  */
 export function krid(inputId) {
 	console.warn('Warn: krid() is deprecated. Please contact the developer to update the program.');
-	const res = verifyKrid(inputId);
+	const res = validateKrid(inputId);
 	return res.ok;
 }

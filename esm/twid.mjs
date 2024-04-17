@@ -110,13 +110,13 @@ export function getTwidDigit(id) {
 }
 
 /**
- * Verify ID card number of Taiwan:
+ * Validate ID card number of Taiwan:
  * - National Identification Card of the Republic of China.
  * - Resident Certificate of the Republic of China, including new ID from 2021.
  * @param {string} inputId
  * @returns {ValididResponse}
  */
-export function verifyTwid(inputId) {
+export function validateTwid(inputId) {
 	const id = normalize(inputId);
 	const type = 'TWID';
 	const twidType = identifyTwidType(id);
@@ -134,14 +134,14 @@ export function verifyTwid(inputId) {
 }
 
 /**
- * Verify ID card number of Taiwan:
+ * Validate ID card number of Taiwan:
  * National Identification Card of the Republic of China.
- * @deprecated Use {@link verifyTwid} and {@link identifyTwidType} instead.
+ * @deprecated Use {@link validateTwid} and {@link identifyTwidType} instead.
  * @param {string} inputId
  * @returns {boolean}
  */
 export function twid(inputId) {
 	console.warn('Warn: twid() is deprecated. Please contact the developer to update the program.');
-	const res = verifyTwid(inputId);
+	const res = validateTwid(inputId);
 	return res.ok && identifyTwidType(res.id) === TwidType.NIC;
 }

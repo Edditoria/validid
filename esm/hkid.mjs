@@ -30,11 +30,11 @@ const _response = ValididResponse; // eslint-disable-line no-unused-vars
 const _status = ValididStatus; // eslint-disable-line no-unused-vars
 
 /**
- * Verify whether a HKID contains 8 or 9 characters.
+ * Check whether a HKID contains 8 or 9 characters.
  * @param {string} id A [normalized ID]{@link normalize}.
  * @returns {boolean}
  */
-export function verifyHkidLength(id) {
+export function validateHkidLength(id) {
 	return id.length === 8 || id.length === 9;
 }
 
@@ -75,15 +75,15 @@ export function getHkidDigit(id) {
 }
 
 /**
- * Verify ID card number of Hong Kong.
+ * Validate ID card number of Hong Kong.
  * Accepts format "X123456(A)" and "XY123456(A)".
  * @param {string} inputId
  * @returns {ValididResponse}
  */
-export function verifyHkid(inputId) {
+export function validateHkid(inputId) {
 	const id = normalize(inputId);
 	const type = 'HKID';
-	if (!verifyHkidLength(id)) {
+	if (!validateHkidLength(id)) {
 		return { id, type, ok: false, status: HkidStatus.INVALID_LENGTH };
 	}
 	if (!new RegExp(HKID_PATTERN).test(id)) {
@@ -97,14 +97,14 @@ export function verifyHkid(inputId) {
 }
 
 /**
- * Verify ID card number of Hong Kong.
+ * Validate ID card number of Hong Kong.
  * Accepts format "X123456(A)" and "XY123456(A)".
- * @deprecated Use {@link verifyHkid} instead.
+ * @deprecated Use {@link validateHkid} instead.
  * @param {string} inputId
  * @returns {boolean}
  */
 export function hkid(inputId) {
 	console.warn('Warn: hkid() is deprecated. Please contact the developer to update the program.');
-	const res = verifyHkid(inputId);
+	const res = validateHkid(inputId);
 	return res.ok;
 }

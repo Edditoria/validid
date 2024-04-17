@@ -12,7 +12,7 @@ export const TwrcVersion = Object.freeze({
 });
 
 /**
- * String for regular expression to verify pattern for Taiwan RC.
+ * String for regular expression to validate the pattern for Taiwan RC.
  * @readonly
  * @example new RegExp(TwrcPattern.RC_LEGACY).test('A800000014'); // Returns true
  */
