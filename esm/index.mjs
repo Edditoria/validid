@@ -8,6 +8,8 @@ import { twrcLegacy } from './twrc-legacy.mjs';
 import { normalize } from './utils/normalize.mjs';
 import { isDateValid } from './utils/is-date-valid.mjs';
 import { getMaxDate } from './utils/get-max-date.mjs';
+import getTwrcFormat from './utils/get-twrc-format.mjs';
+import isTwidChecksumValid from './utils/is-twid-checksum-valid.mjs';
 
 const depreciatedError = function () {
 	throw new Error('Feature depreciated. Please request developer to update the program.');
@@ -19,8 +21,8 @@ validid.utils = {
 	normalize,
 	isDateValid,
 	getMaxDate,
-	isTwidChecksumValid: depreciatedError,
-	getTwrcFormat: depreciatedError,
+	isTwidChecksumValid,
+	getTwrcFormat,
 };
 //todo: Remove in v3
 validid.tools = {
