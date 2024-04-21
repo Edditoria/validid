@@ -11,10 +11,6 @@ import getMaxDate from './utils/get-max-date.mjs';
 import getTwrcFormat from './utils/get-twrc-format.mjs';
 import isTwidChecksumValid from './utils/is-twid-checksum-valid.mjs';
 
-const depreciatedError = function () {
-	throw new Error('Feature depreciated. Please request developer to update the program.');
-};
-
 const validid = () => null;
 
 validid.utils = {
@@ -23,14 +19,6 @@ validid.utils = {
 	getMaxDate,
 	isTwidChecksumValid,
 	getTwrcFormat,
-};
-//todo: Remove in v3
-validid.tools = {
-	normalize: depreciatedError,
-	isDateValid: depreciatedError,
-	getMaxDate: depreciatedError,
-	isTwidChecksumValid: depreciatedError,
-	getTwrcFormat: depreciatedError,
 };
 
 validid.cnid = cnid;
