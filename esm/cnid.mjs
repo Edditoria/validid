@@ -123,12 +123,13 @@ export function validateCnid(inputId) {
 /**
  * Validate ID card number of China (2nd generation):
  * Resident Identity Card of the People's Republic of China (PRC).
- * @deprecated Use {@link validateCnid} instead.
+ * @deprecated To be removed without notice. Please update your code ASAP.
+ * Solution: Use {@link validateCnid} instead.
  * @param {string} inputId
  * @returns {boolean}
  */
-export function cnid(inputId) {
-	console.warn('Warn: cnid() is deprecated. Please contact the developer to update the program.');
+export default function (inputId) {
+	console.warn('validid.cnid() is deprecated. Please contact developer to update the program.');
 	const res = validateCnid(inputId);
 	return res.ok;
 }

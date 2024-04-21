@@ -99,12 +99,13 @@ export function validateHkid(inputId) {
 /**
  * Validate ID card number of Hong Kong.
  * Accepts format "X123456(A)" and "XY123456(A)".
- * @deprecated Use {@link validateHkid} instead.
+ * @deprecated To be removed without notice. Please update your code ASAP.
+ * Solution: Use {@link validateHkid} instead.
  * @param {string} inputId
  * @returns {boolean}
  */
-export function hkid(inputId) {
-	console.warn('Warn: hkid() is deprecated. Please contact the developer to update the program.');
+export default function (inputId) {
+	console.warn('validid.hkid() is deprecated. Please contact developer to update the program.');
 	const res = validateHkid(inputId);
 	return res.ok;
 }

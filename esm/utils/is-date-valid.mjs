@@ -36,13 +36,14 @@ function _parseDate(yyyymmdd) {
  * - NOT a dead person who does not act on internet.
  * - Source: https://en.wikipedia.org/wiki/Oldest_people
  *
- * @deprecated Should not assume that only a living person can use a system.
+ * @deprecated To be removed without notice. Please update your code ASAP.
+ * Reason: Should not assume that only a living person can use a system.
  * @param {string} idDate A string of date in "YYYYMMDD".
  * @param {string} [minDate='default'] A string of date in "YYYYMMDD". Optional.
  * @param {(string|Date)} [maxDate='today'] Either "YYYYMMDD" or a `Date` object. Optional.
  * @returns {boolean}
  */
-export function isDateValid(idDate, minDate = 'default', maxDate = 'today') {
+export default function (idDate, minDate = 'default', maxDate = 'today') {
 	/** @type {Date} */
 	let parsedIdDate;
 	/** @type {Date} */

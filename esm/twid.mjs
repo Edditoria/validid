@@ -136,12 +136,13 @@ export function validateTwid(inputId) {
 /**
  * Validate ID card number of Taiwan:
  * National Identification Card of the Republic of China.
- * @deprecated Use {@link validateTwid} and {@link identifyTwidType} instead.
+ * @deprecated To be removed without notice. Please update your code ASAP.
+ * Solution: Use {@link validateTwid} and {@link identifyTwidType} instead.
  * @param {string} inputId
  * @returns {boolean}
  */
-export function twid(inputId) {
-	console.warn('Warn: twid() is deprecated. Please contact the developer to update the program.');
+export default function (inputId) {
+	console.warn('validid.twid() is deprecated. Please contact developer to update the program.');
 	const res = validateTwid(inputId);
 	return res.ok && identifyTwidType(res.id) === TwidType.NIC;
 }
