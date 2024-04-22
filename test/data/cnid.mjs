@@ -1,7 +1,7 @@
 /**
  * Dummy data for validating China Resident Identity Card.
  */
-export const cnid = [
+export const cnidData = [
 	{
 		id: '11010120170210193X',
 		cardType: 'cnid',

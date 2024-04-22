@@ -1,7 +1,7 @@
 /**
  * Dummy data for validating South Korea Resident Registration Number.
  */
-export const krid = [
+export const kridData = [
 	{
 		id: '781030-5668081',
 		cardType: 'krid',

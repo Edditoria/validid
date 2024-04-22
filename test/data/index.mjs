@@ -1,8 +1,7 @@
-import { hkid } from './hkid.mjs';
-import { twid } from './twid.mjs';
-import { twrc } from './twrc.mjs';
-import { cnid } from './cnid.mjs';
-import { krid } from './krid.mjs';
+import { hkidData } from './hkid.mjs';
+import { twidData } from './twid.mjs';
+import { twrcData } from './twrc.mjs';
+import { cnidData } from './cnid.mjs';
+import { kridData } from './krid.mjs';
 
-export { hkid, twid, twrc, cnid, krid };
-export const allData = [].concat(hkid, twid, twrc, cnid, krid);
+export const allData = { hkidData, twidData, twrcData, cnidData, kridData };

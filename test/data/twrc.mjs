@@ -1,7 +1,7 @@
 /**
  * Dummy data for validating Taiwan Resident Certificate.
  */
-export const twrc = [
+export const twrcData = [
 	/*
 	New UID format from 2021
 	------------------------

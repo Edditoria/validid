@@ -1,7 +1,7 @@
 /**
  * Dummy data for validating Taiwan National Identification Card.
  */
-export const twid = [
+export const twidData = [
 	{
 		id: 'A123456789',
 		cardType: 'twid',

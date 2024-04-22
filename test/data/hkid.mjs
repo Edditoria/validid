@@ -1,7 +1,7 @@
 /**
  * Dummy data for validating Hong Kong ID.
  */
-export const hkid = [
+export const hkidData = [
 	{
 		id: 'G123456A',
 		cardType: 'hkid',
