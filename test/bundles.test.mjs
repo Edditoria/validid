@@ -3,12 +3,29 @@ import { ok } from 'node:assert/strict';
 import validid from '../bundles/validid.esm.mjs';
 import { allData } from './data/index.mjs';
 
+let twidData = [];
+for (const eachData of allData.twidData) {
+	twidData.push({
+		id: eachData.id,
+		cardType: 'twrc',
+		expect: eachData.twidType === 'NIC' && eachData.expect.ok,
+	});
+}
+
+let twrcData = [];
+for (const eachData of allData.twidData) {
+	twrcData.push({
+		id: eachData.id,
+		cardType: 'twrc',
+		expect: eachData.twidType === 'RC' && eachData.expect.ok,
+	});
+}
 const scopes = [
-	{ cardType: 'hkid', data: allData.hkidData, errors: [] },
-	{ cardType: 'twid', data: allData.twidData, errors: [] },
-	{ cardType: 'twrc', data: allData.twrcData, errors: [] },
-	{ cardType: 'cnid', data: allData.cnidData, errors: [] },
-	{ cardType: 'krid', data: allData.kridData, errors: [] },
+	{ name: 'hkid', data: allData.hkidData, errors: [] },
+	{ name: 'twid', data: twidData, errors: [] },
+	{ name: 'twrc', data: twrcData, errors: [] },
+	{ name: 'cnid', data: allData.cnidData, errors: [] },
+	{ name: 'krid', data: allData.kridData, errors: [] },
 ];
 
 function generateOneLineSummary(data, errors) {
@@ -31,8 +48,8 @@ function generateErrorMessage(data, errors) {
 
 describe('bundled ESM', () => {
 	for (const testScope of scopes) {
-		const fnName = testScope.cardType;
-		test(`validid.${testScope.cardType}()`, (t) => {
+		const fnName = testScope.name;
+		test(`validid.${fnName}()`, (t) => {
 			// Prepare:
 			if (!Object.hasOwn(validid, fnName)) {
 				throw new ReferenceError(`Function not exists: validid.${fnName}.`);
