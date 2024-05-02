@@ -37,10 +37,6 @@ export const twidData = [
 			status: { code: 0, text: 'OK', desc: '' },
 		},
 	},
-	/*
-	New UID format from 2021
-	------------------------
-	*/
 	{
 		// Source: immigration.gov.tw
 		id: 'A800000014',
@@ -48,6 +44,17 @@ export const twidData = [
 		twrcVersion: 'RC_2021',
 		expect: {
 			id: 'A800000014',
+			type: 'TWID',
+			ok: true,
+			status: { code: 0, text: 'OK', desc: '' },
+		},
+	},
+	{
+		id: 'C987654321',
+		twidType: 'RC',
+		twrcVersion: 'RC_2021',
+		expect: {
+			id: 'C987654321',
 			type: 'TWID',
 			ok: true,
 			status: { code: 0, text: 'OK', desc: '' },
@@ -77,10 +84,6 @@ export const twidData = [
 			status: { code: 0, text: 'OK', desc: '' },
 		},
 	},
-	/*
-	Legacy UID format before 2021 but still valid
-	---------------------------------------------
-	*/
 	{
 		id: 'AB12345677',
 		twidType: 'RC',
@@ -175,10 +178,6 @@ export const twidData = [
 			status: { code: 0, text: 'OK', desc: '' },
 		},
 	},
-	/*
-	Fail test: length
-	-----------------
-	*/
 	{
 		id: 'A12345678',
 		twidType: 'INVALID',
@@ -223,10 +222,6 @@ export const twidData = [
 			status: { code: 2, text: 'INVALID_LENGTH', desc: '' },
 		},
 	},
-	/*
-	Fail test: characters and format
-	--------------------------------
-	*/
 	{
 		id: 'A12345678X',
 		twidType: 'INVALID',
@@ -261,17 +256,6 @@ export const twidData = [
 		},
 	},
 	{
-		id: 'A12345678X',
-		twidType: 'INVALID',
-		twrcVersion: 'NOT_RC',
-		expect: {
-			id: 'A12345678X',
-			type: 'TWID',
-			ok: false,
-			status: { code: 3, text: 'INVALID_FORMAT', desc: '' },
-		},
-	},
-	{
 		id: 'AB1234567X',
 		twidType: 'INVALID',
 		twrcVersion: 'NOT_RC',
@@ -293,11 +277,6 @@ export const twidData = [
 			status: { code: 3, text: 'INVALID_FORMAT', desc: '' },
 		},
 	},
-	/*
-	Fail test: gender
-	-----------------
-	*/
-	/* ### 2nd character has to be 1 or 2 */
 	{
 		id: 'D012345678',
 		twidType: 'INVALID',
@@ -307,17 +286,6 @@ export const twidData = [
 			type: 'TWID',
 			ok: false,
 			status: { code: 3, text: 'INVALID_FORMAT', desc: '' },
-		},
-	},
-	{
-		id: 'C987654321',
-		twidType: 'RC',
-		twrcVersion: 'RC_2021',
-		expect: {
-			id: 'C987654321',
-			type: 'TWID',
-			ok: true,
-			status: { code: 0, text: 'OK', desc: '' },
 		},
 	},
 	{
@@ -331,7 +299,6 @@ export const twidData = [
 			status: { code: 3, text: 'INVALID_FORMAT', desc: '' },
 		},
 	},
-	/* ### 2nd character has to be [A-D] */
 	{
 		id: 'AE12345673',
 		twidType: 'INVALID',
@@ -355,9 +322,6 @@ export const twidData = [
 			status: { code: 3, text: 'INVALID_FORMAT', desc: '' },
 		},
 	},
-	/*
-	Fail test: checksum
-	*/
 	{
 		// Source: Apple Daily TW
 		id: 'A234567890',
