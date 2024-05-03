@@ -7,7 +7,6 @@ let twidData = [];
 for (const eachData of allData.twidData) {
 	twidData.push({
 		id: eachData.id,
-		cardType: 'twrc',
 		expect: eachData.twidType === 'NIC' && eachData.expect.ok,
 	});
 }
@@ -16,14 +15,23 @@ let twrcData = [];
 for (const eachData of allData.twidData) {
 	twrcData.push({
 		id: eachData.id,
-		cardType: 'twrc',
 		expect: eachData.twidType === 'RC' && eachData.expect.ok,
 	});
 }
+
+let twrcLegacyData = [];
+for (const eachData of allData.twidData) {
+	twrcLegacyData.push({
+		id: eachData.id,
+		expect: eachData.twrcVersion === 'RC_LEGACY' && eachData.expect.ok,
+	});
+}
+
 const scopes = [
 	{ name: 'hkid', data: allData.hkidData, errors: [] },
 	{ name: 'twid', data: twidData, errors: [] },
 	{ name: 'twrc', data: twrcData, errors: [] },
+	{ name: 'twrcLegacy', data: twrcLegacyData, errors: [] },
 	{ name: 'cnid', data: allData.cnidData, errors: [] },
 	{ name: 'krid', data: allData.kridData, errors: [] },
 ];
