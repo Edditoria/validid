@@ -4,63 +4,95 @@
 export const cnidData = [
 	{
 		id: '11010120170210193X',
-		cardType: 'cnid',
-		expect: true,
+		expect: {
+			id: '11010120170210193X',
+			type: 'CNID',
+			ok: true,
+			status: { code: 0, text: 'OK', desc: '' },
+		},
 	},
 	{
 		id: '120103198806018241',
-		cardType: 'cnid',
-		expect: true,
+		expect: {
+			id: '120103198806018241',
+			type: 'CNID',
+			ok: true,
+			status: { code: 0, text: 'OK', desc: '' },
+		},
 	},
 	{
 		id: '310101200001013948',
-		cardType: 'cnid',
-		expect: true,
+		expect: {
+			id: '310101200001013948',
+			type: 'CNID',
+			ok: true,
+			status: { code: 0, text: 'OK', desc: '' },
+		},
 	},
 	{
 		// Source: Wikipedia
 		id: '810000199408230021',
-		cardType: 'cnid',
-		expect: true,
+		expect: {
+			id: '810000199408230021',
+			type: 'CNID',
+			ok: true,
+			status: { code: 0, text: 'OK', desc: '' },
+		},
 	},
 	{
 		// Source: Wikipedia
 		id: '830000199201300022',
-		cardType: 'cnid',
-		expect: true,
+		expect: {
+			id: '830000199201300022',
+			type: 'CNID',
+			ok: true,
+			status: { code: 0, text: 'OK', desc: '' },
+		},
 	},
-	/*
-	Fail test: length
-	-----------------
-	*/
 	{
 		id: '98765432101234567',
-		cardType: 'cnid',
-		expect: false,
+		expect: {
+			id: '98765432101234567',
+			type: 'CNID',
+			ok: false,
+			status: { code: 2, text: 'INVALID_LENGTH', desc: '' },
+		},
 	},
 	{
 		id: '9876543210123456789',
-		cardType: 'cnid',
-		expect: false,
+		expect: {
+			id: '9876543210123456789',
+			type: 'CNID',
+			ok: false,
+			status: { code: 2, text: 'INVALID_LENGTH', desc: '' },
+		},
 	},
-	/*
-	Fail test: characters and format
-	--------------------------------
-	*/
 	{
 		id: '110102YYYYMMDD888X',
-		cardType: 'cnid',
-		expect: false,
+		expect: {
+			id: '110102YYYYMMDD888X',
+			type: 'CNID',
+			ok: false,
+			status: { code: 3, text: 'INVALID_FORMAT', desc: '' },
+		},
 	},
 	{
 		id: '98765432101234567A',
-		cardType: 'cnid',
-		expect: false,
+		expect: {
+			id: '98765432101234567A',
+			type: 'CNID',
+			ok: false,
+			status: { code: 3, text: 'INVALID_FORMAT', desc: '' },
+		},
 	},
 	{
 		id: 'A87654321012345678',
-		cardType: 'cnid',
-		expect: false,
+		expect: {
+			id: 'A87654321012345678',
+			type: 'CNID',
+			ok: false,
+			status: { code: 3, text: 'INVALID_FORMAT', desc: '' },
+		},
 	},
 	/*
 	Fail test: date and future date
@@ -68,8 +100,12 @@ export const cnidData = [
 	*/
 	{
 		id: '110101188606258888',
-		cardType: 'cnid',
-		expect: true,
+		expect: {
+			id: '110101188606258888',
+			type: 'CNID',
+			ok: true,
+			status: { code: 0, text: 'OK', desc: '' },
+		},
 	},
 	// TODO: Review: Suppressed for package upgrade:
 	// {
@@ -80,14 +116,22 @@ export const cnidData = [
 	{
 		// TODO: Update yearly: born in 2024
 		id: '110101202401018889',
-		cardType: 'cnid',
-		expect: true,
+		expect: {
+			id: '110101202401018889',
+			type: 'CNID',
+			ok: true,
+			status: { code: 0, text: 'OK', desc: '' },
+		},
 	},
 	{
 		// TODO: Update yearly: born in 2024
 		id: '110101202412128880',
-		cardType: 'cnid',
-		expect: false,
+		expect: {
+			id: '110101202412128880',
+			type: 'CNID',
+			ok: false,
+			status: { code: 4, text: 'INVALID_DATE', desc: '' },
+		},
 	},
 	/*
 	Fail test: checksum
@@ -95,7 +139,11 @@ export const cnidData = [
 	*/
 	{
 		id: '110102197810272321',
-		cardType: 'cnid',
-		expect: false,
+		expect: {
+			id: '110102197810272321',
+			type: 'CNID',
+			ok: false,
+			status: { code: 5, text: 'INVALID_CHECKSUM', desc: '' },
+		},
 	},
 ];

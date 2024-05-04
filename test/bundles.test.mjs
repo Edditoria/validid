@@ -7,7 +7,7 @@ let twidData = [];
 for (const eachData of allData.twidData) {
 	twidData.push({
 		id: eachData.id,
-		expect: eachData.twidType === 'NIC' && eachData.expect.ok,
+		expect: { ok: eachData.twidType === 'NIC' && eachData.expect.ok },
 	});
 }
 
@@ -15,7 +15,7 @@ let twrcData = [];
 for (const eachData of allData.twidData) {
 	twrcData.push({
 		id: eachData.id,
-		expect: eachData.twidType === 'RC' && eachData.expect.ok,
+		expect: { ok: eachData.twidType === 'RC' && eachData.expect.ok },
 	});
 }
 
@@ -23,7 +23,7 @@ let twrcLegacyData = [];
 for (const eachData of allData.twidData) {
 	twrcLegacyData.push({
 		id: eachData.id,
-		expect: eachData.twrcVersion === 'RC_LEGACY' && eachData.expect.ok,
+		expect: { ok: eachData.twrcVersion === 'RC_LEGACY' && eachData.expect.ok },
 	});
 }
 
@@ -68,7 +68,7 @@ describe('bundled ESM', () => {
 			// Loop data:
 			for (const eachData of testScope.data) {
 				const actual = validid[fnName](eachData.id);
-				if (actual !== eachData.expect) {
+				if (actual !== eachData.expect.ok) {
 					testScope.errors.push(eachData);
 				}
 			}
