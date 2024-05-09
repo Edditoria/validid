@@ -2,29 +2,21 @@ import { describe, test } from 'node:test';
 import { ok } from 'node:assert/strict';
 import validid from '../bundles/validid.esm.mjs';
 import { allData } from './data/index.mjs';
+import { generateErrorMessage, generateOneLineSummary } from './commons.mjs';
 
-let twidData = [];
-for (const eachData of allData.twidData) {
-	twidData.push({
-		id: eachData.id,
-		expect: { ok: eachData.twidType === 'NIC' && eachData.expect.ok },
-	});
+let twidData = structuredClone(allData.twidData);
+for (const eachData of twidData) {
+	eachData.expect.ok = eachData.twidType === 'NIC' && eachData.expect.ok;
 }
 
-let twrcData = [];
-for (const eachData of allData.twidData) {
-	twrcData.push({
-		id: eachData.id,
-		expect: { ok: eachData.twidType === 'RC' && eachData.expect.ok },
-	});
+let twrcData = structuredClone(allData.twidData);
+for (const eachData of twrcData) {
+	eachData.expect.ok = eachData.twidType === 'RC' && eachData.expect.ok;
 }
 
-let twrcLegacyData = [];
-for (const eachData of allData.twidData) {
-	twrcLegacyData.push({
-		id: eachData.id,
-		expect: { ok: eachData.twrcVersion === 'RC_LEGACY' && eachData.expect.ok },
-	});
+let twrcLegacyData = structuredClone(allData.twidData);
+for (const eachData of twrcLegacyData) {
+	eachData.expect.ok = eachData.twrcVersion === 'RC_LEGACY' && eachData.expect.ok;
 }
 
 const scopes = [
@@ -35,24 +27,6 @@ const scopes = [
 	{ name: 'cnid', data: allData.cnidData, errors: [] },
 	{ name: 'krid', data: allData.kridData, errors: [] },
 ];
-
-function generateOneLineSummary(data, errors) {
-	const numOfErrors = errors.length;
-	const numOfData = data.length;
-	if (numOfErrors === 0) {
-		return `Total ${numOfData} tests done without error.`;
-	} else {
-		return `${numOfErrors} error(s) out of ${numOfData} tests.`;
-	}
-}
-
-function generateErrorMessage(data, errors) {
-	let errMsg = generateOneLineSummary(data, errors) + ' Details:';
-	for (const eachData of errors) {
-		errMsg += '\n    ' + JSON.stringify(eachData);
-	}
-	return errMsg;
-}
 
 describe('bundled ESM', () => {
 	for (const testScope of scopes) {
