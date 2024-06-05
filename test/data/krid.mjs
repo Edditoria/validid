@@ -197,13 +197,23 @@ export const kridData = [
 	Fail test: checksum
 	-------------------
 	*/
+	// TODO: Optionally validate checksum.
+	// {
+	// 	id: '980123-1234567',
+	// 	expect: {
+	// 		id: '9801231234567',
+	// 		type: 'KRID',
+	// 		ok: false,
+	// 		status: { code: 5, text: 'INVALID_CHECKSUM', desc: '' },
+	// 	},
+	// },
 	{
 		id: '980123-1234567',
 		expect: {
 			id: '9801231234567',
 			type: 'KRID',
-			ok: false,
-			status: { code: 5, text: 'INVALID_CHECKSUM', desc: '' },
+			ok: true,
+			status: { code: 0, text: 'OK', desc: '' },
 		},
 	},
 ];

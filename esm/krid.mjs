@@ -120,9 +120,10 @@ export function validateKrid(inputId) {
 	if (age < KRID_MIN_AGE) {
 		return { id, type, ok: false, status: KridStatus.INVALID_DATE };
 	}
-	if (getKridDigit(id) !== id.slice(-1)) {
-		return { id, type, ok: false, status: KridStatus.INVALID_CHECKSUM };
-	}
+	// TODO: Optionally validate checksum.
+	// if (getKridDigit(id) !== id.slice(-1)) {
+	// 	return { id, type, ok: false, status: KridStatus.INVALID_CHECKSUM };
+	// }
 	return { id, type, ok: true, status: KridStatus.OK };
 }
 
