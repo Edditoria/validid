@@ -1,27 +1,25 @@
-import { deleteAsync } from 'del';
+import path from 'node:path';
+import { emptyDir } from 'fs-extra';
 
-const dryRun = false;
-const showDetails = true;
-const taskName = 'clean';
-const delGlobs = ['bundles/**'];
+const TASK_NAME = 'clean';
 
-async function main() {
+async function cleanBundlesDirectory() {
+	const folderName = 'bundles';
+	const bundlesPath = path.resolve('./' + folderName);
+	// Recall: Delete directory contents. Create directory if not exist.
+	await emptyDir(bundlesPath);
+}
+
+/**
+ * @param {{taskName: string}} cleanParam
+ */
+async function clean({ taskName }) {
 	console.log(`Starting task "${taskName}"...`);
 	const timerLabel = `Finished task "${taskName}"`;
-	if (dryRun === true) {
-		console.log('(Note: Try-run is enabled.)');
-	}
-	console.log('');
+	// console.log('');
 	console.time(timerLabel);
-
-	const deletedPaths = await deleteAsync(delGlobs, { dryRun: dryRun });
-
-	if (showDetails === true) {
-		console.log('Deleted files:');
-		console.log(deletedPaths.join('\n') || '(none)');
-		console.log('');
-	}
-
+	await cleanBundlesDirectory();
 	console.timeEnd(timerLabel);
 }
-main();
+
+clean({ taskName: TASK_NAME });
