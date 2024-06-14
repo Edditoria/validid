@@ -4,38 +4,57 @@ import { readFileSync } from 'node:fs';
 import buble from '@rollup/plugin-buble';
 import terser from '@rollup/plugin-terser';
 
+// MARK: - Setup variables
+
+/**
+ * @typedef {Object} PackageJson
+ * @property {string} name
+ * @property {string} license
+ * @property {string} author
+ */
+
 /**
  * Ref: https://github.com/eslint/eslint/discussions/15305
- * @param {string} filePath - E.g. './package.json'.
- * @returns {Object} The JSON object.
+ * @returns {PackageJson} The JSON object.
+ * @throws Error for missing properties.
  */
-function importJSONSync(filePath) {
-	const fileURL = new URL(filePath, import.meta.url);
-	const theJSON = JSON.parse(readFileSync(fileURL, 'utf8'));
-	return theJSON;
+function importPackageJson() {
+	// @ts-ignore
+	const fileURL = new URL('./package.json', import.meta.url);
+	const { name, license, author } = JSON.parse(readFileSync(fileURL, 'utf8'));
+	if (!name && !license && !author) {
+		throw new Error();
+	}
+	return { name, license, author };
 }
 
-// Setup Some Vars
-// ===============
+/** @type {PackageJson} */
+const pkg = importPackageJson();
 
-const packageJSON = importJSONSync('./package.json');
-const packageName = packageJSON.name;
-const indent = true;
-const banner = `\
+/** @type {import('rollup').OutputOptions} */
+const outputCommons = {
+	indent: true, // as default.
+	banner: `\
 /**
  * Validid is a Javascript library to validate ID Card numbers of China, Taiwan, Hong Kong and South Korea. \\
  * Validid is open source in: \\
  * https://github.com/Edditoria/validid \\
- * Code released under the ${packageJSON.license} license: \\
+ * Code released under the ${pkg.license} license: \\
  * https://github.com/Edditoria/validid/blob/master/LICENSE.txt
- * @author ${packageJSON.author}
- * @license ${packageJSON.license}
+ * @author ${pkg.author}
+ * @license ${pkg.license}
  */
-`;
+`,
+};
 
-// Options for Plugins
-// ===================
+// MARK: - Plugin options
 
+/** @type {import('@rollup/plugin-buble').RollupBubleOptions} */
+const bubleOptions = {
+	transforms: { dangerousForOf: true },
+};
+
+/** @type {import('@rollup/plugin-terser').Options} */
 const terserOptions = {
 	ecma: 5,
 	compress: false,
@@ -49,64 +68,76 @@ const terserOptions = {
 	},
 };
 
-// Preset Configs
-// ==============
+// MARK: - Export objects
 
-const outputCommon = {
-	indent: indent,
-	banner: banner,
+/**
+ * Rollup options:
+ * - Target ES6 aka ECMAScript 2015.
+ * - ESM; Not minified; In one file.
+ * @type {import('rollup').RollupOptions}
+ */
+const rollupEsm = {
+	input: 'esm/index.mjs',
+	output: {
+		...outputCommons,
+		file: `bundles/${pkg.name}.esm.mjs`,
+		format: 'esm',
+	},
+	plugins: [
+		// buble(bubleOptions),
+	],
 };
-const pluginsCommon = [
-	// buble(),
-];
-const pluginsMinify = [
-	buble({
-		transforms: { dangerousForOf: true },
-	}),
-	terser(terserOptions),
-];
 
-export default [
-	{
-		// Build bundles:
-		input: 'esm/index.mjs',
-		output: [
-			// UMD; Bundle in one file; Not minified
-			{
-				...outputCommon,
-				file: `bundles/${packageName}.umd.js`,
-				format: 'umd',
-				name: packageName,
-			},
-			// ESM; Bundle in one file; Not minified
-			{
-				...outputCommon,
-				file: `bundles/${packageName}.esm.mjs`,
-				format: 'esm',
-				// name: packageName,
-			},
-		],
-		plugins: pluginsCommon,
+/**
+ * Rollup options:
+ * - Target ES6 aka ECMAScript 2015.
+ * - ESM; Minified; In one file.
+ * @type {import('rollup').RollupOptions}
+ */
+const rollupEsmMin = {
+	input: 'esm/index.mjs',
+	output: {
+		...outputCommons,
+		file: `bundles/${pkg.name}.esm.min.mjs`,
+		format: 'esm',
 	},
-	{
-		// Build bundles:
-		input: 'esm/index.mjs',
-		output: [
-			// UMD; Bundles in one file; Minified
-			{
-				...outputCommon,
-				file: `bundles/${packageName}.umd.min.js`,
-				format: 'umd',
-				name: packageName,
-			},
-			// ESM; Bundles in one file; Minified
-			{
-				...outputCommon,
-				file: `bundles/${packageName}.esm.min.mjs`,
-				format: 'esm',
-				// name: packageName,
-			},
-		],
-		plugins: pluginsMinify,
+	plugins: [buble(bubleOptions), terser(terserOptions)],
+};
+
+/**
+ * Rollup options:
+ * - Target legacy browsers.
+ * - UMD; Not minified; In one file.
+ * @type {import('rollup').RollupOptions}
+ */
+const rollupUmd = {
+	input: 'esm/index.mjs',
+	output: {
+		...outputCommons,
+		file: `bundles/${pkg.name}.umd.js`,
+		format: 'umd',
+		name: pkg.name,
 	},
-];
+	plugins: [
+		// buble(bubleOptions),
+	],
+};
+
+/**
+ * Rollup options:
+ * - Target legacy browsers.
+ * - UMD; Minified; In one file.
+ * @type {import('rollup').RollupOptions}
+ */
+const rollupUmdMin = {
+	input: 'esm/index.mjs',
+	output: {
+		...outputCommons,
+		file: `bundles/${pkg.name}.umd.min.js`,
+		format: 'umd',
+		name: pkg.name,
+	},
+	plugins: [buble(bubleOptions), terser(terserOptions)],
+};
+
+export default [rollupEsm, rollupEsmMin, rollupUmd, rollupUmdMin];
