@@ -50,21 +50,38 @@ const outputCommons = {
 // MARK: - Plugin options
 
 /** @type {import('@rollup/plugin-buble').RollupBubleOptions} */
-const bubleOptions = {
+const bubleEsmOptions = {
+	target: { node: 8, safari: 11, chrome: 71 },
+	// transforms: { dangerousForOf: true },
+};
+
+/** @type {import('@rollup/plugin-buble').RollupBubleOptions} */
+const bubleUmdOptions = {
+	target: { ie: 8 },
 	transforms: { dangerousForOf: true },
 };
 
 /** @type {import('@rollup/plugin-terser').Options} */
-const terserOptions = {
-	ecma: 5,
-	compress: false,
-	mangle: false,
+const terserEsmOptions = {
+	ecma: 2015,
 	keep_classnames: true,
-	keep_fnames: true,
+	compress: { arrows: false, typeofs: false },
+	// mangle: false,
 	format: {
-		beautify: false, // as default.
 		comments: 'some', // as default.
-		indent_level: 2,
+	},
+};
+
+/** @type {import('@rollup/plugin-terser').Options} */
+const terserUmdOptions = {
+	ecma: 5,
+	ie8: true,
+	safari10: true,
+	keep_classnames: true,
+	compress: { arrows: false, typeofs: false },
+	// mangle: false,
+	format: {
+		comments: 'some', // as default.
 	},
 };
 
@@ -83,9 +100,7 @@ const rollupEsm = {
 		file: `bundles/${pkg.name}.esm.mjs`,
 		format: 'esm',
 	},
-	plugins: [
-		// buble(bubleOptions),
-	],
+	plugins: [buble(bubleEsmOptions)],
 };
 
 /**
@@ -101,7 +116,7 @@ const rollupEsmMin = {
 		file: `bundles/${pkg.name}.esm.min.mjs`,
 		format: 'esm',
 	},
-	plugins: [buble(bubleOptions), terser(terserOptions)],
+	plugins: [buble(bubleEsmOptions), terser(terserEsmOptions)],
 };
 
 /**
@@ -118,9 +133,7 @@ const rollupUmd = {
 		format: 'umd',
 		name: pkg.name,
 	},
-	plugins: [
-		// buble(bubleOptions),
-	],
+	plugins: [buble(bubleUmdOptions)],
 };
 
 /**
@@ -137,7 +150,7 @@ const rollupUmdMin = {
 		format: 'umd',
 		name: pkg.name,
 	},
-	plugins: [buble(bubleOptions), terser(terserOptions)],
+	plugins: [buble(bubleUmdOptions), terser(terserUmdOptions)],
 };
 
 export default [rollupEsm, rollupEsmMin, rollupUmd, rollupUmdMin];
