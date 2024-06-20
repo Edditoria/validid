@@ -94,7 +94,7 @@ const terserUmdOptions = {
  * @type {import('rollup').RollupOptions}
  */
 const rollupEsm = {
-	input: 'esm/index.mjs',
+	input: 'tasks/resources/rollup-input/module.mjs',
 	output: {
 		...outputCommons,
 		file: `bundles/${pkg.name}.esm.mjs`,
@@ -110,7 +110,7 @@ const rollupEsm = {
  * @type {import('rollup').RollupOptions}
  */
 const rollupEsmMin = {
-	input: 'esm/index.mjs',
+	input: 'tasks/resources/rollup-input/module.mjs',
 	output: {
 		...outputCommons,
 		file: `bundles/${pkg.name}.esm.min.mjs`,
@@ -126,7 +126,7 @@ const rollupEsmMin = {
  * @type {import('rollup').RollupOptions}
  */
 const rollupUmd = {
-	input: 'esm/index.mjs',
+	input: 'tasks/resources/rollup-input/umd.mjs',
 	output: {
 		...outputCommons,
 		file: `bundles/${pkg.name}.umd.js`,
@@ -143,7 +143,7 @@ const rollupUmd = {
  * @type {import('rollup').RollupOptions}
  */
 const rollupUmdMin = {
-	input: 'esm/index.mjs',
+	input: 'tasks/resources/rollup-input/umd.mjs',
 	output: {
 		...outputCommons,
 		file: `bundles/${pkg.name}.umd.min.js`,
