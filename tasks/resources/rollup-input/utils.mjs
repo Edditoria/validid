@@ -5,5 +5,4 @@ export * from '../../../esm/utils/is-capital-letter.mjs';
 export { default as isDateValid } from '../../../esm/utils/is-date-valid.mjs';
 export { default as isTwidChecksumValid } from '../../../esm/utils/is-twid-checksum-valid.mjs';
 export * from '../../../esm/utils/normalize.mjs';
-export * from '../../../esm/utils/response.mjs';
 export * from '../../../esm/utils/twrc.mjs';

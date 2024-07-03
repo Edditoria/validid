@@ -1,4 +1,4 @@
-import { ValididResponse } from '../esm/utils/response.mjs';
+import { ValididResponse } from '../esm/response.mjs';
 
 /**
  * @typedef {Object} TestData
