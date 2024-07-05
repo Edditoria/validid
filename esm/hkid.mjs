@@ -1,5 +1,4 @@
-import { normalize } from './utils/normalize.mjs';
-import { isCaptialLetter } from './utils/is-capital-letter.mjs';
+import { normalize, isCaptialLetter } from './utils.mjs';
 import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './response.mjs';
 
 /** @module core/hkid */

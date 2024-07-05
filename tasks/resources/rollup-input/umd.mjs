@@ -13,4 +13,5 @@ export * from '../../../esm/krid.mjs';
 export * from '../../../esm/cnid.mjs';
 
 export * from '../../../esm/response.mjs';
+export * from '../../../esm/utils.mjs';
 export { utils };

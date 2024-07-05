@@ -1,4 +1,33 @@
 /**
+ * Normalize an ID by:
+ * - `id.toUpperCase()`.
+ * - Remove '-' and '/' at any position.
+ * - Remove whitespace.
+ * - Remove '(' and ')' at the end of the string, e.g. 'A123456(0)'.
+ * @module utils/normalize
+ * @param {string} id
+ * @returns {string} Normalized ID
+ */
+export function normalize(id) {
+	let re = /[-/\s]/g;
+	id = id.toUpperCase().replace(re, '');
+	re = /\([A-Z0-9]\)$/;
+	if (re.test(id)) {
+		id = id.replace(/[()]/g, '');
+	}
+	return id;
+}
+
+/**
+ * Check if the character is uppercase / captial letter.
+ * @param {string} character
+ * @returns {boolean}
+ */
+export function isCaptialLetter(character) {
+	return /^[A-Z]$/.test(character);
+}
+
+/**
  * Simply get age ignoring time zone.
  *
  * NOTE: You may want to validate the parameters. See {@link validateDateString}.

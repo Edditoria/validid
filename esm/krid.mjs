@@ -1,5 +1,4 @@
-import { normalize } from './utils/normalize.mjs';
-import { getAge, validateDateString } from './utils/date-utils.mjs';
+import { normalize, getAge, validateDateString } from './utils.mjs';
 import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidDate, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './response.mjs';
 
 /** @module core/krid */
