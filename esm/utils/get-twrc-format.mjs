@@ -1,4 +1,4 @@
-import { identifyTwrcVersion, TwrcVersion } from './twrc.mjs';
+import { identifyTwrcVersion, TwrcVersion } from '../twid.mjs';
 
 /**
  * Check format of Taiwan Resident Certificate, or invalid.

@@ -1,5 +1,4 @@
-import { validateTwid } from './twid.mjs';
-import { TwrcVersion, identifyTwrcVersion } from './utils/twrc.mjs';
+import { validateTwid, TwrcVersion, identifyTwrcVersion } from './twid.mjs';
 
 /**
  * Validate ID number of Taiwan Resident Certificate (Uniform ID Numbers):
