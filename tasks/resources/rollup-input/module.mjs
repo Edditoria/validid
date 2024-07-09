@@ -8,10 +8,8 @@ import cnid from '../../../esm/cnid.mjs';
 import normalize from '../../../esm/utils/normalize.mjs';
 import isDateValid from '../../../esm/utils/is-date-valid.mjs';
 import getMaxDate from '../../../esm/utils/get-max-date.mjs';
-import getTwrcFormat from '../../../esm/utils/get-twrc-format.mjs';
 import isTwidChecksumValid from '../../../esm/utils/is-twid-checksum-valid.mjs';
-
-import * as utils from './utils.mjs';
+import getTwrcFormat from '../../../esm/utils/get-twrc-format.mjs';
 
 export * from '../../../esm/hkid.mjs';
 export * from '../../../esm/twid.mjs';
@@ -20,7 +18,6 @@ export * from '../../../esm/cnid.mjs';
 
 export * from '../../../esm/response.mjs';
 export * from '../../../esm/utils.mjs';
-export { utils };
 
 /**
  * @deprecated To be removed without notice. Please update your code ASAP.
