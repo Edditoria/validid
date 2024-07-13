@@ -1,8 +1,6 @@
 import { normalize, isCaptialLetter } from './utils.mjs';
 import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './response.mjs';
 
-/** @module core/hkid */
-
 /**
  * String for regular expression to validate pattern for HKID.
  * @type {string}

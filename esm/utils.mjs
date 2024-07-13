@@ -4,7 +4,6 @@
  * - Remove '-' and '/' at any position.
  * - Remove whitespace.
  * - Remove '(' and ')' at the end of the string, e.g. 'A123456(0)'.
- * @module utils/normalize
  * @param {string} id
  * @returns {string} Normalized ID
  */

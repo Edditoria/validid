@@ -1,8 +1,6 @@
 import { normalize, validateDateString } from './utils.mjs';
 import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidDate, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './response.mjs';
 
-/** @module core/cnid */
-
 /** 18 characters in CNID. Fixed. */
 export const CNID_LENGTH = 18;
 

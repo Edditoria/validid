@@ -1,8 +1,6 @@
 import { normalize, getAge, validateDateString } from './utils.mjs';
 import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidDate, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './response.mjs';
 
-/** @module core/krid */
-
 /** 13 characters in KRID. Fixed. */
 export const KRID_LENGTH = 13;
 

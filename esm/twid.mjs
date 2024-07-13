@@ -1,8 +1,6 @@
 import { normalize, isCaptialLetter } from './utils.mjs';
 import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './response.mjs';
 
-/** @module core/twid */
-
 /** 10 characters for National Identification Card and Resident Certificate. */
 export const TWID_LENGTH = 10;
 
