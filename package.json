@@ -23,7 +23,7 @@
 		"clean": "node ./tasks/clean.mjs",
 		"build": "rollup -c rollup.config.mjs",
 		"test": "npm run build && npm run testOnly",
-		"testOnly": "node --test test/*.test.mjs",
+		"testOnly": "node --test test/*.test.mjs test/*.test.cjs",
 		"prepack": "npm run clean && npm run test"
 	},
 	"author": "Edditoria <edditoria@pm.me>",
