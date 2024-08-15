@@ -16,7 +16,7 @@
 		"README.md"
 	],
 	"engines": {
-		"//devNode": "Recommend >=20.0. Require >=14.18 to build properly.",
+		"//devNode": "Recommend >=20.9. Require >=18.0 to build properly.",
 		"node": ">=4.9.0"
 	},
 	"scripts": {
@@ -47,14 +47,14 @@
 		"id"
 	],
 	"devDependencies": {
-		"@eslint/js": "^9.0.0",
+		"@eslint/js": "^9.9.0",
 		"@rollup/plugin-buble": "^1.0.3",
 		"@rollup/plugin-terser": "^0.4.4",
-		"eslint": "^9.0.0",
+		"eslint": "^9.9.0",
 		"eslint-config-prettier": "^9.1.0",
 		"fs-extra": "^11.2.0",
-		"globals": "^15.0.0",
-		"prettier": "^3.2.5",
-		"rollup": "^4.0.0"
+		"globals": "^15.9.0",
+		"prettier": "^3.3.3",
+		"rollup": "^4.20.0"
 	}
 }
