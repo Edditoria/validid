@@ -8,6 +8,44 @@
 	"main": "bundles/validid.umd.min.js",
 	"//module": "ESM format; Entry point of modules; Not minified; Consume using import",
 	"module": "esm/index.mjs",
+	"exports": {
+		".": {
+			"default": "./esm/index.mjs"
+		},
+		"./hkid": {
+			"default": "./esm/hkid.mjs"
+		},
+		"./twid": {
+			"default": "./esm/twid.mjs"
+		},
+		"./krid": {
+			"default": "./esm/krid.mjs"
+		},
+		"./cnid": {
+			"default": "./esm/cnid.mjs"
+		},
+		"./response": {
+			"default": "./esm/response.mjs"
+		},
+		"./utils": {
+			"default": "./esm/utils.mjs"
+		},
+		"./twrc": {
+			"default": "./esm/twrc.mjs"
+		},
+		"./twrc-legacy": {
+			"default": "./esm/twrc-legacy.mjs"
+		},
+		"./esm/*.mjs": {
+			"default": "./esm/*.mjs"
+		},
+		"./bundles/*.mjs": {
+			"default": "./bundles/*.mjs"
+		},
+		"./bundles/*.js": {
+			"default": "./bundles/*.js"
+		}
+	},
 	"files": [
 		"bundles/**/*",
 		"esm/**/*",
