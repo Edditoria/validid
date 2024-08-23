@@ -10,45 +10,58 @@
 	"module": "esm/index.mjs",
 	"exports": {
 		".": {
+			"types": "./types/index.d.mts",
 			"default": "./esm/index.mjs"
 		},
 		"./hkid": {
+			"types": "./types/hkid.d.mts",
 			"default": "./esm/hkid.mjs"
 		},
 		"./twid": {
+			"types": "./types/twid.d.mts",
 			"default": "./esm/twid.mjs"
 		},
 		"./krid": {
+			"types": "./types/krid.d.mts",
 			"default": "./esm/krid.mjs"
 		},
 		"./cnid": {
+			"types": "./types/cnid.d.mts",
 			"default": "./esm/cnid.mjs"
 		},
 		"./response": {
+			"types": "./types/response.d.mts",
 			"default": "./esm/response.mjs"
 		},
 		"./utils": {
+			"types": "./types/utils.d.mts",
 			"default": "./esm/utils.mjs"
 		},
 		"./twrc": {
+			"types": "./types/twrc.d.mts",
 			"default": "./esm/twrc.mjs"
 		},
 		"./twrc-legacy": {
+			"types": "./types/twrc-legacy.d.mts",
 			"default": "./esm/twrc-legacy.mjs"
 		},
 		"./esm/*.mjs": {
+			"types": "./types/*.d.mts",
 			"default": "./esm/*.mjs"
 		},
 		"./bundles/*.mjs": {
+			"types": "./types/bundles.d.mts",
 			"default": "./bundles/*.mjs"
 		},
 		"./bundles/*.js": {
+			"types": "./types/bundles.d.ts",
 			"default": "./bundles/*.js"
 		}
 	},
 	"files": [
 		"bundles/**/*",
 		"esm/**/*",
+		"types/**/*",
 		"package.json",
 		"LICENSE.txt",
 		"README.md"
