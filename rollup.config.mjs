@@ -36,10 +36,10 @@ const outputCommons = {
 	indent: true, // as default.
 	banner: `\
 /**
- * Validid is a Javascript library to validate ID Card numbers of China, Taiwan, Hong Kong and South Korea. \\
- * Validid is open source in: \\
- * https://github.com/Edditoria/validid \\
- * Code released under the ${pkg.license} license: \\
+ * Validid is a Javascript library to validate ID Card numbers of China, Taiwan, Hong Kong and South Korea.
+ * Validid is open source in:
+ * https://github.com/Edditoria/validid
+ * Code released under the ${pkg.license} license:
  * https://github.com/Edditoria/validid/blob/master/LICENSE.txt
  * @author ${pkg.author}
  * @license ${pkg.license}
