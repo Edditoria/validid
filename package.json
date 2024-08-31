@@ -1,7 +1,7 @@
 {
 	"name": "validid",
 	"version": "2.2.1",
-	"description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
+	"description": "Validate ID card number of Hong Kong, Taiwan, South Korea and China.",
 	"license": "MIT",
 	"private": true,
 	"//main": "UMD format; Bundle in one file; Minified; Act as fallback",
@@ -89,13 +89,13 @@
 	"keywords": [
 		"validate",
 		"id number",
-		"validation",
-		"china id",
-		"taiwan id",
 		"hong kong",
-		"hkid",
+		"taiwan id",
 		"korea",
-		"id"
+		"china id",
+		"id",
+		"validation",
+		"hkid"
 	],
 	"devDependencies": {
 		"@eslint/js": "^9.9.0",

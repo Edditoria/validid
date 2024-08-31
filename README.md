@@ -1,15 +1,16 @@
 # Validid: Validate ID Card Number
 
-Validid is a Javascript library to validate ID Card numbers of China, Taiwan, Hong Kong and South Korea. Available in npm and bower.
+Validid is a Javascript library to validate ID card number of Hong Kong, Taiwan, South Korea and China. Available in npm and bower.
 
-\(Validid 是一個 Javascript 程式庫，用作校驗身份證號碼是否基本正確，現時支援中國丶台灣丶香港和韓國 :\)
+\(Validid 是一個 Javascript 程式庫，用作校驗身份證號碼是否基本正確，現時支援香港丶台灣丶韓國和中國 :\)
 
 ## What It Excels
 
-- Deeper validation, more than checksum, e.g. gender, excluding characters in real practice.
-- Same code base and usage in front-end and back-end.
-- Validate multiple card types, or selectively import individual modules (Welcome requests for more!).
-- Supports IE.
+- **Deeper validation**, such as gender, invalid characters in real practice.
+- **Return reason of failure**. Not only true or false. Fit for front-end development.
+- **No dependency** to consume this library.
+- Vanilla Javascript with **JSDoc and Typescript-typing** for your editors and IDE.
+- Come with bundled files to support browsers, including **IE**.
 
 ## Quick Examples
 

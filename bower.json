@@ -1,6 +1,6 @@
 {
   "name": "validid",
-  "description": "Validate ID Card numbers of China, Taiwan, Hong Kong and South Korea",
+  "description": "Validate ID card number of Hong Kong, Taiwan, South Korea and China.",
   "license": "MIT",
   "main": "bundles/validid.umd.js",
   "moduleType": "globals",
@@ -11,13 +11,13 @@
   "keywords": [
     "validate",
     "id number",
-    "validation",
-    "china id",
-    "taiwan id",
     "hong kong",
-    "hkid",
+    "taiwan id",
     "korea",
-    "id"
+    "china id",
+    "id",
+    "validation",
+    "hkid"
   ],
   "ignore": [
     "**/*",
