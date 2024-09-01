@@ -10,7 +10,11 @@
 	"module": "esm/index.mjs",
 	"exports": {
 		".": {
-			"types": "./types/index.d.mts",
+			"types": {
+				"require": "./types/bundles.d.ts",
+				"default": "./types/bundles.d.mts"
+			},
+			"require": "./bundles/validid.umd.js",
 			"default": "./esm/index.mjs"
 		},
 		"./hkid": {
