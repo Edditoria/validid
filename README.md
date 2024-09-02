@@ -14,86 +14,67 @@ Validid is a Javascript library to validate ID card number of Hong Kong, Taiwan,
 
 ## Quick Examples
 
-Simply provide cardType and ID. `validid` will return `true` or `false`:
+Most likely you would import function starting with a word "validate":
 
 ```js
-// China ID card
-validid.cnid('120103198806018241'); // return true
+// Hong Kong ID card (Supports two leading letters):
+import { validateHkid } from 'validid/hkid';
+validateHkid('AB987654(3)'); // returns { id: 'AB9876543', ok: true, ... }
 
-// Taiwan ID card
-validid.twid('A123456789'); // return true
+// Taiwan ID card (including National Identification Card and Resident Certificate):
+import { validateTwid, identifyTwidType, identifyTwrcVersion } from 'validid/twid';
+validateTwid('A123456789'); // returns { ok: true, ... }
+// Some services still need to identify NIC and RC:
+identifyTwidType('A123456789'); // returns "NIC"
+identifyTwidType('A800000014'); // returns "RC"
+// And even to identify old and new RC:
+identifyTwrcVersion('A800000014'); // returns "RC_2021"
+identifyTwrcVersion('AB12345677'); // returns "RC_LEGACY"
 
-// Taiwan Resident Certificate 2021
-validid.twrc('A800000014'); // return true
-// while validate old format
-validid.twrc('AB12345677'); // return true
-// old format "only" (not recommended, though)
-validid.twrcLegacy('A800000014'); // return false
-validid.twrcLegacy('AB12345677'); // return true
+// Korea ID card:
+import { validateKrid } from 'validid/krid';
+validateKrid('781030-5668081'); // returns { id: "7810305668081", ok: true, ... }
+// No checksum is required according to latest system:
+validateKrid('7810305668082'); // returns { id: "7810305668082", ok: true, ... }
 
-// Hong Kong ID card: supports two leading letters
-validid.hkid('AB9876543'); // return true
-
-// Korea ID card
-validid.krid('781030-5668081'); // return true
+// China ID card:
+import { validateCnid } from 'validid/cnid';
+validateCnid('120103198806018241'); // returns { ok: true, ... }
 ```
 
 Currently support:
 
-| cardType | Country / Place | Name(s) of Card |
+| Module   | Country / Place | Name(s) of Card |
 | -------- | --------------- | --------------- |
-| cnid     | China           | China ID card, Resident Identity Card of the People's Republic of China (PRC), 中华人民共和国居民身份证 |
 | hkid     | Hong Kong       | Hong Kong ID card, 香港身份證 |
-| twid     | Taiwan          | Taiwan ID card, National Identification Card of the Republic of China, 中華民國國民身分證, 臺灣身分證 |
-| twrc     | Taiwan          | Taiwan Resident Certificate (Uniform ID Numbers), 中華民國居留證 (統一證號) |
+| twid     | Taiwan          | National Identification Card of the Republic of China, 中華民國國民身分證, 臺灣身分證 |
+| twid     | Taiwan          | Resident Certificate (Uniform ID Numbers), 中華民國居留證 (統一證號) |
 | krid     | South Korea     | South Korea ID card, Resident Registration Number (RRN), 주민등록번호, 住民登錄番號 |
+| cnid     | China           | China ID card, Resident Identity Card of the People's Republic of China (PRC), 中华人民共和国居民身份证 |
+
+There are vary of exported utilities in this package. They might help your UI.
 
 ## Install and Usage
 
 Validid can be installed via npm, Bower, or run in browser directly. You can also consume it using your favorite bundling tools.
 
-### npm
+### npm and Node.js
 
 ```shell
 npm install validid
 ```
 
-Require in node.js:
+Import ES module that you need:
 
 ```js
-var validid = require('validid'); // point to validid.umd.min.js
-validid.cnid('120103198806018241'); // return true
+import { validateTwid } from 'validid/twid';
 ```
 
-Or, import module(s) in Node 13+:
+Require in old fashion. No module. All-in-one named export:
 
 ```js
-// import the whole validid object
-import validid from 'validid/esm/index.mjs';
-// import individual module function
-import krid from 'validid/esm/krid.mjs';
-// import utility in your project
-import normalize from 'validid/esm/utils/normalize.mjs';
-
-validid.krid('781030-5668081'); // return true
-krid('781030-5668081'); // return true
-normalize('g123456(a)'); // return 'G123456A'
+const { validateTwid } = require('validid'); // point to validid.umd.js
 ```
-
-### Bundling Tools :new:
-
-In v2, validid bundles ESM and UMD formats. You can make use of them in bundling tools such as Webpack, Rollup and more. Please see `<package.json>`:
-
-```json
-{
-  "//": "...",
-  "main": "bundles/validid.umd.min.js",
-  "module": "bundles/validid.esm.mjs",
-  "//": "..."
-}
-```
-
-In most cases, you may import `validid` by resolving "module" rather than "main".
 
 ### Bower
 
@@ -103,48 +84,48 @@ You can download and easily update `validid` via [Bower package manager](https:/
 bower install validid
 ```
 
-And it is ready to serve in front-end environment:
+And it is ready to serve:
 
 ```html
 <html>
-	<head>
+	<body>
 		<script src="bower_components/validid/bundles/validid.umd.js"></script>
-		<script src="test.js"></script>
-	</head>
+		<script src="your-scripts.js"></script>
+	</body>
 </html>
-
 ```
 
 ```js
-/* In test.js */
-console.log(validid.cnid('120103198806018241')); // true
+/* In your-scripts.js */
+const result = validid.validateHkid('A9876543');
+console.log(result.ok); // false
+console.log(result.status.text) // "INVALID_CHECKSUM"
 ```
 
 ### Direct Download
 
-Nothing can stop you. Download the file `validid.umd.js` and refer it in your html file:
+Nothing can stop you. Download the UMD file, then use the global name `validid` in your page:
 
 ```html
 <html>
-	<head>
+	<body>
 		<script src="validid.umd.js"></script>
-	</head>
+		<script>
+			const result = validid.validateHkid('A9876543');
+			console.log(result.ok); // false
+			console.log(result.status.text) // "INVALID_CHECKSUM"
+		</script>
+	</body>
 </html>
-```
-
-And you are ready to go:
-
-```js
-console.log(validid.cnid('120103198806018241')); // true
 ```
 
 ## Help Me Out!
 
 This repo is in stable and ready for you, while here are some aspects need your help:
 
-- Bugs and new policy that may need an update. However, please do not expose any real ID. 
+- Bugs and new policy that may need an update. However, please do not expose any real ID.
+- Your experience related to LSP, JSDoc, Typescript, etc. Suppose it works out of the box.
 - Grammar and writing, including code comments.
-- Open an issue if you want more than simple true/false validation.
 - I'm not sure why developers need an ID generator. Please tell me your need.
 - Any suggestion you want to make.
 
