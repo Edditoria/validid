@@ -1,0 +1,23 @@
+{
+	"plugins": ["plugins/markdown"],
+	"tags": {
+		"allowUnknownTags": false
+	},
+	"opts": {
+		"template": "node_modules/docdash",
+		"recurse": true
+	},
+	"sourceType": "module",
+	"source": {
+		"include": ["esm/"],
+		"includePattern": "\\.(js|mjs|cjs|jsx|ts|tsx|jsdoc)$"
+	},
+	"docdash": {
+		"static": true,
+		"sort": false,
+		"commonNav": true,
+		"collapse": false,
+		"typedefs": true,
+		"private": false
+	}
+}

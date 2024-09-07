@@ -79,7 +79,8 @@
 		"build": "rollup -c rollup.config.mjs",
 		"test": "npm run build && npm run testOnly",
 		"testOnly": "node --test test/*.test.mjs test/*.test.cjs",
-		"prepack": "npm run clean && npm run test"
+		"prepack": "npm run clean && npm run test",
+		"jsdoc": "jsdoc -c jsdoc.config.json"
 	},
 	"author": "Edditoria <edditoria@pm.me>",
 	"homepage": "https://github.com/Edditoria/validid",
@@ -105,10 +106,13 @@
 		"@eslint/js": "^9.9.0",
 		"@rollup/plugin-buble": "^1.0.3",
 		"@rollup/plugin-terser": "^0.4.4",
+		"docdash": "^2.0.2",
 		"eslint": "^9.9.0",
 		"eslint-config-prettier": "^9.1.0",
 		"fs-extra": "^11.2.0",
 		"globals": "^15.9.0",
+		"jsdoc": "^4.0.3",
+		"jsdoc-to-markdown": "^9.0.1",
 		"prettier": "^3.3.3",
 		"rollup": "^4.20.0"
 	}
