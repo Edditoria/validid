@@ -1,4 +1,8 @@
 /**
+ * @module response
+ */
+
+/**
  * Serve as "final answer" of the main modules in Validid package.
  * Keep the type simple for more usages, e.g. JSON data via API call.
  * @typedef {Object} ValididResponse

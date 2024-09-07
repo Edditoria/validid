@@ -1,3 +1,7 @@
+/**
+ * @module twid
+ */
+
 import { normalize, isCaptialLetter } from './utils.mjs';
 import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './response.mjs';
 

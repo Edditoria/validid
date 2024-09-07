@@ -1,3 +1,7 @@
+/**
+ * @module cnid
+ */
+
 import { normalize, validateDateString } from './utils.mjs';
 import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidDate, statusInvalidFormat, statusInvalidLength, statusOk, statusUnknownError } from './response.mjs';
 

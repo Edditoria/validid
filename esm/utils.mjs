@@ -1,4 +1,8 @@
 /**
+ * @module utils
+ */
+
+/**
  * Normalize an ID by:
  * - `id.toUpperCase()`.
  * - Remove '-' and '/' at any position.
