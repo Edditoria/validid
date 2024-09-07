@@ -4,7 +4,10 @@ import { ValididResponse, ValididStatus, statusInvalidChecksum, statusInvalidFor
 /** 10 characters for National Identification Card and Resident Certificate. */
 export const TWID_LENGTH = 10;
 
-/** Each letter represents a value from "10" to "35". */
+/**
+ * Each letter represents a value from "10" to "35".
+ * @ignore
+ */
 const _LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
 
 /**
@@ -59,11 +62,17 @@ export const TwidStatus = {
 	// DUMMY_ID: statusDummyId,
 };
 
-/** Just a magic trick for JSDoc and Typescript. */
+/**
+ * Just a magic trick for JSDoc and Typescript.
+ * @ignore
+ */
 // @ts-ignore
 const _response = ValididResponse; // eslint-disable-line no-unused-vars
 
-/** Just a magic trick for JSDoc and Typescript. */
+/**
+ * Just a magic trick for JSDoc and Typescript.
+ * @ignore
+ */
 // @ts-ignore
 const _status = ValididStatus; // eslint-disable-line no-unused-vars
 
@@ -101,6 +110,7 @@ export function identifyTwrcVersion(id) {
 
 /**
  * Get weighted sum of the region code, aka the first character in Taiwan ID.
+ * @ignore
  * @param {string} id The whole ID or its first character.
  * @param {number} [weight=9] Default: 9.
  * @returns {number}
@@ -112,6 +122,7 @@ function _getRegionCodeValue(id, weight = 9) {
 
 /**
  * Get weighted sum of the gender code, aka the second character in Taiwan ID.
+ * @ignore
  * @param {string} id The whole ID or first 2 characters.
  * @param {number} [weight=8] Default: 8.
  * @returns {number}

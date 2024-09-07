@@ -18,11 +18,17 @@ export const HkidStatus = {
 	// DUMMY_ID: statusDummyId,
 };
 
-/** Just a magic trick for JSDoc and Typescript. */
+/**
+ * Just a magic trick for JSDoc and Typescript.
+ * @ignore
+ */
 // @ts-ignore
 const _response = ValididResponse; // eslint-disable-line no-unused-vars
 
-/** Just a magic trick for JSDoc and Typescript. */
+/**
+ * Just a magic trick for JSDoc and Typescript.
+ * @ignore
+ */
 // @ts-ignore
 const _status = ValididStatus; // eslint-disable-line no-unused-vars
 
@@ -35,6 +41,7 @@ export function validateHkidLength(id) {
 	return id.length === 8 || id.length === 9;
 }
 
+/** @ignore */
 function _getLetterValue(letter) {
 	/*
 	charCode = { A: 65, B: 66... Z: 90 }

@@ -1,6 +1,7 @@
 /**
  * Parse a date string to a `Date`.
  * @deprecated
+ * @ignore
  * @param {string} yyyymmdd A string of date in "YYYYMMDD".
  * @returns {Date}
  * @throws Error of invalid format.
@@ -44,11 +45,14 @@ function _parseDate(yyyymmdd) {
  * @returns {boolean}
  */
 export default function (idDate, minDate = 'default', maxDate = 'today') {
-	/** @type {Date} */
+	/** @type {Date}
+	 * @ignore */
 	let parsedIdDate;
-	/** @type {Date} */
+	/** @type {Date}
+	 * @ignore */
 	let parsedMinDate;
-	/** @type {Date} */
+	/** @type {Date}
+	 * @ignore */
 	let parsedMaxDate;
 
 	// Keep for legacy reason.
