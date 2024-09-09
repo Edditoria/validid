@@ -16,13 +16,13 @@ export const CNID_LENGTH = 18;
 export const CNID_PATTERN = '^[0-9]{17}[0-9X]$';
 
 /**
- * Birth date of the oldest Chinese with reliable record.
+ * A string of date in "YYYYMMDD" representing the birth date of the oldest Chinese.
  * Assume the oldest Chinese, Alimihan Seyiti, was born in 25 Jun, 1886 and she had an ID card.
  * Source: http://www.scmp.com/news/china/article/1297022/uygur-alimihan-seyiti-age-127-may-set-record-oldest-person-alive
  *
  * This is not used in Validid package directly, but for reference for other developers.
  *
- * @type {string} A string of date "YYYYMMDD".
+ * @type {string}
  */
 export const BIRTH_DATE_OF_OLDEST_CHINESE = '18860625';
 

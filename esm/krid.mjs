@@ -15,7 +15,10 @@ export const KRID_LENGTH = 13;
  */
 export const KRID_PATTERN = '^[0-9]{13}$';
 
-/** @type {number} Minimum age to register a ID card. */
+/**
+ * Minimum age to register a ID card.
+ * @type {number}
+ */
 export const KRID_MIN_AGE = 17;
 
 /** @enum {ValididStatus} */

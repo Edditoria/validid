@@ -1,5 +1,4 @@
 /**
- * @note
  * Prettier, eslint, .editorconfig and .gitattributes work together.
  * Remember to check their configs regularly.
  * @see https://prettier.io/docs/en/configuration.html
