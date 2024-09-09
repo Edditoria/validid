@@ -1,4 +1,8 @@
 /**
+ * @module utils/get-max-date
+ */
+
+/**
  * Calculate the expected birthday by providing year only.
  * Useful for putting `maxDate` in `isDateValid()`.
  * @deprecated To be removed without notice. Please update your code ASAP.

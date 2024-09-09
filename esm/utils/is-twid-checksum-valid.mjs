@@ -1,3 +1,7 @@
+/**
+ * @module utils/is-twid-checksum-valid
+ */
+
 import { getTwidDigit } from '../twid.mjs';
 
 /**

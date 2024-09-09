@@ -1,3 +1,7 @@
+/**
+ * @module twrc
+ */
+
 import { TwidType, identifyTwidType, validateTwid } from './twid.mjs';
 
 /**

@@ -1,3 +1,7 @@
+/**
+ * @module utils/get-twrc-format
+ */
+
 import { identifyTwrcVersion, TwrcVersion } from '../twid.mjs';
 
 /**

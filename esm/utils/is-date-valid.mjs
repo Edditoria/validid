@@ -1,4 +1,8 @@
 /**
+ * @module utils/is-date-valid
+ */
+
+/**
  * Parse a date string to a `Date`.
  * @deprecated
  * @ignore

@@ -1,3 +1,7 @@
+/**
+ * @module twrc-legacy
+ */
+
 import { validateTwid, TwrcVersion, identifyTwrcVersion } from './twid.mjs';
 
 /**

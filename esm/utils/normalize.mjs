@@ -1,3 +1,7 @@
+/**
+ * @module utils/normalize
+ */
+
 import { normalize } from '../utils.mjs';
 
 /**
