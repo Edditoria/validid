@@ -2,10 +2,10 @@ import { ValididResponse } from '../esm/response.mjs';
 
 /**
  * @typedef {Object} TestData
- * @property {string} testData.id
- * @property {ValididResponse} testData.expect
- * @property {string} [testData.twidType]
- * @property {string} [testData.twrcVersion]
+ * @property {string} id
+ * @property {ValididResponse} expect
+ * @property {string} [twidType]
+ * @property {string} [twrcVersion]
  */
 
 /** Just a magic trick for JSDoc and Typescript. */
