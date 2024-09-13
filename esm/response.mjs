@@ -6,7 +6,7 @@
  * Serve as "final answer" of the main modules in Validid package.
  * Keep the type simple for more usages, e.g. JSON data via API call.
  * @typedef {Object} ValididResponse
- * @property {string} id Normalized ID.
+ * @property {string} id A [normalized ID]{@link normalize}.
  * @property {string} type Type of ID, e.g. "TWID".
  * @property {boolean} ok Valid or not. Most developers may rely on this.
  * @property {ValididStatus} status

@@ -51,13 +51,13 @@ const _status = ValididStatus; // eslint-disable-line no-unused-vars
  * @example
  * // Use case: Compare with birthday entered by user:
  * captureBirthDateFromKrid(normalizedId) === yyyymmddFromWebForm
- * @param {string} normId A normalized ID. See: {@link normalize}
+ * @param {string} id A [normalized ID]{@link normalize}.
  * @returns {string} A string in format of date "YYYYMMDD".
  * @throws Invalid date, e.g. 2001-02-29.
  */
-export function captureBirthDateFromKrid(normId) {
+export function captureBirthDateFromKrid(id) {
 	/** Recall the format of KRID: "YYMMDDSBBBBNC" */
-	const sDigit = normId.substring(6, 7);
+	const sDigit = id.substring(6, 7);
 	let yearPrefix;
 	switch (sDigit) {
 		case '1':
@@ -75,7 +75,7 @@ export function captureBirthDateFromKrid(normId) {
 		default:
 			yearPrefix = '18';
 	}
-	const dateStr = yearPrefix + normId.substring(0, 6);
+	const dateStr = yearPrefix + id.substring(0, 6);
 	if (!validateDateString(dateStr)) {
 		throw new Error('Invalid date');
 	}
@@ -86,7 +86,7 @@ export function captureBirthDateFromKrid(normId) {
  * Get check digit of a South Korea ID.
  * NOTE: This function does not validate its pattern.
  * @example getKridDigit('781030566808_') // returns 1.
- * @param {string} id Full ID with check digit. Use `_` if check digit is unknown.
+ * @param {string} id A [normalized ID]{@link normalize}. Use `_` if check digit is unknown.
  * @returns {string} Check digit: "0" to "9".
  */
 export function getKridDigit(id) {

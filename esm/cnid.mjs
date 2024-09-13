@@ -56,13 +56,13 @@ const _status = ValididStatus; // eslint-disable-line no-unused-vars
  * @example
  * // Use case: Compare with birthday entered by user:
  * captureBirthDateFromCnid(normalizedId) === yyyymmddFromWebForm
- * @param {string} normId A normalized ID. See: {@link normalize}
+ * @param {string} id A [normalized ID]{@link normalize}.
  * @returns {string} A string of date in "YYYYMMDD".
  * @throws Invalid date, e.g. 2001-02-29
  */
-export function captureBirthDateFromCnid(normId) {
+export function captureBirthDateFromCnid(id) {
 	/** Recall the format of CNID: "110102YYYYMMDD888X" */
-	const dateStr = normId.substring(6, 14);
+	const dateStr = id.substring(6, 14);
 	if (!validateDateString(dateStr)) {
 		throw new Error('Invalid date');
 	}
@@ -73,7 +73,7 @@ export function captureBirthDateFromCnid(normId) {
  * Get check digit of a China ID.
  * NOTE: This function does not validate its pattern.
  * @example getCnidDigit('11010120170210193_') // returns "X".
- * @param {string} id Full ID with check digit. Use `_` if check digit is unknown.
+ * @param {string} id A [normalized ID]{@link normalize}. Use `_` if check digit is unknown.
  * @returns {string} Check digit: "0" to "9" or "X".
  */
 export function getCnidDigit(id) {

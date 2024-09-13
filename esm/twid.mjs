@@ -82,7 +82,7 @@ const _status = ValididStatus; // eslint-disable-line no-unused-vars
 
 /**
  * Identify the type of a Taiwan ID.
- * @param {string} id Expect the ID is normalized.
+ * @param {string} id A [normalized ID]{@link normalize}.
  * @returns {TwidType} Either NIC, RC or invalid.
  */
 export function identifyTwidType(id) {
@@ -98,7 +98,7 @@ export function identifyTwidType(id) {
 
 /**
  * Identify the version of a Taiwan RC.
- * @param {string} id Expect the ID is normalized.
+ * @param {string} id A [normalized ID]{@link normalize}.
  * @returns {TwrcVersion} Either legacy, 2021 version, not-RC.
  */
 export function identifyTwrcVersion(id) {
@@ -141,7 +141,7 @@ function _getGenderCodeValue(id, weight = 8) {
  * Get check digit of Taiwan ID, including TWID/TWRC.
  * NOTE: This function does not validate its pattern.
  * @example getTwidDigit('A12345678_') // returns 9.
- * @param {string} id The whole ID including check digit. Use `_` if check digit is unknown.
+ * @param {string} id A [normalized ID]{@link normalize}. Use `_` if check digit is unknown.
  * @returns {string}
  */
 export function getTwidDigit(id) {

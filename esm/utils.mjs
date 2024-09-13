@@ -8,17 +8,17 @@
  * - Remove '-' and '/' at any position.
  * - Remove whitespace.
  * - Remove '(' and ')' at the end of the string, e.g. 'A123456(0)'.
- * @param {string} id
- * @returns {string} Normalized ID
+ * @param {string} inputId Input ID, such as user-input in web form.
+ * @returns {string} A normalized ID.
  */
-export function normalize(id) {
+export function normalize(inputId) {
 	let re = /[-/\s]/g;
-	id = id.toUpperCase().replace(re, '');
+	inputId = inputId.toUpperCase().replace(re, '');
 	re = /\([A-Z0-9]\)$/;
-	if (re.test(id)) {
-		id = id.replace(/[()]/g, '');
+	if (re.test(inputId)) {
+		inputId = inputId.replace(/[()]/g, '');
 	}
-	return id;
+	return inputId;
 }
 
 /**

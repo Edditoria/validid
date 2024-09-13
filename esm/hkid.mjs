@@ -59,7 +59,7 @@ function _getLetterValue(letter) {
  * Get check digit of a Hong Kong ID.
  * NOTE: This function does not validate its pattern.
  * @example getHkidDigit('A123456_') // returns 3.
- * @param {string} id Full HKID with check digit. Use `_` if check digit is unknown.
+ * @param {string} id A [normalized ID]{@link normalize}. Use `_` if check digit is unknown.
  * @returns {string} Check digit: "0" to "9" or "A".
  */
 export function getHkidDigit(id) {
