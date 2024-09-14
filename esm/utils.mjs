@@ -5,9 +5,10 @@
 /**
  * Normalize an ID by:
  * - `id.toUpperCase()`.
- * - Remove '-' and '/' at any position.
+ * - Remove "-" and "/" at any position.
  * - Remove whitespace.
- * - Remove '(' and ')' at the end of the string, e.g. 'A123456(0)'.
+ * - Remove "(" and ")" at the end.
+ * @example normalize('A123456(0)') // returns 'A1234560'.
  * @param {string} inputId Input ID, such as user-input in web form.
  * @returns {string} A normalized ID.
  */
