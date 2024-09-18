@@ -52,7 +52,7 @@ const _status = ValididStatus; // eslint-disable-line no-unused-vars
  * // Use case: Compare with birthday entered by user:
  * captureBirthDateFromKrid(normalizedId) === yyyymmddFromWebForm
  * @param {string} id A [normalized ID]{@link normalize}.
- * @returns {string} A string in format of date "YYYYMMDD".
+ * @returns {string} A string of date in "YYYYMMDD".
  * @throws Invalid date, e.g. 2001-02-29.
  */
 export function captureBirthDateFromKrid(id) {

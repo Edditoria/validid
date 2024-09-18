@@ -3,7 +3,7 @@
  */
 
 /**
- * Parse a date string to a `Date`.
+ * Parse a string of date to a `Date`.
  * @deprecated
  * @ignore
  * @param {string} yyyymmdd A string of date in "YYYYMMDD".
@@ -28,7 +28,7 @@ function _parseDate(yyyymmdd) {
 }
 
 /**
- * Validate a date-string, includes:
+ * Validate a string of date, includes:
  * - Is a string in format "YYYYMMDD".
  * - Is not a future date.
  * - Is between `minDate` and `maxDate`.

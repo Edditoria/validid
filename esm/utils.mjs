@@ -60,7 +60,7 @@ export function getAge(birthDateStr, currentTimeStr) {
 
 /**
  * Validate a date-like string.
- * @param {string} yyyymmdd A string of date "YYYYMMDD".
+ * @param {string} yyyymmdd A string of date in "YYYYMMDD".
  * @returns {boolean}
  */
 export function validateDateString(yyyymmdd) {
