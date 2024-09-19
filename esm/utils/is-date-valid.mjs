@@ -39,7 +39,7 @@ function _parseDate(yyyymmdd) {
  * - Providing ID number for a dead person is NOT the case.
  * - So, `minDate` is the birth date of world's "living" person verified.
  * - NOT a dead person who does not act on internet.
- * - Source: https://en.wikipedia.org/wiki/Oldest_people
+ * - Source: {@link https://en.wikipedia.org/wiki/Oldest_people }
  *
  * @deprecated To be removed without notice. Please update your code ASAP.
  * Reason: Should not assume that only a living person can use a system.

@@ -3,12 +3,11 @@
  */
 
 /**
- * Calculate the expected birthday by providing year only.
+ * Calculate the expected birth date by providing age.
  * Useful for putting `maxDate` in `isDateValid()`.
  * @deprecated To be removed without notice. Please update your code ASAP.
  * Reason: Not perfectly safe to use user's local time.
  * Solution: Refactor using `getAge()` that accepts `currentTimeStr`.
- * This function will be removed without notice. Please update your code ASAP.
  * @param {number} yearsOld A positive integer representing age.
  * @returns {Date}
  */

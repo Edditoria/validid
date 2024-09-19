@@ -45,13 +45,15 @@ export function validateHkidLength(id) {
 	return id.length === 8 || id.length === 9;
 }
 
-/** @ignore */
+/**
+ * While charCode = { A: 65, B: 66... Z: 90 },
+ *           HKID = { A: 10, B: 11... Z: 35 }.
+ * Therefore, diff = 55.
+ * @ignore
+ * @param {string} letter A single character.
+ * @returns {number}
+ */
 function _getLetterValue(letter) {
-	/*
-	charCode = { A: 65, B: 66... Z: 90 }
-	HKID     = { A: 10, B: 11... Z: 35 }
-	Therefore, diff = 55
-	*/
 	return letter.charCodeAt(0) - 55;
 }
 

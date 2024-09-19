@@ -5,10 +5,10 @@
 import { identifyTwrcVersion, TwrcVersion } from '../twid.mjs';
 
 /**
- * Check format of Taiwan Resident Certificate, or invalid.
- * @deprecated
- * "Old" and "new" are confusing. Use {@link identifyTwrcVersion} instead.
- * This function will be removed without notice. Please update your code ASAP.
+ * Check format of Taiwan Resident Certificate.
+ * @deprecated To be removed without notice. Please update your code ASAP.
+ * Reason: "Old" and "new" are confusing.
+ * Solution: Use {@link identifyTwrcVersion} instead.
  * @param {string} id A [normalized ID]{@link normalize}.
  * @returns {'old'|'new'|false}
  */

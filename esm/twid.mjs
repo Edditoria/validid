@@ -184,7 +184,8 @@ export function validateTwid(inputId) {
 
 /**
  * Validate ID card number of Taiwan:
- * National Identification Card of the Republic of China.
+ * - Validate: National Identification Card of the Republic of China.
+ * - But not: Resident Certificate.
  * @deprecated To be removed without notice. Please update your code ASAP.
  * Solution: Use {@link validateTwid} and {@link identifyTwidType} instead.
  * @param {string} inputId

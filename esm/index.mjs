@@ -18,6 +18,7 @@ import isTwidChecksumValid from './utils/is-twid-checksum-valid.mjs';
  */
 
 /**
+ * Default export for this package.
  * @deprecated To be removed without notice. Please update your code ASAP.
  * Solution: Use named export from individual modules, e.g. `{ validateHkid }`.
  */
