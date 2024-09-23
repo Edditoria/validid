@@ -42,7 +42,7 @@ const outputCommons = {
  * https://github.com/Edditoria/validid
  *
  * Code released under the ${pkg.license} license:
- * https://github.com/Edditoria/validid/blob/master/LICENSE.txt
+ * https://github.com/Edditoria/validid/blob/main/LICENSE.txt
  *
  * @author ${pkg.author}
  * @license ${pkg.license}

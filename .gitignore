@@ -16,7 +16,7 @@ docs/.jekyll-metadata
    #  #  #  #  #  #  #
    #  #   ##    ###   ##
 
-# Source: https://github.com/github/gitignore/blob/master/Node.gitignore
+# Source: https://github.com/github/gitignore/blob/main/Node.gitignore
 # ==========
 
 # Logs
@@ -158,7 +158,7 @@ dist
    ###    ###  ###     ##   ##  #   #
             #
           ##
-# Source: https://github.com/github/gitignore/blob/master/Global
+# Source: https://github.com/github/gitignore/blob/main/Global
 
 # Dropbox settings and caches
 # ==========
