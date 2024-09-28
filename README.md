@@ -119,15 +119,19 @@ Nothing can stop you. Download the UMD file, then use the global name `validid` 
 </html>
 ```
 
+## From v2 to v3
+
+Please check out [release page on Github](https://github.com/Edditoria/validid/releases).
+
 ## Help Me Out!
 
 This repo is in stable and ready for you, while here are some aspects need your help:
 
 - Bugs and new policy that may need an update. However, please do not expose any real ID.
-- Your experience related to LSP, JSDoc, Typescript, etc. Suppose it works out of the box.
+- Your experience related to LSP, JSDoc, Typescript, etc. Suppose it should work out of the box.
+- Existing code using Validid v2 should not break.
 - Grammar and writing, including code comments.
-- I'm not sure why developers need an ID generator. Please tell me your need.
-- Any suggestion you want to make.
+- Feature request that might help in server code and UI.
 
 ## Copyright and License
 
