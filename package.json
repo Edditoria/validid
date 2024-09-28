@@ -102,14 +102,14 @@
 		"hkid"
 	],
 	"devDependencies": {
-		"@eslint/js": "^9.9.0",
+		"@eslint/js": "^9.11.1",
 		"@rollup/plugin-buble": "^1.0.3",
 		"@rollup/plugin-terser": "^0.4.4",
-		"eslint": "^9.9.0",
+		"eslint": "^9.11.1",
 		"eslint-config-prettier": "^9.1.0",
 		"fs-extra": "^11.2.0",
 		"globals": "^15.9.0",
 		"prettier": "^3.3.3",
-		"rollup": "^4.20.0"
+		"rollup": "^4.22.5"
 	}
 }
