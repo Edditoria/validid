@@ -121,7 +121,7 @@ Nothing can stop you. Download the UMD file, then use the global name `validid` 
 
 ## From v2 to v3
 
-Please check out [release page on Github](https://github.com/Edditoria/validid/releases).
+Please check out [release page on Github](https://github.com/Edditoria/validid/releases) and [migration guide](https://github.com/Edditoria/validid/blob/main/docs/migrate-from-v2.md).
 
 ## Help Me Out!
 
